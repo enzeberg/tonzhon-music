@@ -3,7 +3,7 @@
 <p>It's online: <a href="http://tongzhong.xyz">http://tongzhong.xyz</a> </p>
 
 ## Screenshot
-<img src="./screenshots/tongzhong.png">
+<img src="./screenshots/tongzhong.PNG">
 
 ## Usage
     # Install dependencies
