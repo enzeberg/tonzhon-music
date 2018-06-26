@@ -1,0 +1,43 @@
+/* html, body {
+  font-family: "Microsoft Yahei","微软雅黑", PingFangSC-Regular,Verdana,Arial,"宋体", Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+} */
+
+/* a {
+  text-decoration: none;
+  color: black;
+}
+a.no-copyright {
+  color: #ccc;
+} */
+
+.nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.loading-anim-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playlist::-webkit-scrollbar {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  width: 8px;
+  border-radius: 10px;
+}
+.playlist::-webkit-scrollbar-thumb {
+    background-color: rgb(100, 100, 100);
+    border-radius: 10px;
+    width: 5px;
+}
+.playlist::-webkit-scrollbar-track {
+    display: none;
+    border-radius: 10px;
+}
+.playlist::-webkit-scrollbar-track-piece {
+    border-radius: 10px;
+}
