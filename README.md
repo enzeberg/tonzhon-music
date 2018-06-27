@@ -1,5 +1,5 @@
 # 铜钟聚合音乐
-<p>- 聆听QQ音乐、网易云音乐和虾米</p>
+<p>- 一个网站，三家平台的音乐</p>
 <p>It's online: <a href="http://tongzhong.xyz">http://tongzhong.xyz</a> </p>
 
 ## Screenshot
@@ -14,7 +14,7 @@
     npm run server
 Open `http://localhost:8080` to visit the page that uses the production build.
 
-## Development
+## Client-side development
     # Start webpack dev server
     npm start
 
