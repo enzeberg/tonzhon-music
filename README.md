@@ -1,5 +1,5 @@
 # 铜钟聚合音乐
-<p>- 一个网站，三家平台的音乐</p>
+<p>- 在一处聆听所有音乐</p>
 <p>It's online: <a href="http://tongzhong.xyz">http://tongzhong.xyz</a> </p>
 
 ## Screenshot
