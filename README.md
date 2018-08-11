@@ -18,5 +18,12 @@ Open `http://localhost:8080` to visit the page that uses the production build.
     # Start webpack dev server
     npm start
 
+## API from others
+<ul>
+<li><a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a></li>
+<li><a href="https://github.com/LIU9293/musicafe">LIU9293/musicafe</a></li>
+</ul>
+I really appreciate these projects!
+
 ## License
 MIT
