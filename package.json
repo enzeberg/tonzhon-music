@@ -37,7 +37,8 @@
     "react-icons-kit": "^1.0.7",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "simple-netease-cloud-music": "^0.3.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.6",
