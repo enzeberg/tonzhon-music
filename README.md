@@ -1,6 +1,8 @@
 # 铜钟聚合音乐
 <p>- 在一处聆听所有音乐</p>
 <p>It's online: <a href="http://tongzhong.xyz">http://tongzhong.xyz</a> </p>
+<p> Note: This repo is just part of the tongzhong.xyz site.</p>
+
 
 ## Screenshot
 <img src="./screenshots/tongzhong.PNG">
@@ -23,7 +25,7 @@ Open `http://localhost:8080` to visit the page that uses the production build.
 <li><a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a></li>
 <li><a href="https://github.com/LIU9293/musicAPI">LIU9293/musicAPI</a></li>
 </ul>
-I really appreciate these projects!
+I really appreciate these projects and their contributors!
 
 ## License
 MIT
