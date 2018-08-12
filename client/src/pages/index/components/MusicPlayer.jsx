@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Slider, Button, notification, Tooltip } from 'antd';
+import { Icon, Row, Col, Slider, Button, notification, Tooltip } from 'antd';
 import { withBaseIcon } from 'react-icons-kit';
 import { repeat } from 'react-icons-kit/ikons/repeat';
 import { ic_repeat_one } from 'react-icons-kit/md/ic_repeat_one'
@@ -12,7 +12,7 @@ import Artists from './Artists';
 import MVIcon from './MVIcon';
 import Playlist from './Playlist';
 import { toMinAndSec } from '../lib/time_converter';
-import { musicPlayer } from '../../../config';
+import { musicPlayer, themeColor } from '../../../config';
 
 notification.config({
   placement: 'bottomRight',
@@ -21,7 +21,7 @@ notification.config({
 });
 
 const Icon1 = withBaseIcon({
-  size: 20, style: {color: 'white', verticalAlign: 'middle'}
+  size: 20, style: { color: 'white', verticalAlign: 'middle' }
 });
 const modeIcons = {
   loop: repeat,
@@ -43,9 +43,10 @@ class MusicPlayer extends Component {
       playMode: localStorage.getItem('playMode') || 'loop',
       volume:
         localStorage.getItem('volume') ?
-        Number(localStorage.getItem('volume')) : 0.6,
+          Number(localStorage.getItem('volume')) : 0.6,
       songSource: null,
       muted: false,
+      playProgress: 0,
     };
     this.playOrPause = this.playOrPause.bind(this);
     this.play = this.play.bind(this);
@@ -56,6 +57,7 @@ class MusicPlayer extends Component {
     this.changeVolume = this.changeVolume.bind(this);
     this.playNext = this.playNext.bind(this);
     this.switchPlayMode = this.switchPlayMode.bind(this);
+    this.handleClickingHeart = this.handleClickingHeart.bind(this);
     this.clickPlaylistBtn = this.clickPlaylistBtn.bind(this);
   }
 
@@ -65,7 +67,7 @@ class MusicPlayer extends Component {
       this.setState({
         songLoaded: true,
         songDuration: this.audio.duration,
-        playProgress: 0
+        // playProgress: 0
       });
     });
     this.audio.addEventListener('play', () => {
@@ -106,11 +108,12 @@ class MusicPlayer extends Component {
       // updating playlist will cause component receive props, so the judgement
       // is necessary
       if ((currentSong && songToPlay.link !== currentSong.link) ||
-           (!currentSong && songToPlay)) {
+        (!currentSong && songToPlay)) {
         if (playAction === 'play') {
           this.audio.pause();
           this.setState({
             songSource: null,
+            songLoaded: false,
             playProgress: 0,
           });
           this.getSongSource(songToPlay.platform, songToPlay.originalId, () => {
@@ -119,6 +122,7 @@ class MusicPlayer extends Component {
         } else if (playAction === 'pause') {
           this.setState({
             songSource: null,
+            songLoaded: false,
             playProgress: 0,
           });
         }
@@ -223,6 +227,42 @@ class MusicPlayer extends Component {
     });
   }
 
+  handleClickingHeart() {
+    if (this.props.user.signedIn) {
+      const song = this.props.currentSong;
+      let url, method;
+      if (this.props.currentSongIsLiked) {
+        url = `/api/favorite_songs/${song.platform}/${song.originalId}`;
+        method = 'DELETE';
+      } else {
+        url = `/api/favorite_songs`;
+        method = 'POST';
+      }
+      fetch(url, {
+        method: method,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: method === 'POST' ? JSON.stringify({
+          song: song
+        }) : null,
+      }).then(res => res.json())
+        .then(json => {
+          if (json.status === 'ok') {
+            this.setState({
+              isLiked: !this.props.currentSongIsLiked
+            });
+            this.props.updateUserFavoriteSongs(song);
+          }
+        }).catch(err => console.error(err));
+    } else {
+      notification.open({
+        message: '请先登录。'
+      });
+    }
+  }
+
   clickPlaylistBtn() {
     const { shouldShowPlaylist } = this.props;
     if (shouldShowPlaylist) {
@@ -255,7 +295,7 @@ class MusicPlayer extends Component {
               // disabled={!this.state.songSource}
               style={{ margin: '0 10px' }} />
             <Button ghost shape="circle" icon="step-forward"
-              onClick={() => this.playNext('forward')}/>
+              onClick={() => this.playNext('forward')} />
           </Col>
           <Col xs={24} sm={15} style={{ paddingLeft: 30, paddingRight: 30 }}>
             <Row type="flex" justify="space-between" style={{ height: 20 }}>
@@ -294,7 +334,9 @@ class MusicPlayer extends Component {
               </Col>
               <Col xs={0} sm={4} style={{ textAlign: 'right' }}>
                 {
-                  this.state.songLoaded && `${progress} / ${total}`
+                  this.state.songLoaded ? `${progress} / ${total}` :
+                    (this.props.playAction === 'play' &&
+                      <Icon type="loading" />)
                 }
               </Col>
             </Row>
@@ -305,6 +347,25 @@ class MusicPlayer extends Component {
               onChange={this.changePlayProgress}
               disabled={!this.state.songSource}
               style={{ margin: '8px 0' }} />
+          </Col>
+          <Col xs={1} sm={1}>
+            <a title={this.props.currentSongIsLiked ? "取消喜欢" : "喜欢"}
+              onClick={this.handleClickingHeart}
+            >
+              <Icon type={this.props.currentSongIsLiked ? "heart" : "heart-o"}
+                style={{ color: this.props.currentSongIsLiked ? themeColor : 'white' }}
+              />
+            </a>
+            {/* <Button
+              title={this.props.currentSongIsLiked ? "取消喜欢" : "喜欢"}
+              onClick={this.handleClickingHeart}
+              icon={this.props.currentSongIsLiked ? "heart" : "heart-o"}
+              style={{
+                color: this.props.currentSongIsLiked ? themeColor : 'white',
+                border: 'none',
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+              }}
+            /> */}
           </Col>
           <Col xs={1} sm={1}>
             <Tooltip
@@ -356,13 +417,13 @@ class MusicPlayer extends Component {
           </Col>
           <Col xs={2} sm={1}>
             <Button ghost icon="bars" onClick={this.clickPlaylistBtn}
-               title="播放列表"
-               style={{ float: 'right' }}
+              title="播放列表"
+              style={{ float: 'right' }}
             />
           </Col>
         </Row>
         {
-           this.props.shouldShowPlaylist && <Playlist />
+          this.props.shouldShowPlaylist && <Playlist />
         }
       </div>
     );
@@ -394,7 +455,7 @@ function mapStateToProps(state) {
     currentSong: currentSong,
     playlist: state.playlist,
     currentSongIsLiked: user && currentSong && user.favoriteSongs.some(song =>
-       song.link === currentSong.link),
+      song.link === currentSong.link),
     user: state.user,
     shouldShowPlaylist: state.shouldShowPlaylist,
   };
@@ -410,7 +471,7 @@ function mapDispatchToProps(dispatch) {
           nextPlayIndex = playlist[currentIndex + 1] ? currentIndex + 1 : 0;
         } else if (direction === 'backward') {
           nextPlayIndex = playlist[currentIndex - 1] ? currentIndex - 1 :
-                          playlist.length - 1;
+            playlist.length - 1;
         }
       } else if (playMode === 'single') {
         dispatch({ type: 'UPDATE_PLAY_ACTION', data: 'pause' });
@@ -424,12 +485,15 @@ function mapDispatchToProps(dispatch) {
           dispatch({ type: 'UPDATE_PLAY_INDEX', data: nextPlayIndex });
         }
       }
-      
+
       // if the player is paused, clicking "Previous" or "Next" button will make it play
       dispatch({ type: 'UPDATE_PLAY_ACTION', data: 'play' });
     },
     updatePlayAction: (playAction) => {
       dispatch({ type: 'UPDATE_PLAY_ACTION', data: playAction });
+    },
+    updateUserFavoriteSongs: (song) => {
+      return dispatch({ type: 'UPDATE_FAVORITE_SONGS', data: song });
     },
     showPlaylist: () => {
       dispatch({ type: 'SHOULD_SHOW_PLAYLIST' });
