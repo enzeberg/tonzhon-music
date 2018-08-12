@@ -57,7 +57,6 @@ class MusicPlayer extends Component {
     this.changeVolume = this.changeVolume.bind(this);
     this.playNext = this.playNext.bind(this);
     this.switchPlayMode = this.switchPlayMode.bind(this);
-    this.handleClickingHeart = this.handleClickingHeart.bind(this);
     this.clickPlaylistBtn = this.clickPlaylistBtn.bind(this);
   }
 
@@ -227,42 +226,6 @@ class MusicPlayer extends Component {
     });
   }
 
-  handleClickingHeart() {
-    if (this.props.user.signedIn) {
-      const song = this.props.currentSong;
-      let url, method;
-      if (this.props.currentSongIsLiked) {
-        url = `/api/favorite_songs/${song.platform}/${song.originalId}`;
-        method = 'DELETE';
-      } else {
-        url = `/api/favorite_songs`;
-        method = 'POST';
-      }
-      fetch(url, {
-        method: method,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: method === 'POST' ? JSON.stringify({
-          song: song
-        }) : null,
-      }).then(res => res.json())
-        .then(json => {
-          if (json.status === 'ok') {
-            this.setState({
-              isLiked: !this.props.currentSongIsLiked
-            });
-            this.props.updateUserFavoriteSongs(song);
-          }
-        }).catch(err => console.error(err));
-    } else {
-      notification.open({
-        message: '请先登录。'
-      });
-    }
-  }
-
   clickPlaylistBtn() {
     const { shouldShowPlaylist } = this.props;
     if (shouldShowPlaylist) {
@@ -298,7 +261,7 @@ class MusicPlayer extends Component {
               onClick={() => this.playNext('forward')} />
           </Col>
           <Col xs={24} sm={15} style={{ paddingLeft: 30, paddingRight: 30 }}>
-            <Row type="flex" justify="space-between" style={{ height: 20 }}>
+            <Row type="flex" align="middle" justify="space-between" style={{ height: 20 }}>
               <Col xs={11} sm={15}>
                 <div className="nowrap">
                   {
@@ -329,7 +292,7 @@ class MusicPlayer extends Component {
                 </div>
 
               </Col>
-              <Col xs={9} sm={5}>
+              <Col xs={9} sm={5} style={{ fontSize: 'small', fontWeight: 'lighter', color: 'rgb(230, 230, 230)' }}>
                 {currentSong && `来自${platforms[currentSong.platform]}`}
               </Col>
               <Col xs={0} sm={4} style={{ textAlign: 'right' }}>
@@ -349,23 +312,6 @@ class MusicPlayer extends Component {
               style={{ margin: '8px 0' }} />
           </Col>
           <Col xs={1} sm={1}>
-            <a title={this.props.currentSongIsLiked ? "取消喜欢" : "喜欢"}
-              onClick={this.handleClickingHeart}
-            >
-              <Icon type={this.props.currentSongIsLiked ? "heart" : "heart-o"}
-                style={{ color: this.props.currentSongIsLiked ? themeColor : 'white' }}
-              />
-            </a>
-            {/* <Button
-              title={this.props.currentSongIsLiked ? "取消喜欢" : "喜欢"}
-              onClick={this.handleClickingHeart}
-              icon={this.props.currentSongIsLiked ? "heart" : "heart-o"}
-              style={{
-                color: this.props.currentSongIsLiked ? themeColor : 'white',
-                border: 'none',
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-              }}
-            /> */}
           </Col>
           <Col xs={1} sm={1}>
             <Tooltip
@@ -448,15 +394,11 @@ const platforms = {
 };
 
 function mapStateToProps(state) {
-  const { user } = state;
   const currentSong = state.playlist[state.playIndex];
   return {
     playAction: state.playAction,
     currentSong: currentSong,
     playlist: state.playlist,
-    currentSongIsLiked: user && currentSong && user.favoriteSongs.some(song =>
-      song.link === currentSong.link),
-    user: state.user,
     shouldShowPlaylist: state.shouldShowPlaylist,
   };
 }
@@ -491,9 +433,6 @@ function mapDispatchToProps(dispatch) {
     },
     updatePlayAction: (playAction) => {
       dispatch({ type: 'UPDATE_PLAY_ACTION', data: playAction });
-    },
-    updateUserFavoriteSongs: (song) => {
-      return dispatch({ type: 'UPDATE_FAVORITE_SONGS', data: song });
     },
     showPlaylist: () => {
       dispatch({ type: 'SHOULD_SHOW_PLAYLIST' });
