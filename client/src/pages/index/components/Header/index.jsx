@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
-import SearchBar from '../SearchBar';
+import SearchBar from '../SearchBar/withDropdown';
 import logo from './images/logo.png';
 import { themeColor } from '../../../../config';
 
