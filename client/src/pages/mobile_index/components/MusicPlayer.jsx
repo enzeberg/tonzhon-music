@@ -151,6 +151,9 @@ class MusicPlayer extends Component {
   }
 
   getSongSource(platform, originalId, callback) {
+    this.setState({
+      getMusicUrlStatus: 'started',
+    });
     fetch(`/api/song_source/${platform}/${originalId}`)
       .then(res => res.json())
       .then(json => {
@@ -160,14 +163,16 @@ class MusicPlayer extends Component {
             songLoaded: false,
           }, callback);
         } else {
-          notification.open({
-            message: '播放失败'
+          this.setState({
+            getMusicUrlStatus: 'failed',
           });
         }
       })
-      .catch(err => notification.open({
-        message: '播放失败',
-      }));
+      .catch(err => {
+        this.setState({
+          getMusicUrlStatus: 'failed',
+        });
+      });
   }
 
   changePlayProgress(value) {
@@ -294,7 +299,12 @@ class MusicPlayer extends Component {
           </Col>
           <Col span={7} style={{ textAlign: 'right' }}>
             {
-              this.state.songLoaded && `${progress} / ${total}`
+              this.state.getMusicUrlStatus === 'failed' ? '播放失败' :
+                (
+                  this.state.songLoaded ? `${progress} / ${total}` :
+                    (this.props.playAction === 'play' &&
+                      <Icon type="loading" />)
+                )
             }
           </Col>
         </Row>

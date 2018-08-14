@@ -16,9 +16,19 @@ const getSongSource = (songId) => {
       cookie,
       result => {
         console.log('result: ', result)
-        resolve({
-          songSource: JSON.parse(result).data[0].url
-        });
+        // resolve({
+        //   songSource: JSON.parse(result).data[0].url
+        // });
+        const parsed = JSON.parse(result);
+        if (parsed.data[0].code === 200) {
+          resolve({
+            songSource: parsed.data[0].url
+          });
+        } else {
+          reject({
+            message: parsed.data[0].code
+          });
+        }
       },
       err => {
         reject(err);
