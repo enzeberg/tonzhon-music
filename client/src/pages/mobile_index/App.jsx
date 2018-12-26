@@ -8,12 +8,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import T_Header from './components/Header/like_desktop';
 import SearchBar from './components/SearchBar';
 import Result from './components/Result';
-import T_Footer from './components/Footer';
 import SearchWithURL from './components/SearchWithURL';
 import NotFound from './components/NotFound';
 import TopSongs from './components/TopSongs';
 import MusicPlayer from './components/MusicPlayer';
-import SearchRecommendations from './components/SearchRecommendations';
 import './App.css';
 import { themeColor } from '../../config';
 
@@ -45,7 +43,6 @@ class App extends Component {
               <div
                 style={{
                   marginTop: 70,
-                  borderBottom: '1px solid #DBDBDB',
                   padding: '10px 9px 0 9px',
                 }}
               >
@@ -53,19 +50,7 @@ class App extends Component {
                   <SearchBar />
                 </div>
                 <Switch>
-                  <Route exact path="/" render={() => (
-                    <div>
-                      <SearchRecommendations />
-                      <br/>
-                      <h3>在铜钟上，你可以：</h3>
-                      <ul>
-                        <li>播放QQ音乐、网易云音乐和虾米上面的歌曲</li>
-                        <li>搜索歌曲、专辑和艺人，从而快速地知道自己想听的歌的原唱版本在哪个平台上</li>
-                        <li>保存自己喜欢的歌曲</li>
-                      </ul>
-                      <p>更多带感新功能，敬请期待！</p>
-                    </div>
-                  )} />
+                  <Route exact path="/" />
                   <Route path="/search" render={() => (
                     <div>
                       {
@@ -93,7 +78,6 @@ class App extends Component {
               </div>
             </Content>
             <Footer style={{ marginBottom: 110 }}>
-              <T_Footer />
             </Footer>
             <MusicPlayer />
           </Layout>

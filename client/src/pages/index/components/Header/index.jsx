@@ -3,7 +3,6 @@ import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
 import SearchBar from '../SearchBar/withDropdown';
-import logo from './images/logo.png';
 import { themeColor } from '../../../../config';
 
 class Header extends Component {
@@ -20,12 +19,15 @@ class Header extends Component {
         <Row type="flex" align="middle" className="container" >
           <Col xs={24} sm={7}>
             <div style={styles.header}>
-              <Link to="/">
-                <img src={logo} alt="铜钟" />
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <h1 style={{ display: 'inline', color: themeColor }}
+                >
+                  Tongzhong Mini
+                </h1>
               </Link>
             </div>
           </Col>
-          <Col xs={24} sm={8} >
+          <Col xs={24} sm={17} >
             <SearchBar />
           </Col>
         </Row>

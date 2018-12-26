@@ -6,8 +6,6 @@ import { withRouter } from 'react-router-dom';
 
 const Search = Input.Search;
 
-import recommendations from '../../../../config/search_recommendations';
-
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -47,18 +45,6 @@ class SearchBar extends Component {
         >
           {
             searchHistory.map(item => (
-              <Menu.Item key={item}>
-                {item}
-              </Menu.Item>
-            ))
-          }
-        </Menu.ItemGroup>
-        <Menu.Divider />
-        <Menu.ItemGroup key="recommendations" title={
-          <span>搜索推荐</span>}
-        >
-          {
-            recommendations.map(item => (
               <Menu.Item key={item}>
                 {item}
               </Menu.Item>

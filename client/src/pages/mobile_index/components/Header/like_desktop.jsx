@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
 
-import { themeColor, serverUrl } from '../../../../config';
-import logo from './images/logo.png';
+import { themeColor } from '../../../../config';
 
 class Header extends Component {
   constructor(props) {
@@ -40,8 +38,11 @@ class Header extends Component {
         <Row type="flex" align="middle" className="container" >
           <Col span={4}>
             <div style={styles.header}>
-              <Link to="/">
-                <img src={logo} alt="铜钟" />
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <h1 style={{ display: 'inline', color: themeColor }}
+                >
+                  Tongzhong Mini
+                </h1>
               </Link>
             </div>
           </Col>

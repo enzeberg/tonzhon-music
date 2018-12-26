@@ -70,7 +70,13 @@ class MusicPlayer extends Component {
       });
     });
     this.audio.addEventListener('play', () => {
-      document.title = `${this.props.currentSong.name} - 铜钟聚合音乐`;
+      document.title = `${this.props.currentSong.name} -
+                        ${this.props.currentSong.artists
+                          .map(item => item.name)
+                          .reduce(
+                          (accumulator, currentValue) =>
+                            accumulator + ' / ' + currentValue
+                        )}`;
       if (this.interval) { clearInterval(this.interval); }
       this.interval = setInterval(() => {
         console.log('interval')

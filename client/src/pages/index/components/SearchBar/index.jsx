@@ -8,7 +8,6 @@ const Search = Input.Search;
 const Option = AutoComplete.Option;
 const OptGroup = AutoComplete.OptGroup;
 
-import recommendations from '../../../../config/search_recommendations';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -25,28 +24,12 @@ class SearchBar extends Component {
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('will receive props')
-  // }
 
   render() {
     const { keyword } = this.props.searchParameters;
     const { searchHistory } = this.props;
 
     const options = [
-      <OptGroup key="recommendations"
-        label={
-          <span>搜索推荐</span>
-        }
-      >
-        {
-          recommendations.map(item => (
-            <Option key={item} value={item}>
-              {item}
-            </Option>
-          ))
-        }
-      </OptGroup>,
       <OptGroup key="history"
         label={
           <span>搜索历史

@@ -8,25 +8,13 @@ import { playlist } from '../../../config';
 class Playlist extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
   }
-
-  // likeAll = () => {
-  //
-  // }
 
   render() {
     return (
       <div style={styles.wrapper}>
         <Row type="flex" align="middle" style={styles.header}>
           <Col span={14}>播放列表</Col>
-          {/* <Col span={6}>
-            <Button icon="heart-o" ghost>
-              喜欢全部
-            </Button>
-          </Col> */}
           <Col span={8}>
             <Button icon="delete" ghost onClick={this.props.clearPlaylist}>
               清空
