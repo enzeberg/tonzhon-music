@@ -5,20 +5,20 @@ const fs = require('fs');
 const url = require('url');
 
 // Make sure any symlinks in the project folder are resolved:
-// https://github.com/facebookincubator/create-react-app/issues/637
+// https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const envPublicUrl = process.env.PUBLIC_URL;
 
-function ensureSlash(path, needsSlash) {
-  const hasSlash = path.endsWith('/');
+function ensureSlash(inputPath, needsSlash) {
+  const hasSlash = inputPath.endsWith('/');
   if (hasSlash && !needsSlash) {
-    return path.substr(path, path.length - 1);
+    return inputPath.substr(0, inputPath.length - 1);
   } else if (!hasSlash && needsSlash) {
-    return `${path}/`;
+    return `${inputPath}/`;
   } else {
-    return path;
+    return inputPath;
   }
 }
 
@@ -38,34 +38,72 @@ function getServedPath(appPackageJson) {
   return ensureSlash(servedUrl, true);
 }
 
-function scanSrc() {
+const moduleFileExtensions = [
+  'web.mjs',
+  'mjs',
+  'web.js',
+  'js',
+  'web.ts',
+  'ts',
+  'web.tsx',
+  'tsx',
+  'json',
+  'web.jsx',
+  'jsx',
+];
+
+// Resolve file paths in the same order as webpack
+const resolveModule = (resolveFn, filePath) => {
+  const extension = moduleFileExtensions.find(extension =>
+    fs.existsSync(resolveFn(`${filePath}.${extension}`))
+  );
+
+  if (extension) {
+    return resolveFn(`${filePath}.${extension}`);
+  }
+
+  return resolveFn(`${filePath}.js`);
+};
+
+// pages: {
+//   pageOne: 'to/pageOne/index.js',
+//   pageTwo: 'to/pageTwo/index.js',
+// }
+function scanPages() {
   const dirs = fs.readdirSync(resolveApp('client/src/pages/'));
-  const map = {};
+  const pages = {};
   dirs.forEach((file) => {
     const state = fs.statSync(resolveApp('client/src/pages/' + file));
     if (state.isDirectory()) {
-      map[file] = resolveApp('client/src/pages/' + file + '/index.js');
+      pages[file] = resolveApp('client/src/pages/' + file + '/index.js');
     }
   });
-  return map;
+  return pages;
 }
 
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
+  appPath: resolveApp('.'),
   appBuild: resolveApp('client/build'),
   appPublic: resolveApp('client/public'),
   appHtml: resolveApp('client/public/index.html'),
   mobileIndexHtml: resolveApp('client/public/mobile_index.html'),
-  // appIndexJs: resolveApp('client/src/app/index.js'),
+  appIndexJs: resolveModule(resolveApp, 'client/src/pages/index/index'),
+  mobileIndexJs:
+    resolveModule(resolveApp, 'client/src/pages/mobile_index/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('client/src'),
+  appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  testsSetup: resolveModule(resolveApp, 'client/src/setupTests'),
+  proxySetup: resolveApp('client/src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
-  dirsInSrc: scanSrc(),
-  indexServiceWorker:
-    resolveApp('client/src/pages/index/registerServiceWorker.js'),
+  pages: scanPages(),
 };
+
+
+
+module.exports.moduleFileExtensions = moduleFileExtensions;
