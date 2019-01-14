@@ -3,9 +3,8 @@ import { Row, Col, Pagination } from 'antd';
 import { connect } from 'react-redux';
 
 import SongList from './SongList';
-// import Album from './qqzhida/Album';
-// import Artist from './qqzhida/Artist';
 import Wrapper from './Wrapper';
+import OperatingBar from './OperatingBar';
 import to2D from '../lib/change_1d_to_2d';
 
 // 一个Result就是一个有边框的面板
@@ -104,18 +103,10 @@ class Result extends Component {
 
     return (
       <Wrapper provider={provider}
-        // zhida={
-        //   (function() {
-        //     if (result.searchSuccess && result.data.zhida) {
-        //       let { type, content } = result.data.zhida;
-        //       if (type === 'artist') {
-        //         return <Artist artist={content} />
-        //       } else if (type === 'album') {
-        //         return <Album album={content} />
-        //       }
-        //     }
-        //   })()
-        // }
+        operatingBar={
+          result.searchSuccess && searchType === 'song' &&
+          <OperatingBar songs={result.data.songs} />
+        }
         pagination={ result.searchSuccess &&
           <Pagination
              simple

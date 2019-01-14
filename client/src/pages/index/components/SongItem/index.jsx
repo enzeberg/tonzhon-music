@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Row, Col, Button } from 'antd';
 import { connect } from 'react-redux';
 
-import neteaseMusicLogo from './images/netease_22.png';
-import qqMusicLogo from './images/qq_22.png';
-import xiamiMusicLogo from './images/xiami_22.png';
+import neteaseMusicLogo from './images/netease_16.ico';
+import qqMusicLogo from './images/qq_16.ico';
+import xiamiMusicLogo from './images/xiami_16.ico';
 import Artists from '../Artists';
 import MVIcon from '../MVIcon';
 import AddTo from '../AddTo';
@@ -69,7 +69,7 @@ class SongItem extends Component {
           </Col>
           <Col sm={2}>
             {
-              this.props.showPlatform && <img src={logos[song.platform]} alt={song.platform} style={{ width: 22, height: 22 }}/>
+              this.props.showPlatform && <img src={logos[song.platform]} alt={song.platform} />
             }
           </Col>
           <Col sm={1}>

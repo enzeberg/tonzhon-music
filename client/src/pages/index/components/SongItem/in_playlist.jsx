@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'antd';
-import neteaseMusicLogo from './images/netease_22.png';
-import qqMusicLogo from './images/qq_22.png';
-import xiamiMusicLogo from './images/xiami_22.png';
+import neteaseMusicLogo from './images/netease_16.ico';
+import qqMusicLogo from './images/qq_16.ico';
+import xiamiMusicLogo from './images/xiami_16.ico';
 import { connect } from 'react-redux';
 import Artists from '../Artists';
 
@@ -59,7 +59,6 @@ class SongItem extends Component {
         </Col>
         <Col xs={3} sm={2}>
            <img src={logos[song.platform]} alt={song.platform}
-              style={{ width: 22, height: 22 }}
            />
         </Col>
         <Col xs={2} sm={1}>

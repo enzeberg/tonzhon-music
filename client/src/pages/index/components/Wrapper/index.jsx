@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 
-import neteaseMusicLogo from './images/netease_50.png';
-import qqMusicLogo from './images/qq_50.png';
-import xiamiMusicLogo from './images/xiami_50.png';
+import neteaseMusicLogo from './images/netease_32.ico';
+import qqMusicLogo from './images/qq_32.ico';
+import xiamiMusicLogo from './images/xiami_32.ico';
 
 class Wrapper extends Component {
   constructor(props) {
@@ -14,18 +14,21 @@ class Wrapper extends Component {
     const { provider } = this.props;
     const { themeColor, logo, link } = providers[provider];
     return (
-      <div style={{...styles.wrapper, borderColor: themeColor}}>
+      <div style={{ ...styles.wrapper, borderColor: themeColor }}>
         <Row>
-          <Col xs={4} sm={4} md={4}>
+          <Col xs={4} sm={4} md={6}>
             <a href={link} target="_blank" alt={provider}>
-              <img src={logo} alt="" style={styles.providerLogo} />
+              <img src={logo} alt="" />
             </a>
           </Col>
-          <Col xs={20} sm={20} md={14}>
-            { this.props.zhida }
+          <Col xs={20} sm={20} md={8}>
+            {this.props.zhida}
+          </Col>
+          <Col md={4} style={{ paddingRight: 60 }}>
+            {this.props.operatingBar}
           </Col>
           <Col md={6}>
-            { this.props.pagination}
+            {this.props.pagination}
           </Col>
         </Row>
         <div style={{ marginTop: 20 }}>
@@ -42,11 +45,6 @@ const styles = {
     borderRadius: 5,
     padding: '15px 10px',
     marginBottom: 20
-  },
-  providerLogo: {
-    width: 50,
-    height: 50,
-    borderRadius: 5
   },
   resultContainer: {
     // padding: window.tongzhong.isMobile ? '0 0' : '0 15px',
