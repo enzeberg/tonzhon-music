@@ -36,13 +36,13 @@ class Header extends Component {
     return (
       <div style={{ padding: '10px 9px', borderBottom: '1px solid #DBDBDB', }}>
         <Row type="flex" align="middle" className="container" >
-          <Col span={4}>
+          <Col >
             <div style={styles.header}>
               <Link to="/" style={{ textDecoration: 'none' }}>
-                <h1 style={{ display: 'inline', color: themeColor }}
+                <h2 style={{ display: 'inline', color: themeColor }}
                 >
                   Tongzhong Mini
-                </h1>
+                </h2>
               </Link>
             </div>
           </Col>

@@ -122,11 +122,6 @@ const styles = {
     padding: '15px 10px',
     marginBottom: 20
   },
-  providerLogo: {
-    width: 50,
-    height: 50,
-    borderRadius: 5
-  },
   resultContainer: {
     // padding: window.tongzhong.isMobile ? '0 0' : '0 15px',
     marginTop: 10

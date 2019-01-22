@@ -42,7 +42,7 @@ class App extends Component {
             <Content>
               <div
                 style={{
-                  marginTop: 70,
+                  marginTop: 50,
                   padding: '10px 9px 0 9px',
                 }}
               >

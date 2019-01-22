@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { ListItem } from 'material-ui/List';
 import { connect } from 'react-redux';
 
-import neteaseMusicLogo from './images/netease_22.png';
-import qqMusicLogo from './images/qq_22.png';
-import xiamiMusicLogo from './images/xiami_22.png';
+import neteaseMusicLogo from './images/netease_16.ico';
+import qqMusicLogo from './images/qq_16.ico';
+import xiamiMusicLogo from './images/xiami_16.ico';
 
 class SongItem extends Component {
   constructor(props) {
@@ -37,7 +37,10 @@ class SongItem extends Component {
       <ListItem
         onClick={() => this.playOrPause(shouldPlay)}
         rightIcon={showPlatform &&
-          <img src={logos[song.platform]} alt=""/>}
+          <img src={logos[song.platform]} alt=""
+               style={{ width: 16, height: 16 }}
+          />
+        }
         key={song.link}
         primaryText={song.name}
         secondaryText={song.artists.map(artist => artist.name)

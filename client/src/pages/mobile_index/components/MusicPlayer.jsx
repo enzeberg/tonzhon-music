@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Icon, Row, Col, Slider, Button, notification, Tooltip } from 'antd';
 import { withBaseIcon } from 'react-icons-kit';
 import { repeat } from 'react-icons-kit/ikons/repeat';
-import { repeat_1 } from 'react-icons-kit/ikons/repeat_1';
+import { ic_repeat_one } from 'react-icons-kit/md/ic_repeat_one';
 import { shuffle } from 'react-icons-kit/ikons/shuffle';
 
 import Playlist from './Playlist';
@@ -21,7 +21,7 @@ const Icon1 = withBaseIcon({
 });
 const modeIcons = {
   loop: repeat,
-  single: repeat_1,
+  single: ic_repeat_one,
   shuffle: shuffle,
 };
 
@@ -220,7 +220,7 @@ class MusicPlayer extends Component {
           type="flex" align="middle" className="container"
           style={{ marginBottom: 10 }}
         >
-          <Col span={12}>
+          <Col span={16}>
             <Button ghost shape="circle" icon="step-backward"
               onClick={() => this.playNext('backward')}
             />
@@ -265,7 +265,7 @@ class MusicPlayer extends Component {
             />
           </Col>
         </Row>
-        <Row type="flex" justify="space-between" style={{ height: 20 }}>
+        <Row type="flex" align="middle" justify="space-between" style={{ height: 20 }}>
           <Col span={10}>
             <div className="nowrap">
               {
@@ -293,7 +293,7 @@ class MusicPlayer extends Component {
 
           </Col>
           <Col span={7}>
-            <span style={{ textSize: 'x-small' }}>
+            <span style={{ textSize: 'x-small', fontWeight: 'lighter', color: 'rgb(200,200,200)' }}>
               {currentSong && `来自${platforms[currentSong.platform]}`}
             </span>
           </Col>
@@ -328,7 +328,7 @@ const styles = {
   player: {
     position: 'fixed',
     bottom: 0,
-    padding: '8px 12px',
+    padding: '12px',
     width: '100%',
     backgroundColor: musicPlayer.background,
     color: musicPlayer.color,
