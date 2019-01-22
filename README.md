@@ -1,7 +1,7 @@
 # tongzhong-music
 <p>- Listen to all the music in one place!</p>
 <p>It's online: <a href="http://mini.tongzhong.xyz">http://mini.tongzhong.xyz</a> </p>
-<p> Note: This open-source website is a reduced version of tongzhong.xyz.</p>
+<p> Note: This open-source website is a reduced version of <a href="http://tongzhong.xyz">tongzhong.xyz</a>.</p>
 
 
 ## Usage
@@ -18,7 +18,7 @@ Open `http://localhost:8081` to visit the page that uses the production build.
     npm start
 Open `http://localhost:3000` for desktop, and `http://localhost:3000/m` for mobile.
 
-## API from others
+## Thanks
 <ul>
 <li><a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a></li>
 <li><a href="https://github.com/LIU9293/musicAPI">LIU9293/musicAPI</a></li>

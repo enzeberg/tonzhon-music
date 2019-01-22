@@ -17,8 +17,7 @@
   "dependencies": {
     "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0",
-    "antd": "^3.6.2",
-    "antd-mobile": "^2.1.8",
+    "antd": "^3.12.4",
     "big-integer": "^1.6.25",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
@@ -70,7 +69,7 @@
     "html-webpack-plugin": "^4.0.0-alpha.2",
     "jest": "^23.6.0",
     "less": "^3.9.0",
-    "less-loader": "^4.0.5",
+    "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.3",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "pnp-webpack-plugin": "^1.1.0",
@@ -98,5 +97,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enzeberg/tongzhong-music"
+  },
+  "license": "MIT"
 }
