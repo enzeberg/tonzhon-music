@@ -17,7 +17,7 @@
   "dependencies": {
     "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0",
-    "antd": "^3.6.2",
+    "antd": "^3.13.0",
     "big-integer": "^1.6.25",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
