@@ -7,18 +7,26 @@ const getSongSource = (songId) => {
       .then(res => res.text())
       .then(text => {
         const parsed = JSON.parse(text);
-        // console.log(parsed);
+        // console.log('parsed text: ', parsed);
+        // console.log('parsed.data.items[0]', parsed.data.items[0]);
         const { filename, vkey } = parsed.data.items[0];
-        const songSource = `http://dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}&guid=${guid}&fromtag=66`;
-        resolve({
-          songSource,
-        });
+        if (vkey) {
+          resolve({
+            songSource: `http://dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}&guid=${guid}&fromtag=66`,
+          });
+        } else {
+          reject({
+            message: '403',
+          });
+        }
       })
       .catch(err => reject(err));
   });
 };
 
-// getSongSource('001Nl0W80sBSwJ')
+// const songId = '004GK4aP4TGbbG'; // Love Story
+// const songId = '001Nl0W80sBSwJ'; // 凉凉
+// getSongSource(songId)
 //   .then(obj => console.log(obj))
 //   .catch(err => console.error(err))
 
