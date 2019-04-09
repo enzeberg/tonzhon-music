@@ -1,7 +1,6 @@
 # tongzhong-music
 <p>- Listen to all the music in one place!</p>
-<p>It's online: <a href="http://mini.tongzhong.xyz">http://mini.tongzhong.xyz</a> </p>
-<p> Note: This open-source website is a reduced version of <a href="http://tongzhong.xyz">tongzhong.xyz</a>.</p>
+<p> Note: This website is a reduced version of <a href="http://tongzhong.xyz">tongzhong.xyz</a>.</p>
 
 
 ## Usage
