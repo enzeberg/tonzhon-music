@@ -33,7 +33,6 @@ app.use(express.static(path.join(__dirname, '../client/build'), {
 }));
 
 app.get('/', function(req, res, next) {
-  console.log('req.useragent: ', req.useragent);
   if (req.useragent.isMobile) {
     res.sendFile('mobile_index.html', {
       root: path.join(__dirname, '../client/build')
@@ -47,11 +46,6 @@ app.get('/', function(req, res, next) {
 });
 
 app.use('/api', api);
-
-app.use('/search', (req, res, next) => {
-  return next();
-});
-
 
 app.use('/*', (req, res, next) => {
   return next();

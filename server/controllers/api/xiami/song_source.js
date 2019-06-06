@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const querystring = require('querystring');
 
-const getSongSource = (songId, br) => {
+const getSongSource = (songId) => {
   return new Promise((resolve, reject) => {
     const query = {
       id: songId,
@@ -18,7 +18,6 @@ const getSongSource = (songId, br) => {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json)
         const songSource = json.data.song.listen_file;
         if (songSource) {
           resolve({

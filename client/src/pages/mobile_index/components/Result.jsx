@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Row, Col, Pagination } from 'antd';
 import { connect } from 'react-redux';
+
 import SongList from './SongList';
 import Wrapper from './Wrapper';
+import OperatingBarOfSongList from './OperatingBarOfSongList';
 import to2D from '../lib/change_1d_to_2d';
 
 // 一个Result就是一个有边框的面板
@@ -18,7 +20,7 @@ class Result extends Component {
   renderSongs(songs) {
     // console.log('songs rendered') // I don't understand why this would be logged 5 times.
     return (
-      <SongList songs={songs} />
+      <SongList songs={songs} shouldSendOperatingData />
     );
   }
 
@@ -30,16 +32,16 @@ class Result extends Component {
           albumRow.map((album) => (
             <Col key={album.link}>
               <a href={album.link} title={album.name} target="_blank">
-                <img src={album.picUrl} alt={album.name} style={{ display: 'inline-block', width: 180, height: 180, border: '1px solid #999'}}/>
+                <img src={album.picUrl} alt={album.name} style={{ display: 'inline-block', width: 180, height: 180, border: '1px solid #999' }} />
               </a>
               <div className="nowrap" style={{ marginTop: 8, width: 182, fontSize: 'large' }}>
                 <a href={album.link} title={album.name} target="_blank">{album.name}</a>
               </div>
-              <div className="nowrap" style={{width: 182}}>
+              <div className="nowrap" style={{ width: 182 }}>
                 {
                   album.artists.map((artist, artistIndex) => (
                     <span key={artist.link}>
-                      { artistIndex > 0 && <span> / </span>}
+                      {artistIndex > 0 && <span> / </span>}
                       <a href={artist.link} title={artist.name} target="_blank">{artist.name}</a>
                     </span>
                   ))
@@ -60,7 +62,7 @@ class Result extends Component {
           artistRow.map((artist, i) => (
             <Col key={i}>
               <a href={artist.link} title={artist.name} target="_blank">
-                <img src={artist.picUrl} alt={artist.name} style={{display: 'inline-block', width: 180, height: 180, borderRadius: 90, border: '1px solid #999'}}/>
+                <img src={artist.picUrl} alt={artist.name} style={{ display: 'inline-block', width: 180, height: 180, borderRadius: 90, border: '1px solid #999' }} />
               </a>
               <div className="nowrap" style={{ marginTop: 8, width: 182, fontSize: 'large', textAlign: 'center' }}>
                 <a href={artist.link} title={artist.name} target="_blank">{artist.name}</a>
@@ -101,15 +103,19 @@ class Result extends Component {
 
     return (
       <Wrapper provider={provider}
-        pagination={ result.searchSuccess &&
+        pagination={result.searchSuccess &&
           <Pagination
-             simple
-             onChange={this.onPageChange}
-             defaultPageSize={4}
-             total={result.data.totalCount} />
+            simple
+            onChange={this.onPageChange}
+            defaultPageSize={4}
+            total={result.data.totalCount} />
+        }
+        operatingBar={
+          result.searchSuccess && searchType === 'song' &&
+          <OperatingBarOfSongList songs={result.data.songs} />
         }
       >
-        <div style={ styles.resultContainer }>{mainPart}</div>
+        <div style={styles.resultContainer}>{mainPart}</div>
       </Wrapper>
     );
   }
@@ -121,6 +127,11 @@ const styles = {
     borderRadius: 5,
     padding: '15px 10px',
     marginBottom: 20
+  },
+  providerLogo: {
+    width: 50,
+    height: 50,
+    borderRadius: 5
   },
   resultContainer: {
     // padding: window.tongzhong.isMobile ? '0 0' : '0 15px',
@@ -138,10 +149,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onResultResponded: (provider, data) => {
-      dispatch({ type: 'UPDATE_SEARCH_RESULTS', provider, data});
+      dispatch({ type: 'UPDATE_SEARCH_RESULTS', provider, data });
     }
   };
 }
 
 export default connect(mapStateToProps,
-                       mapDispatchToProps)(Result);
+  mapDispatchToProps)(Result);

@@ -13,9 +13,11 @@ class OperatingBarOfSongList extends Component {
     return (
       <Row type="flex" align="middle" justify="space-around">
         <Col>
-          <Button icon="caret-right" shape="circle"
+          <Button icon="caret-right"
             onClick={() => this.props.playSongList(this.props.songs)}
-          />
+          >
+            播放全部
+          </Button>
         </Col>
         <Col>
           <AddTo data={this.props.songs} />
@@ -31,9 +33,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     playSongList: (songs) => {
-      dispatch({ type: 'NEW_PLAYLIST', data: songs });
+      dispatch({ type: 'NEW_PLAYING_LIST', data: songs });
       dispatch({ type: 'UPDATE_PLAY_INDEX', data: 0 });
-      dispatch({ type: 'UPDATE_PLAY_ACTION', data: 'play' });
     },
   };
 }

@@ -15,7 +15,7 @@ const getSongSource = (songId) => {
       data,
       cookie,
       result => {
-        console.log('result: ', result)
+        // console.log('result: ', result)
         // resolve({
         //   songSource: JSON.parse(result).data[0].url
         // });
@@ -38,6 +38,10 @@ const getSongSource = (songId) => {
 };
 
 // getSongSource('108557')
+//   .then(object => console.log(object))
+//   .catch(err => console.error(err))
+
+// getSongSource('167655')
 //   .then(object => console.log(object))
 //   .catch(err => console.error(err))
 

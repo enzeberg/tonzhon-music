@@ -1,7 +1,7 @@
 {
   "name": "tongzhong-music",
-  "version": "0.0.1",
-  "url": "http://mini.tongzhong.xyz",
+  "version": "0.0.2",
+  "url": "http://tongzhong.xyz",
   "author": {
     "name": "Li Enze",
     "email": "enzeberg@outlook.com"
@@ -17,7 +17,7 @@
   "dependencies": {
     "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0",
-    "antd": "^3.13.0",
+    "antd": "^3.19.2",
     "big-integer": "^1.6.25",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
@@ -29,6 +29,7 @@
     "material-ui": "^0.20.0",
     "morgan": "~1.9.0",
     "node-fetch": "^2.1.1",
+    "pac-proxy-agent": "^3.0.0",
     "prop-types": "^15.6.0",
     "querystring": "^0.2.0",
     "react": "^16.0.0",

@@ -1,7 +1,7 @@
 const enc = require('../../../utils/crypto');
 const querystring = require('querystring');
 const request = require('../../../utils/request');
-const neteaseMusicUrl = 'http://music.163.com/#/';
+const neteaseMusicUrl = 'https://music.163.com/#/';
 
 const host = 'music.163.com';
 const path = '/weapi/cloudsearch/get/web?csrf_token=';
@@ -100,7 +100,6 @@ const songsHandler = (songs) => {
     link: `${neteaseMusicUrl}song?id=${song.id}`,
     alias: song.alia[0], // if no alia: undefined
     mvLink: song.mv ? `${neteaseMusicUrl}mv?id=${song.mv}` : null,
-    playLink: `${neteaseMusicUrl}song?id=${song.id}&autoplay=true`,
     artists: song.ar.map((artist) => {
       return {
         name: artist.name,

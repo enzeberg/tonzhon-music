@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import SongList from './SongList';
 import Wrapper from './Wrapper';
-import OperatingBar from './OperatingBar';
+import OperatingBarOfSongList from './OperatingBarOfSongList';
 import to2D from '../lib/change_1d_to_2d';
 
 // 一个Result就是一个有边框的面板
@@ -105,7 +105,7 @@ class Result extends Component {
       <Wrapper provider={provider}
         operatingBar={
           result.searchSuccess && searchType === 'song' &&
-          <OperatingBar songs={result.data.songs} />
+          <OperatingBarOfSongList songs={result.data.songs} />
         }
         pagination={ result.searchSuccess &&
           <Pagination

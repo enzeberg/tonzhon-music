@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import { notification, Button } from 'antd';
 import { connect } from 'react-redux';
 
-notification.config({
-  placement: 'bottomRight',
-  bottom: 50,
-  duration: 3,
-});
-
 class AddTo extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +24,6 @@ class AddTo extends Component {
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}
-        size={this.props.iconSize}
       />
     );
   }
@@ -43,7 +36,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addToPlaylist: (data) => {
-      dispatch({ type: 'ADD_TO_PLAYING_LIST', data: data });
+      dispatch({ type: 'ADD_TO_PLAYLIST', data: data });
     },
   };
 }

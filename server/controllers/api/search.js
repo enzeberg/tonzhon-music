@@ -1,6 +1,6 @@
-const netease = require('./netease');
-const qq = require('./qq');
-const xiami = require('./xiami');
+const netease = require('./netease/search');
+const qq = require('./qq/search');
+const xiami = require('./xiami/search');
 
 const search = (req, res, next) => {
   let { keyword, type, provider, limit, page } = req.query;
@@ -10,7 +10,7 @@ const search = (req, res, next) => {
       message: 'Lack of necessary parameters!'
     });
   }
-  
+
   limit = limit || 4;
   page = page || 1;
 

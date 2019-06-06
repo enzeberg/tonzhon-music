@@ -15,18 +15,14 @@ class SongItem extends Component {
     super(props);
   }
 
-  playOrPause = (shouldPlay) => {
-    if (shouldPlay) {
-      const index = this.props.playlist.findIndex(song => song.link === this.props.song.link);
-      if (index === -1) {
-        this.props.addToPlaylist(this.props.song);
-        this.props.updatePlayIndex(this.props.playlist.length);
-      } else {
-        this.props.updatePlayIndex(index);
-      }
-      this.props.updatePlayAction('play');
+  changeCurrentSong = () => {
+    const index = this.props.playingList.findIndex(song =>
+      song.link === this.props.song.link);
+    if (index === -1) {
+      this.props.addToPlayingList(this.props.song);
+      this.props.updatePlayIndex(this.props.playingList.length);
     } else {
-      this.props.updatePlayAction('pause');
+      this.props.updatePlayIndex(index);
     }
   }
 
@@ -34,16 +30,16 @@ class SongItem extends Component {
     let { song, currentSong } = this.props;
     let anchorClass = song.hasCopyright ? '' : 'no-copyright';
     const shouldShowPlayIcon =
-      (!currentSong  || currentSong.link !== song.link) ||
+      (!currentSong || currentSong.link !== song.link) ||
       (currentSong.link === song.link && this.props.playAction === 'pause');
     return (
       <li className="song-item">
-        <Row  type="flex"  align="middle" style={{ fontSize: 14 }}>
-          <Col xs={24} sm={8}>
+        <Row type="flex" align="middle" style={{ fontSize: 14 }}>
+          <Col sm={8}>
             <div className="nowrap">
               <a href={song.link}
                 title={`${song.name}${song.alias ? ` - ${song.alias}` : ''}\n` +
-                       `${song.hasCopyright ? '' : '（此歌曲在该平台可能存在版权问题。）'}`}
+                  `${song.hasCopyright ? '' : '（此歌曲在该平台可能存在版权问题。）'}`}
                 target="_blank"
                 className={anchorClass}
               >
@@ -55,12 +51,12 @@ class SongItem extends Component {
             </div>
           </Col>
           <Col sm={1}>{song.mvLink && <MVIcon link={song.mvLink} />}</Col>
-          <Col xs={12} sm={5}>
+          <Col sm={5}>
             <div className="nowrap">
               <Artists artists={song.artists} />
             </div>
           </Col>
-          <Col xs={12} sm={5}>
+          <Col sm={5}>
             <div className="nowrap">
               <a href={song.album.link} target="_blank" title={song.album.name}>
                 《{song.album.name}》
@@ -72,15 +68,18 @@ class SongItem extends Component {
               this.props.showPlatform && <img src={logos[song.platform]} alt={song.platform} />
             }
           </Col>
-          <Col sm={1}>
+          <Col sm={2}>
             <Button
-              onClick={() => this.playOrPause(shouldShowPlayIcon)}
+              onClick={this.changeCurrentSong}
               shape="circle"
-              icon={shouldShowPlayIcon ? 'caret-right' : 'pause'}
-              title={shouldShowPlayIcon ? '播放' : '暂停'}
+              icon="caret-right"
               style={{
                 backgroundColor: 'rgba(0, 0, 0, 0)',
               }}
+              type={
+                currentSong && currentSong.link === song.link ?
+                  'primary' : 'default'
+              }
             />
           </Col>
           <Col sm={1}>
@@ -100,21 +99,17 @@ const logos = {
 
 function mapStateToProps(state) {
   return {
-    currentSong: state.playlist[state.playIndex],
-    playlist: state.playlist,
-    playAction: state.playAction,
+    currentSong: state.playingList[state.playIndex],
+    playingList: state.playingList,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    addToPlaylist: (song) => {
-      dispatch({ type: 'ADD_TO_PLAYLIST', data: song });
+    addToPlayingList: (song) => {
+      dispatch({ type: 'ADD_TO_PLAYING_LIST', data: song });
     },
     updatePlayIndex: (index) => {
       dispatch({ type: 'UPDATE_PLAY_INDEX', data: index });
-    },
-    updatePlayAction: (playAction) => {
-      dispatch({ type: 'UPDATE_PLAY_ACTION', data: playAction });
     },
   };
 }

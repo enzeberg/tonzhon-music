@@ -48,14 +48,14 @@ function createWebAPIRequest(
   cookie = cookie.split("__proxy__")[0];
   const cryptoreq = Encrypt(data);
   const options = {
-    url: `http://${host}${path}`,
+    url: `https://${host}${path}`,
     method: method,
     headers: {
       Accept: "*/*",
       "Accept-Language": "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4",
       Connection: "keep-alive",
       "Content-Type": "application/x-www-form-urlencoded",
-      Referer: "http://music.163.com",
+      Referer: "https://music.163.com",
       Host: "music.163.com",
       Cookie: baseCookie + (cookie ? "; " : "") + cookie,
       "User-Agent": randomUserAgent()
@@ -66,9 +66,9 @@ function createWebAPIRequest(
     }),
     proxy: proxy
   };
-  console.log(
-    `[request] ${options.method} ${options.url} proxy:${options.proxy}`
-  );
+  // console.log(
+  //   `[request] ${options.method} ${options.url} proxy:${options.proxy}`
+  // );
 
   request(options, function (error, res, body) {
     if (error) {
@@ -91,10 +91,10 @@ function createWebAPIRequest(
 function createRequest(path, method, data) {
   return new Promise((resolve, reject) => {
     const options = {
-      url: `http://music.163.com${path}`,
+      url: `https://music.163.com${path}`,
       method: method,
       headers: {
-        Referer: "http://music.163.com",
+        Referer: "https://music.163.com",
         Cookie: "appver=1.5.2",
         "Content-Type": "application/x-www-form-urlencoded",
         "User-Agent": randomUserAgent()

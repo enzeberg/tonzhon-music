@@ -9,12 +9,13 @@ const musicPlayer = {
   background: 'rgba(120, 120, 120, 1)',
   color: 'white',
 };
-const playlist = {
+const playingList = {
   width: 600,
 }
+
 export {
   serverUrl,
   themeColor,
   musicPlayer,
-  playlist,
+  playingList,
 };

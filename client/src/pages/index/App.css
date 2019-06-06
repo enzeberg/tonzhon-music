@@ -34,20 +34,20 @@ a:hover {
   }
 }
 
-.playlist::-webkit-scrollbar {
+.playingList::-webkit-scrollbar {
   /* background-color: rgba(0, 0, 0, 0.5); */
   width: 8px;
   border-radius: 10px;
 }
-.playlist::-webkit-scrollbar-thumb {
+.playingList::-webkit-scrollbar-thumb {
     background-color: rgb(100, 100, 100);
     border-radius: 10px;
     width: 5px;
 }
-.playlist::-webkit-scrollbar-track {
+.playingList::-webkit-scrollbar-track {
     display: none;
     border-radius: 10px;
 }
-.playlist::-webkit-scrollbar-track-piece {
+.playingList::-webkit-scrollbar-track-piece {
     border-radius: 10px;
 }

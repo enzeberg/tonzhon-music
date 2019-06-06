@@ -3,7 +3,7 @@ const querystring = require('querystring');
 const request = require('../../../utils/request');
 const Crypto = require('../../../utils/crypto');
 
-const xiamiSite = 'http://www.xiami.com/';
+const xiamiSite = 'https://www.xiami.com/';
 const xiamiAPIUrl = 'https://api.xiami.com/web?';
 const NEW_API_URL = 'http://acs.m.xiami.com/h5/';
 let g = global;
@@ -50,7 +50,6 @@ const searchSongs = (keyword, limit, page) => {
             originalId: song.song_id,
             name: song.song_name,
             link: `${xiamiSite}song/${song.song_id}`,
-            playLink: `${xiamiSite}play?ids=/song/playlist/id/${song.song_id}/object_name/default/object_id/0#open`,
             artists: [{
               name: song.artist_name,
               link: `${xiamiSite}artist/${song.artist_id}`
@@ -95,7 +94,7 @@ const newRequest = (api, query) => {
     return new Promise((resolve, reject) => {
       makeXiamiRequest(api, query, g.XIAMI_TOKEN + '1', g.XIAMI_SIGNED_TOKEN)
         .then(res => {
-          if(JSON.stringify(res.data) === '{}') {
+          if (JSON.stringify(res.data) === '{}') {
             throw 'sign error';
           }
           resolve(res);
@@ -126,23 +125,23 @@ const getXiamiToken = (api) => {
      *  get token from xiami
      *  exmaple: http://acs.m.xiami.com/h5/mtop.alimusic.search.searchservice.searchsongs/1.0/
      */
-     fetch(`${NEW_API_URL}${api}/1.0/`)
-       .then(res => {
+    fetch(`${NEW_API_URL}${api}/1.0/`)
+      .then(res => {
 
-         // myToken is the final token we need;
-         let token = Array.from(res.headers._headers['set-cookie']);
-         token = token.map(i => i.split(';')[0].trim());
-         const myToken = token[0].replace('_m_h5_tk=', '').split('_')[0];
+        // myToken is the final token we need;
+        let token = Array.from(res.headers._headers['set-cookie']);
+        token = token.map(i => i.split(';')[0].trim());
+        const myToken = token[0].replace('_m_h5_tk=', '').split('_')[0];
 
-         resolve({
-           token,
-           signedToken: myToken
-         });
-       })
-       .catch(err => {
-         reject(err);
-       })
-   });
+        resolve({
+          token,
+          signedToken: myToken
+        });
+      })
+      .catch(err => {
+        reject(err);
+      })
+  });
 }
 
 const makeXiamiRequest = (api, query, token, signedToken) => {
@@ -175,32 +174,32 @@ const makeXiamiRequest = (api, query, token, signedToken) => {
     /*
      * generate request data
      */
-     let params = {
-       appKey: 12574478,
-       t,
-       sign,
-       v: 1.0,
-       type: 'originaljson',
-       dataType: 'json',
-       api,
-       data: queryStr
-     };
-     let opts = {
-       headers: {
-         Host: 'acs.m.xiami.com',
-         'Content-Type': 'application/x-www-form-urlencoded',
-         'X-Real-IP': `211.161.244.${random}`,
-         Cookie: `${token[0]};${token[1]}`
-       },
-     };
+    let params = {
+      appKey: 12574478,
+      t,
+      sign,
+      v: 1.0,
+      type: 'originaljson',
+      dataType: 'json',
+      api,
+      data: queryStr
+    };
+    let opts = {
+      headers: {
+        Host: 'acs.m.xiami.com',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Real-IP': `211.161.244.${random}`,
+        Cookie: `${token[0]};${token[1]}`
+      },
+    };
 
-     /*
-      * make request
-      */
-      fetch(`${NEW_API_URL}${api}/1.0/?${querystring.stringify(params)}`, opts)
-        .then(res => res.json())
-        .then(json => resolve(json))
-        .catch(err => reject(err))
+    /*
+     * make request
+     */
+    fetch(`${NEW_API_URL}${api}/1.0/?${querystring.stringify(params)}`, opts)
+      .then(res => res.json())
+      .then(json => resolve(json))
+      .catch(err => reject(err))
   });
 }
 // end end end  copy copy copy
@@ -238,10 +237,10 @@ const searchAlbums = (keyword, limit, page) => {
 const search = (keyword, type, limit, page) => {
   if (type === 'song') {
     return searchSongs(keyword, limit, page);
-  // } else if (type === 'album') {
-  //   return searchSongs(keyword, limit, page);
-  // } else if (type === 'artist') {
-  //   return searchSongs(keyword, limit, page);
+    // } else if (type === 'album') {
+    //   return searchSongs(keyword, limit, page);
+    // } else if (type === 'artist') {
+    //   return searchSongs(keyword, limit, page);
   } else {
     return Promise.reject({ message: 'Xiami Music does not support this search type!' });
   }

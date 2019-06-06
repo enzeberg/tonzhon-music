@@ -12,6 +12,7 @@ import SearchWithURL from './components/SearchWithURL';
 import NotFound from './components/NotFound';
 import TopSongs from './components/TopSongs';
 import MusicPlayer from './components/MusicPlayer';
+import Hot from './components/Hot';
 import './App.css';
 
 const { Header, Content, Footer } = Layout;
@@ -42,7 +43,7 @@ class App extends Component {
                 }}
               >
                 <Switch>
-                  <Route exact path="/"  />
+                  <Route exact path="/" component={Hot}/>
                   <Route path="/search" render={() => (
                     <div>
                       {

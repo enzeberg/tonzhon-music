@@ -27,27 +27,27 @@ const searchSongs = (keyword, limit, page) => {
       lossless: 0,
       cr: 1,
       t: '0',
-      catZhida: 1 // get qqmusic zhida
+      // catZhida: 1 // get qqmusic zhida
     }).then(json => {
       if (json.message === 'no results') {
         reject({ message: '抱歉，未搜索到相关内容！' });
       } else {
         const songs = songsHandler(json.data.song.list);
-        let zhidaContent, zhidaType;
+        // let zhidaContent, zhidaType;
 
-        if (json.data.zhida.type === 1) {
-          zhidaType = 'artist';
-          zhidaContent = constructZhidaArtist(json.data.zhida.zhida_singer);
-        } else if (json.data.zhida.type === 2) {
-          zhidaType = 'album';
-          zhidaContent = constructZhidaAlbum(json.data.zhida.zhida_album);
-        }
+        // if (json.data.zhida.type === 1) {
+        //   zhidaType = 'artist';
+        //   zhidaContent = constructZhidaArtist(json.data.zhida.zhida_singer);
+        // } else if (json.data.zhida.type === 2) {
+        //   zhidaType = 'album';
+        //   zhidaContent = constructZhidaAlbum(json.data.zhida.zhida_album);
+        // }
         resolve({
           songs: songs,
-          zhida: {
-            type: zhidaType,
-            content: zhidaContent
-          },
+          // zhida: {
+          //   type: zhidaType,
+          //   content: zhidaContent
+          // },
           totalCount: json.data.song.totalnum
         });
       }
@@ -68,7 +68,7 @@ const searchAlbums = (keyword, limit, page) => {
       catZhida: 0 // don't get qqmusic zhida
     }).then(json => {
       if (json.message === 'no results') {
-        reject({ message: '抱歉，未搜索到相关内容！'});
+        reject({ message: '抱歉，未搜索到相关内容！' });
       } else {
         resolve({
           albums: albumsHandler(json.data.album.list),
@@ -87,7 +87,6 @@ const songsHandler = (songs) => {
     link: `${qqMusicUrl}song/${song.songmid}.html`,
     alias: song.lyric, // if no lyric: ''
     mvLink: song.vid ? `${qqMusicUrl}mv/v/${song.vid}.html` : null,
-    playLink: `${qqMusicUrl}song/${song.songmid}.html?play=1`,
     artists: song.singer.map((artist) => {
       return {
         name: artist.name,
@@ -114,31 +113,31 @@ const albumsHandler = (albums) => {
     }))
   }));
 };
-const handlers = {
-  'song': songsHandler,
-  'album': albumsHandler
-};
-const constructZhidaArtist = (artist) => {
-  return {
-    name: artist.singerName,
-    link: `${qqMusicUrl}singer/${artist.singerMID}.html`,
-    picUrl: `https://y.gtimg.cn/music/photo_new/T001R150x150M000${artist.singerMID}.jpg`,
-    songNum: artist.songNum,
-    albumNum: artist.albumNum,
-    mvNum: artist.mvNum
-  };
-};
-const constructZhidaAlbum = (album) => {
-  return {
-    name: album.albumName,
-    link: `${qqMusicUrl}album/${album.albumMID}.html`,
-    picUrl: `https://y.gtimg.cn/music/photo_new/T002R150x150M000${album.albumMID}.jpg`,
-    artist: {
-      name: album.singerName,
-      link: `${qqMusicUrl}singer/${album.singerMID}.html`
-    }
-  };
-};
+// const handlers = {
+//   'song': songsHandler,
+//   'album': albumsHandler
+// };
+// const constructZhidaArtist = (artist) => {
+//   return {
+//     name: artist.singerName,
+//     link: `${qqMusicUrl}singer/${artist.singerMID}.html`,
+//     picUrl: `https://y.gtimg.cn/music/photo_new/T001R150x150M000${artist.singerMID}.jpg`,
+//     songNum: artist.songNum,
+//     albumNum: artist.albumNum,
+//     mvNum: artist.mvNum
+//   };
+// };
+// const constructZhidaAlbum = (album) => {
+//   return {
+//     name: album.albumName,
+//     link: `${qqMusicUrl}album/${album.albumMID}.html`,
+//     picUrl: `https://y.gtimg.cn/music/photo_new/T002R150x150M000${album.albumMID}.jpg`,
+//     artist: {
+//       name: album.singerName,
+//       link: `${qqMusicUrl}singer/${album.singerMID}.html`
+//     }
+//   };
+// };
 
 const search = (keyword, type, limit, offset) => {
   if (type === 'song') {

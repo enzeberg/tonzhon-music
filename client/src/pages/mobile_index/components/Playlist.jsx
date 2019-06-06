@@ -1,77 +1,75 @@
 import React, { Component } from 'react';
-import { Button, List, Row, Col, Icon } from 'antd';
+import { Button, List, Row, Col, Icon, Drawer } from 'antd';
 import { connect } from 'react-redux';
 
 import ItemInPlaylist from './SongItem/item_in_playlist';
-import { playlist } from '../../../config';
+import { playingList } from '../../../config';
 
-class Playlist extends Component {
+class PlayingList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+
+    };
   }
 
   render() {
     return (
-      <div style={styles.wrapper}>
-        <Row type="flex" align="middle" style={styles.header}>
-          <Col span={14}>播放列表</Col>
-          <Col span={8}>
-            <Button icon="delete" ghost onClick={this.props.clearPlaylist}>
-              清空
-            </Button>
-          </Col>
-          <Col span={2}>
-            <Button icon="close" ghost onClick={this.props.closePlaylist} />
-          </Col>
-        </Row>
-        <div className="playlist" style={styles.list}>
-          <List
-            itemLayout="horizontal"
-            dataSource={this.props.dataSource}
-            size="small"
-            renderItem={song => {
-              return (
-                <List.Item
-                  key={`${song.platform}${song.originalId}`}
-                  // style={{ color: 'white' }}
-                >
-                  <ItemInPlaylist song={song} rowWidth={playlist.width} />
-                </List.Item>
-              );
-            }}
+      <Drawer visible={this.props.visible}
+        placement="bottom"
+        mask={false}
+        height={540}
+        closable={false}
+        bodyStyle={{
+          padding: '0 0 75px 0',
+        }}
+        style={{
+          zIndex: 10,
+        }}
+        title={
+          <Row type="flex" align="middle" style={styles.header}>
+            <Col span={18}>播放列表</Col>
+            <Col span={6}>
+              <Button icon="delete" onClick={this.props.clearPlayingList}>
+                清空
+              </Button>
+            </Col>
+          </Row>
+        }
+      >
+        <div style={styles.wrapper}>
 
-          />
+          <div className="playingList" style={styles.list}>
+            <List
+              itemLayout="horizontal"
+              dataSource={this.props.dataSource}
+              size="small"
+              renderItem={song => {
+                return (
+                  <List.Item
+                    key={`${song.platform}${song.originalId}`}
+                  >
+                    <ItemInPlaylist song={song} rowWidth={playingList.width} />
+                  </List.Item>
+                );
+              }}
+
+            />
+          </div>
+
         </div>
+      </Drawer>
 
-      </div>
     );
   }
 }
 
 const styles = {
-  wrapper: {
-    position: 'absolute',
-    bottom: 106,
-    color: 'white',
-    left: 0,
-    width: '100%',
-    // height: 300,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    background: 'rgba(150, 150, 150, 0.8)',
-  },
-  header: {
-    borderBottom: '2px solid gray',
-    padding: '10px 10px',
-    background: 'rgb(150, 150, 150)',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-  },
   list: {
-    color: 'white',
+    // color: 'white',
     overflow: 'auto',
     // background: 'rgba(150, 150, 150, 0.8)',
-    height: 200,
+    height: 400,
     padding: '0 10px',
   },
 };
@@ -83,13 +81,10 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    clearPlaylist: () => {
+    clearPlayingList: () => {
       dispatch({ type: 'CLEAR_PLAYLIST' });
-    },
-    closePlaylist: () => {
-      dispatch({ type: 'SHOULD_NOT_SHOW_PLAYLIST' });
     },
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayingList);

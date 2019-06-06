@@ -15,19 +15,16 @@ class Wrapper extends Component {
     const { themeColor, logo, link } = providers[provider];
     return (
       <div style={{ ...styles.wrapper, borderColor: themeColor }}>
-        <Row>
-          <Col xs={4} sm={4} md={6}>
+        <Row type="flex" align="middle">
+          <Col span={12}>
             <a href={link} target="_blank" alt={provider}>
               <img src={logo} alt="" />
             </a>
           </Col>
-          <Col xs={20} sm={20} md={8}>
-            {this.props.zhida}
-          </Col>
-          <Col md={4} style={{ paddingRight: 60 }}>
+          <Col span={6} style={{ paddingRight: 60 }}>
             {this.props.operatingBar}
           </Col>
-          <Col md={6}>
+          <Col span={6}>
             {this.props.pagination}
           </Col>
         </Row>

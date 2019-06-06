@@ -1,6 +1,6 @@
-const qq = require('./qq');
-const netease = require('./netease');
-const xiami = require('./xiami');
+const qq = require('./qq/song_source');
+const netease = require('./netease/song_source');
+const xiami = require('./xiami/song_source');
 
 module.exports = (req, res, next) => {
   const { platform, originalId } = req.params;

@@ -1,9 +1,9 @@
 let list = localStorage.getItem('playlist');
 const initialState = (list && JSON.parse(list)) || [];
 
-const playlist = (state = initialState, action) => {
+const playingList = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_TO_PLAYLIST':
+    case 'ADD_TO_PLAYING_LIST':
       let { data } = action;
       const links = state.map(song => song.link);
       if (Array.isArray(data)) {
@@ -20,16 +20,16 @@ const playlist = (state = initialState, action) => {
       }
       localStorage.setItem('playlist', JSON.stringify(list));
       return list;
-    case 'NEW_PLAYLIST':
+    case 'NEW_PLAYING_LIST': // There's NEW_PLAYLIST (新建歌单)
       list = action.data;
       localStorage.setItem('playlist', JSON.stringify(list));
       return list;
-    case 'DELETE_SONG_IN_PLAYLIST':
+    case 'DELETE_SONG_IN_PLAYING_LIST':
       list = Array.from(state);
       list.splice(action.data, 1);
       localStorage.setItem('playlist', JSON.stringify(list));
       return list;
-    case 'CLEAR_PLAYLIST':
+    case 'CLEAR_PLAYING_LIST':
       localStorage.setItem('playlist', '');
       return [];
     default:
@@ -37,4 +37,4 @@ const playlist = (state = initialState, action) => {
   }
 };
 
-export default playlist;
+export default playingList;

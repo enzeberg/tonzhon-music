@@ -3,10 +3,8 @@ import searchHistory from './search_history';
 import searchStatus from './search_status';
 import searchResults from './search_results';
 import searchParameters from './search_parameters';
-import playlist from './playlist';
+import playingList from './playing_list';
 import playIndex from './play_index';
-import playAction from './play_action';
-import shouldShowPlaylist from './should_show_playlist';
 
 export default combineReducers({
   // key: state name, value: state value
@@ -15,8 +13,6 @@ export default combineReducers({
   searchStatus,
   searchResults,
   searchParameters,
-  playlist,
+  playingList,
   playIndex,
-  playAction,
-  shouldShowPlaylist,
 });
