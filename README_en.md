@@ -10,13 +10,13 @@
 - Hot list (including QQ Music and Netease Music)
 - Record search history
 
-<img src="./screenshots/desktop.png" alt="desktop">
+<img src="./screenshots/desktop.PNG" alt="desktop">
 
 ### Mobile
 - Search
 - Play
 
-<img src="./screenshots/m.png" alt="mobile">
+<img src="./screenshots/m.PNG" alt="mobile">
 
 ## Usage
     # Install dependencies
