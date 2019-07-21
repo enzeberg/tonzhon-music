@@ -1,7 +1,9 @@
 # tongzhong-music
 <a href="./README_en.md">English</a>
+
+<img src="./screenshots/qr_code.png" alt="mobile">
+
 <p>呃，现在好像不能“在一处聆听所有音乐”了。因为QQ音乐为了推广它的客户端，已经不再支持在 Web 上播放周杰伦的歌了。</p>
-<p>注意：该网站是 <a href="http://tongzhong.xyz">tongzhong.xyz</a> 的阉割版。</p>
 
 ## 功能
 ### 桌面版
@@ -41,7 +43,9 @@
 ## 致谢
 - <a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a>
 - <a href="https://github.com/LIU9293/musicAPI">LIU9293/musicAPI</a>
-<p>如果 GitHub 有“感谢”按钮的话，我一定再给你们点个感谢！</p>
+
+## 注意
+<p>该网站是 <a href="http://tongzhong.xyz">tongzhong.xyz</a> 的阉割版。</p>
 
 ## License
 MIT

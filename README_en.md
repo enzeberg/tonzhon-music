@@ -1,6 +1,9 @@
 # tongzhong-music
+
+<img src="./screenshots/qr_code.png" alt="mobile">
+
 <p>Listen to all the music in one place. Uh, maybe not.</p>
-<p> Note: This site is a reduced version of <a href="http://tongzhong.xyz">tongzhong.xyz</a>.</p>
+
 
 ## Features
 ### Desktop
@@ -42,7 +45,9 @@ Open `http://localhost:3000` for desktop, and `http://localhost:3000/m` for mobi
 <li><a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a></li>
 <li><a href="https://github.com/LIU9293/musicAPI">LIU9293/musicAPI</a></li>
 </ul>
-I really appreciate these projects and their contributors!
+
+## Note
+<p> This site is a reduced version of <a href="http://tongzhong.xyz">tongzhong.xyz</a>.</p>
 
 ## License
 MIT
