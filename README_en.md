@@ -1,6 +1,6 @@
 # tongzhong-music
 
-<img src="./screenshots/qr_code.png" alt="mobile">
+<img src="./screenshots/qr_code.png" width="64" alt="mobile">
 
 <p>Listen to all the music in one place. Uh, maybe not.</p>
 

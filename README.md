@@ -1,7 +1,7 @@
 # tongzhong-music
 <a href="./README_en.md">English</a>
 
-<img src="./screenshots/qr_code.png" alt="mobile">
+<img src="./screenshots/qr_code.png" width="64" alt="mobile">
 
 <p>呃，现在好像不能“在一处聆听所有音乐”了。因为QQ音乐为了推广它的客户端，已经不再支持在 Web 上播放周杰伦的歌了。</p>
 
