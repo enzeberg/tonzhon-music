@@ -8,7 +8,7 @@
 ## 功能
 ### 桌面版
 - 搜索
- (支持使用查询字符串搜索，如: <a href="http://tongzhong.xyz/search?keyword=Iron%20Man&type=song" >http://tongzhong.xyz/search?keyword=Iron%20Man&type=song</a>.)
+ (支持使用查询字符串搜索，如: <a href="http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song" >http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song</a>.)
 - 播放
 - 热歌榜（包括QQ音乐和网易云音乐）
 - 记录搜索历史
@@ -43,9 +43,6 @@
 ## 致谢
 - <a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a>
 - <a href="https://github.com/LIU9293/musicAPI">LIU9293/musicAPI</a>
-
-## 注意
-<p>该网站是 <a href="http://tongzhong.xyz">tongzhong.xyz</a> 的阉割版。</p>
 
 ## License
 MIT
