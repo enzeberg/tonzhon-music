@@ -10,6 +10,7 @@
 - Search
  (Searching with query string is supported, try: <a href="http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song" >http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song</a>.)
 - Play
+- Download
 - Hot list (including QQ Music and Netease Music)
 - Record search history
 

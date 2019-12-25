@@ -10,6 +10,7 @@
 - 搜索
  (支持使用查询字符串搜索，如: <a href="http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song" >http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song</a>.)
 - 播放
+- 下载
 - 热歌榜（包括QQ音乐和网易云音乐）
 - 记录搜索历史
 
