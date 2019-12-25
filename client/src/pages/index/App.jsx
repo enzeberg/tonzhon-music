@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Icon, LocaleProvider, Layout } from 'antd';
+import { Icon, ConfigProvider, Layout } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ class App extends Component {
     let { searchStatus, searchResults, searchParameters } = this.props;
     return (
       <BrowserRouter>
-        <LocaleProvider locale={zh_CN}>
+        <ConfigProvider locale={zh_CN}>
           <Layout>
             <Switch>
               <Route path="/search" component={SearchWithURL} />
@@ -75,7 +75,7 @@ class App extends Component {
             </Content>
             <MusicPlayer />
           </Layout>
-        </LocaleProvider>
+        </ConfigProvider>
       </BrowserRouter>
     );
   }

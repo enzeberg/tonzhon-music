@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Slider, Button, Tooltip } from 'antd';
+import { Row, Col, Slider, Button, Icon, Tooltip } from 'antd';
 import { withBaseIcon } from 'react-icons-kit';
 import { repeat } from 'react-icons-kit/ikons/repeat';
 import { ic_repeat_one } from 'react-icons-kit/md/ic_repeat_one'
@@ -15,7 +15,12 @@ import { toMinAndSec } from '../lib/time_converter';
 import { musicPlayer } from '../../../config';
 
 const Icon1 = withBaseIcon({
-  size: 20, style: { color: 'white', verticalAlign: 'middle' }
+  size: 20,
+  style: {
+    color: 'white',
+    verticalAlign: 'middle',
+    paddingLeft: 10
+  },
 });
 const modeIcons = {
   loop: repeat,
@@ -267,7 +272,7 @@ class MusicPlayer extends Component {
               onClick={() => this.playNext('forward')}
             />
           </Col>
-          <Col xs={24} sm={15} style={{ paddingLeft: 30, paddingRight: 30 }}>
+          <Col xs={24} sm={14} style={{ paddingLeft: 20, paddingRight: 20 }}>
             <Row type="flex" align="middle" justify="space-between" style={{ height: 20 }}>
               <Col xs={11} sm={15}>
                 <div className="nowrap">
@@ -317,7 +322,19 @@ class MusicPlayer extends Component {
               tipFormatter={(value) => toMinAndSec(value)}
               onChange={this.changePlayProgress}
               disabled={!this.state.songSource}
-              style={{ margin: '8px 0' }} />
+              style={{ margin: '8px 0' }}
+            />
+          </Col>
+          <Col sm={1}>
+            {/* <a href={this.state.songSource} download>
+              <Icon type="download" />
+            </a> */}
+            <Button icon="download" ghost shape="circle"
+              // type="link" size="large"
+              href={this.state.songSource} target="_blank"
+              download disabled={this.state.songSource === null}
+              // style={{ color:'white' }}
+            />
           </Col>
           <Col xs={1} sm={1}>
             <Tooltip
@@ -334,12 +351,12 @@ class MusicPlayer extends Component {
           </Col>
           <Col xs={10} sm={3}>
             <Row type="flex" align="middle">
-              <Col xs={3} sm={4}>
+              <Col xs={3} sm={6}>
                 <a onClick={this.muteOrNot}>
                   <Icon1 icon={this.state.muted ? volume_mute : volume_2} />
                 </a>
               </Col>
-              <Col xs={21} sm={20} style={{ paddingRight: 5 }}>
+              <Col xs={21} sm={18} style={{ paddingRight: 5 }}>
                 <Slider min={0} max={1} step={0.01}
                   defaultValue={this.state.volume}
                   onChange={this.changeVolume}
