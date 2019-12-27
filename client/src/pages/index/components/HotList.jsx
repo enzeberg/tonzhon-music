@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Icon } from 'antd';
+import { Icon } from 'antd';
 
 import SongList from './SongList';
 import OperatingBarOfSongList from './OperatingBarOfSongList';
@@ -17,8 +17,10 @@ class HotList extends Component {
     this.fetchHotList(this.props.platform);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.fetchHotList(nextProps.platform);
+  componentDidUpdate(prevProps) {
+    if (prevProps.platform !== this.props.platform) {
+      this.fetchHotList(this.props.platform);
+    }
   }
 
   fetchHotList(platform) {

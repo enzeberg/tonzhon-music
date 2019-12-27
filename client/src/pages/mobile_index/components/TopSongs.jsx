@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
-import Icon from 'react-icons-kit';
-import { ic_ondemand_video } from 'react-icons-kit/md/ic_ondemand_video';
-import { ic_play_circle_outline } from 'react-icons-kit/md/ic_play_circle_outline';
 
 import SongList from './SongList';
 
@@ -15,26 +11,28 @@ class TopSongs extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const nextResults = nextProps.searchResults;
+  componentDidUpdate(prevProps) {
+    const currentResults = this.props.searchResults;
     // changing search keyword will cause 'CLEAR_RESULTS', which means the topSongs should be cleared too.
-    if (Object.keys(nextResults).length === 0) {
-      this.setState({
-        topSongs: []
+    if (currentResults !== prevProps.searchResults) {
+      if (Object.keys(currentResults).length === 0) {
+        this.setState({
+          topSongs: []
+        });
+      }
+      Object.keys(currentResults).forEach((key) => {
+        if (this.state.topSongs.every((song) => song.platform !== key)) {
+          if (currentResults[key].searchSuccess) {
+            this.setState({
+              topSongs: [...this.state.topSongs,
+              currentResults[key].data.songs[0]
+              ]
+            });
+          }
+
+        }
       });
     }
-    Object.keys(nextResults).forEach((key) => {
-      if (this.state.topSongs.every((song) => song.platform !== key)) {
-        if (nextResults[key].searchSuccess) {
-          this.setState({
-            topSongs: [...this.state.topSongs,
-              nextResults[key].data.songs[0]
-              ]
-          });
-        }
-
-      }
-    });
   }
 
   render() {

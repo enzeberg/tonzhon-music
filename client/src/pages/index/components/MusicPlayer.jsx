@@ -103,22 +103,45 @@ class MusicPlayer extends Component {
 
   }
 
-  componentWillReceiveProps(nextProps) {
-    const currentSong = this.props.currentSong;
-    const songToPlay = nextProps.currentSong;
+  // componentWillReceiveProps(nextProps) {
+  //   const currentSong = this.props.currentSong;
+  //   const songToPlay = nextProps.currentSong;
 
-    if (songToPlay) {
-      // updating playingList will cause component receive props, so the judgement
-      // is necessary
-      if ((currentSong && songToPlay.link !== currentSong.link) ||
-        (!currentSong && songToPlay)) {
+  //   if (songToPlay) {
+  //     // updating playingList will cause component receive props, so the judgement
+  //     // is necessary
+  //     if ((currentSong && songToPlay.link !== currentSong.link) ||
+  //       (!currentSong && songToPlay)) {
+  //       this.audio.pause();
+  //       this.setState({
+  //         songSource: null,
+  //         songLoaded: false,
+  //         playProgress: 0,
+  //       });
+  //       this.getSongSourceAndPlay(songToPlay);
+  //     }
+  //   } else {
+  //     this.setState({
+  //       songSource: null,
+  //       songLoaded: false,
+  //       playProgress: 0,
+  //     });
+  //   }
+  // }
+
+  componentDidUpdate(prevProps) {
+    const prevSong = prevProps.currentSong;
+    const currentSong = this.props.currentSong;
+
+    if (currentSong) {
+      if ((prevSong && currentSong.link !== prevSong.link) || !prevSong) {
         this.audio.pause();
         this.setState({
           songSource: null,
           songLoaded: false,
           playProgress: 0,
         });
-        this.getSongSourceAndPlay(songToPlay);
+        this.getSongSourceAndPlay(currentSong);
       }
     } else {
       this.setState({

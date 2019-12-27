@@ -8,7 +8,7 @@ class SearchWithURL extends Component {
   //   super(props);
   // }
 
-  componentWillMount() {
+  componentDidMount() {
     const { location, searchParameters } = this.props;
     const query = location.search.slice(1);
     // keyword in the store is encoded
@@ -22,27 +22,6 @@ class SearchWithURL extends Component {
       }
     }
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('SearchWithURL will receive props...............')
-  //   const nextQuery = nextProps.location.search.slice(1);
-  //   const parsed = querystring.parse(nextQuery);
-  //   const nextKeyword = parsed.keyword,
-  //         nextType = parsed.type;
-  //   // console.log()
-  //   const query = this.props.location.search.slice(1);
-  //   const { keyword, type } = querystring.parse(query);
-  //   // const { keyword, type } = this.props.searchParameters;
-  //   console.log('next: ', parsed)
-  //   console.log('current: ', { keyword, type })
-  //   console.log('from store: ', this.props.searchParameters)
-  //   if (nextKeyword && nextType) {
-  //     if (nextKeyword !== keyword || nextType !== type) {
-  //       console.log('update search parameters')
-  //       // this.props.updateSearchParameters({ nextKeyword, nextType });
-  //     }
-  //   }
-  // }
 
   render() {
     return (

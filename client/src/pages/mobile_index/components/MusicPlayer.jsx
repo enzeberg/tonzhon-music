@@ -71,7 +71,6 @@ class MusicPlayer extends Component {
     this.audio.addEventListener('play', () => {
       if (this.interval) { clearInterval(this.interval); }
       this.interval = setInterval(() => {
-        console.log('interval')
         this.setState({
           playProgress: this.audio.currentTime,
           // songDuration: this.audio.duration,
@@ -93,22 +92,21 @@ class MusicPlayer extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
+    const prevSong = prevProps.currentSong;
     const currentSong = this.props.currentSong;
-    const songToPlay = nextProps.currentSong;
 
-    if (songToPlay) {
+    if (currentSong) {
       // updating playlist will cause component receive props, so the judgement
       // is necessary
-      if ((currentSong && songToPlay.link !== currentSong.link) ||
-        (!currentSong && songToPlay)) {
+      if ((prevSong && currentSong.link !== prevSong.link) || !prevSong) {
         this.audio.pause();
         this.setState({
           songSource: null,
           songLoaded: false,
           playProgress: 0,
         });
-        this.getSongSourceAndPlay(songToPlay);
+        this.getSongSourceAndPlay(currentSong);
       }
     } else {
       this.setState({

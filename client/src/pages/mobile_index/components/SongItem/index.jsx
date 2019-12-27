@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListItem } from 'material-ui/List';
+import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 import neteaseMusicLogo from './images/netease_16.ico';
@@ -34,40 +34,29 @@ class SongItem extends Component {
       (!currentSong  || currentSong.link !== song.link) ||
       (currentSong.link === song.link && this.props.playAction === 'pause');
     return (
-      <ListItem
+      <ListItem button
         onClick={() => this.playOrPause(shouldPlay)}
-        rightIcon={showPlatform &&
-          <img src={logos[song.platform]} alt=""
-               style={{ width: 16, height: 16 }}
-          />
-        }
         key={song.link}
-        primaryText={song.name}
-        secondaryText={song.artists.map(artist => artist.name)
-          .reduce((accumulator, currentValue) =>
-            accumulator + ' / ' + currentValue
-        )}
         style={{
           color: song.hasCopyright ? 'black' : '#aaa',
         }}
-      />
-      // <ListItem
-      //   onClick={() => this.playOrPause(shouldPlay)}
-      //   rightIcon={showPlatform &&
-      //     <img src={logos[song.platform]} alt=""/>}
-      //   key={song.link}
-      //   style={{
-      //     color: song.hasCopyright ? 'black' : '#aaa',
-      //   }}
-      // >
-      //   <ListItemText
-      //     primary={song.name}
-      //     secondary={song.artists.map(artist => artist.name)
-      //       .reduce((accumulator, currentValue) =>
-      //       accumulator + ' / ' + currentValue
-      //     )}
-      //   />
-      // </ListItem>
+      >
+        <ListItemText primary={song.name}
+          secondary={song.artists.map(artist => artist.name)
+            .reduce((accumulator, currentValue) =>
+              accumulator + ' / ' + currentValue
+          )}
+        />
+
+        {
+          showPlatform &&
+            <ListItemIcon>
+              <img src={logos[song.platform]} alt=""
+                style={{ width: 16, height: 16 }}
+              />
+            </ListItemIcon>
+        }
+      </ListItem>
     );
   }
 }
