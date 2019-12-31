@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Icon, Button } from 'antd';
-// import Icon from 'react-icons-kit';
-// import { ic_play_circle_outline } from 'react-icons-kit/md/ic_play_circle_outline';
-// import { ic_pause_circle_outline } from 'react-icons-kit/md/ic_pause_circle_outline';
-// import './index.css';
+import { Row, Col, Button } from 'antd';
+
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';

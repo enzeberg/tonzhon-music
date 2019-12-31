@@ -45,16 +45,6 @@ class HotList extends Component {
     const { songs } = this.state;
     return (
       <div>
-        {/* <Row type="flex" align="middle" justify="space-between" style={{ marginBottom: 7 }}>
-          <Col>
-            <span style={{ fontSize: 22 }}>{name}</span>
-          </Col>
-          <Col>
-            {
-              songs.length !== 0 && <OperatingBarOfSongList songs={songs} />
-            }
-          </Col>
-        </Row> */}
         <div style={{ paddingLeft: 620 }}>
           {
             songs.length !== 0 && <OperatingBarOfSongList songs={songs} />
@@ -63,10 +53,7 @@ class HotList extends Component {
         {
           this.state.loading ?
           <Icon type="loading" /> :
-          //   <div style={{ padding: '8px 15px', marginBottom: 25, backgroundColor: 'rgba(240,240,240,0.5)', borderRadius: 5 }}>
-              <SongList songs={songs}
-              />
-          //   </div>
+          <SongList songs={songs} />
         }
       </div>
     );

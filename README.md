@@ -39,7 +39,7 @@
 ### 前端
     # Start webpack dev server
     npm start
-桌面版打开 `http://localhost:3000`，移动版打开`http://localhost:3000/m`。
+桌面版打开 `http://localhost:3000/`，移动版打开`http://localhost:3000/m/`。（注意是 `/m/`）
 
 ## 致谢
 - <a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a>

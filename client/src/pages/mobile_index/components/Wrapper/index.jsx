@@ -26,9 +26,7 @@ class Wrapper extends Component {
             {this.props.operatingBar}
           </Col>
         </Row>
-        <div style={{ marginTop: 20 }}>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
   }
@@ -38,14 +36,9 @@ const styles = {
   wrapper: {
     border: '1px solid',
     borderRadius: 5,
-    padding: '15px 10px',
-    marginBottom: 20
+    padding: '8px 8px 0',
+    marginBottom: 15,
   },
-  resultContainer: {
-    // padding: window.tongzhong.isMobile ? '0 0' : '0 15px',
-    marginTop: 10
-  }
-
 };
 
 const providers = {

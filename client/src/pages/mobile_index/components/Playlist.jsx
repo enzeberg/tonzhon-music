@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, List, Row, Col, Icon, Drawer } from 'antd';
+import { Button, List, Row, Col, Drawer } from 'antd';
 import { connect } from 'react-redux';
 
 import ItemInPlaylist from './SongItem/item_in_playlist';
@@ -8,9 +8,6 @@ import { playingList } from '../../../config';
 class PlayingList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
   }
 
   render() {
@@ -53,13 +50,10 @@ class PlayingList extends Component {
                   </List.Item>
                 );
               }}
-
             />
           </div>
-
         </div>
       </Drawer>
-
     );
   }
 }

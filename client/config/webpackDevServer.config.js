@@ -80,7 +80,7 @@ module.exports = function(proxy, allowedHost) {
       // See https://github.com/facebook/create-react-app/issues/387.
       disableDotRule: true,
       rewrites: [
-        { from: /^\/m$/, to: '/mobile_index.html' },
+        { from: /^\/m\/$/, to: '/mobile_index.html' },
       ],
     },
     public: allowedHost,

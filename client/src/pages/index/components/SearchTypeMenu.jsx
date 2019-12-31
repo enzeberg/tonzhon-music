@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 class SearchTypeMenu extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onSelect = this.onSelect.bind(this);
   }
 
@@ -50,5 +50,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(
-  mapStateToProps, mapDispatchToProps)(SearchTypeMenu));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)
+                          (SearchTypeMenu));

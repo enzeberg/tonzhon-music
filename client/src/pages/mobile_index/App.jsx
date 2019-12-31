@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { Icon, Layout } from 'antd';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -18,71 +16,63 @@ import { themeColor } from '../../config';
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
     let { searchStatus, searchResults, searchParameters } = this.props;
     return (
       <BrowserRouter basename={process.env.NODE_ENV === 'development' ? '/m' : '/'}>
-        <MuiThemeProvider muiTheme={getMuiTheme({
-          appBar: {
-            color: themeColor,
-          },
-        })}>
-          <Layout>
-            <Switch>
-              <Route path="/search" component={SearchWithURL} />
-            </Switch>
+        <Layout>
+          <Switch>
+            <Route path="/search" component={SearchWithURL} />
+          </Switch>
 
-            <Header style={{ position: 'fixed', width: '100%', zIndex: 1040 }}>
-              <T_Header />
-            </Header>
-            <Content>
-              <div
-                style={{
-                  marginTop: 50,
-                  padding: '10px 9px 0 9px',
-                }}
-              >
-                <div style={{ marginBottom: 10 }}>
-                  <SearchBar />
-                </div>
-                <Switch>
-                  <Route exact path="/" />
-                  <Route path="/search" render={() => (
-                    <div>
-                      {
-                        searchParameters.type === 'song' && <TopSongs />
-                      }
-                      {
-                        Object.keys(searchResults).map((key) => (
-                          <Result
-                            searchType={searchParameters.type}
-                            result={searchResults[key]}
-                            provider={key}
-                            key={key} />
-                        ))
-                      }
-                      <div className="loading-anim-wrapper">
-                        {
-                          searchStatus === 'searching' &&
-                           <Icon type="loading" style={{fontSize: 30, color: themeColor}} />
-                        }
-                      </div>
-                    </div>
-                  )}/>
-                  <Route path="/*" render={NotFound}/>
-                </Switch>
+          <Header style={{ position: 'fixed', width: '100%', zIndex: 1040 }}>
+            <T_Header />
+          </Header>
+          <Content>
+            <div
+              style={{
+                marginTop: 50,
+                padding: '10px 2px 0',
+                marginBottom: 80,
+              }}
+            >
+              <div style={{ marginBottom: 10 }}>
+                <SearchBar />
               </div>
-            </Content>
-            <Footer style={{ marginBottom: 110 }}>
-            </Footer>
-            <MusicPlayer />
-          </Layout>
-        </MuiThemeProvider>
-
+              <Switch>
+                <Route exact path="/" />
+                <Route path="/search" render={() => (
+                  <div>
+                    {
+                      searchParameters.type === 'song' && <TopSongs />
+                    }
+                    {
+                      Object.keys(searchResults).map((key) => (
+                        <Result
+                          searchType={searchParameters.type}
+                          result={searchResults[key]}
+                          provider={key}
+                          key={key} />
+                      ))
+                    }
+                    <div className="loading-anim-wrapper">
+                      {
+                        searchStatus === 'searching' &&
+                          <Icon type="loading" style={{fontSize: 30, color: themeColor}} />
+                      }
+                    </div>
+                  </div>
+                )}/>
+                <Route path="/*" render={NotFound}/>
+              </Switch>
+            </div>
+          </Content>
+          <MusicPlayer />
+        </Layout>
       </BrowserRouter>
     );
   }

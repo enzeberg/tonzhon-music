@@ -5,7 +5,6 @@ import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';
 import { connect } from 'react-redux';
-// import Artists from '../Artists';
 
 class SongItem extends Component {
   constructor(props) {

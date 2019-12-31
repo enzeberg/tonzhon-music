@@ -39,7 +39,7 @@ Open `http://localhost:8081` to visit the page that uses the production build.
 ### Client-side
     # Start webpack dev server
     npm start
-Open `http://localhost:3000` for desktop, and `http://localhost:3000/m` for mobile.
+Open `http://localhost:3000/` for desktop, and `http://localhost:3000/m/` for mobile.
 
 ## Thanks
 <ul>

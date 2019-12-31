@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, Menu, Input, Button } from 'antd';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 const Search = Input.Search;
@@ -9,6 +8,7 @@ const Search = Input.Search;
 class SearchBar extends Component {
   constructor(props) {
     super(props);
+    // don't delete the following lines!
     this.onSearch = this.onSearch.bind(this);
     this.onSelect = this.onSelect.bind(this);
   }
@@ -72,10 +72,6 @@ class SearchBar extends Component {
 
 }
 
-SearchBar.propTypes = {
-  searchParameters: PropTypes.object.isRequired
-};
-
 function mapStateToProps(state) {
   return {
     searchParameters: state.searchParameters,
@@ -94,5 +90,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(connect(mapStateToProps,
-  mapDispatchToProps)(SearchBar));
-
+                                  mapDispatchToProps)(SearchBar));

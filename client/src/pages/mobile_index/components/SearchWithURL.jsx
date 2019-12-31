@@ -1,12 +1,11 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import querystring from 'querystring';
-import PropTypes from 'prop-types';
 
 class SearchWithURL extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     const { location, searchParameters } = this.props;
@@ -29,10 +28,6 @@ class SearchWithURL extends Component {
     );
   }
 }
-
-SearchWithURL.propTypes = {
-  // location: PropTypes.instanceOf(location).isRequired,
-};
 
 function mapStateToProps(state) {
   return {

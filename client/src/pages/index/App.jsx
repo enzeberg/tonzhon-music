@@ -5,6 +5,7 @@ import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import T_Header from './components/Header';
+import T_Footer from './components/Footer';
 import SearchTypeMenu from './components/SearchTypeMenu';
 import Result from './components/Result';
 import { themeColor } from '../../config';
@@ -18,8 +19,8 @@ import './App.css';
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -39,7 +40,8 @@ class App extends Component {
               <div className="container"
                 style={{
                   marginTop: 80,
-                  marginBottom: 90
+                  marginBottom: 20,
+                  borderBottom: '1px solid #DBDBDB',
                 }}
               >
                 <Switch>
@@ -73,6 +75,9 @@ class App extends Component {
                 </Switch>
               </div>
             </Content>
+            <Footer style={{ marginBottom: 80 }}>
+              <T_Footer />
+            </Footer>
             <MusicPlayer />
           </Layout>
         </ConfigProvider>

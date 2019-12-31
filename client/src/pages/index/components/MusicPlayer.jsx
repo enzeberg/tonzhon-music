@@ -100,34 +100,7 @@ class MusicPlayer extends Component {
         this.playNext('forward');
       });
     });
-
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   const currentSong = this.props.currentSong;
-  //   const songToPlay = nextProps.currentSong;
-
-  //   if (songToPlay) {
-  //     // updating playingList will cause component receive props, so the judgement
-  //     // is necessary
-  //     if ((currentSong && songToPlay.link !== currentSong.link) ||
-  //       (!currentSong && songToPlay)) {
-  //       this.audio.pause();
-  //       this.setState({
-  //         songSource: null,
-  //         songLoaded: false,
-  //         playProgress: 0,
-  //       });
-  //       this.getSongSourceAndPlay(songToPlay);
-  //     }
-  //   } else {
-  //     this.setState({
-  //       songSource: null,
-  //       songLoaded: false,
-  //       playProgress: 0,
-  //     });
-  //   }
-  // }
 
   componentDidUpdate(prevProps) {
     const prevSong = prevProps.currentSong;
@@ -144,11 +117,13 @@ class MusicPlayer extends Component {
         this.getSongSourceAndPlay(currentSong);
       }
     } else {
-      this.setState({
-        songSource: null,
-        songLoaded: false,
-        playProgress: 0,
-      });
+      if (prevSong) {
+        this.setState({
+          songSource: null,
+          songLoaded: false,
+          playProgress: 0,
+        });
+      }
     }
   }
 

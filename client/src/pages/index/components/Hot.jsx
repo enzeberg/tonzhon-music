@@ -4,7 +4,6 @@ import { Layout, Menu } from 'antd';
 import HotList from './HotList';
 
 const { Sider, Content } = Layout;
-const { SubMenu } = Menu;
 
 class Hot extends Component {
   constructor(props) {

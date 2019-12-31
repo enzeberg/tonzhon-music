@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Slider, Button, notification, Tooltip, Drawer } from 'antd';
-// import Button1 from '@material-ui/core/Button';
 import { withBaseIcon } from 'react-icons-kit';
 import { repeat } from 'react-icons-kit/ikons/repeat';
 import { ic_repeat_one } from 'react-icons-kit/md/ic_repeat_one'
@@ -109,11 +108,13 @@ class MusicPlayer extends Component {
         this.getSongSourceAndPlay(currentSong);
       }
     } else {
-      this.setState({
-        songSource: null,
-        songLoaded: false,
-        playProgress: 0,
-      });
+      if (prevSong) {
+        this.setState({
+          songSource: null,
+          songLoaded: false,
+          playProgress: 0,
+        });
+      }
     }
   }
 

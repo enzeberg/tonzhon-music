@@ -11,14 +11,15 @@ import to2D from '../lib/change_1d_to_2d';
 class Result extends Component {
   constructor() {
     super();
-    this.renderSongs = this.renderSongs.bind(this);
-    this.renderAlbums = this.renderAlbums.bind(this);
-    this.renderArtists = this.renderArtists.bind(this);
+    // this.renderSongs = this.renderSongs.bind(this);
+    // this.renderAlbums = this.renderAlbums.bind(this);
+    // this.renderArtists = this.renderArtists.bind(this);
+
+    // don't delete the following line!
     this.onPageChange = this.onPageChange.bind(this);
   }
 
   renderSongs(songs) {
-    // console.log('songs rendered') // I don't understand why this would be logged 5 times.
     return (
       <SongList songs={songs} />
     );
@@ -122,19 +123,7 @@ class Result extends Component {
 }
 
 const styles = {
-  wrapper: {
-    border: '1px solid',
-    borderRadius: 5,
-    padding: '15px 10px',
-    marginBottom: 20
-  },
-  providerLogo: {
-    width: 50,
-    height: 50,
-    borderRadius: 5
-  },
   resultContainer: {
-    // padding: window.tongzhong.isMobile ? '0 0' : '0 15px',
     marginTop: 10
   }
 

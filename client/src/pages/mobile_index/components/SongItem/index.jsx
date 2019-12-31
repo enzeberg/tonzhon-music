@@ -9,7 +9,6 @@ import xiamiMusicLogo from './images/xiami_16.ico';
 class SongItem extends Component {
   constructor(props) {
     super(props);
-    this.playOrPause = this.playOrPause.bind(this);
   }
 
   playOrPause(shouldPlay) {
@@ -39,6 +38,8 @@ class SongItem extends Component {
         key={song.link}
         style={{
           color: song.hasCopyright ? 'black' : '#aaa',
+          padding: 0,
+          borderBottom: '0.1px solid #ccc',
         }}
       >
         <ListItemText primary={song.name}
@@ -47,7 +48,6 @@ class SongItem extends Component {
               accumulator + ' / ' + currentValue
           )}
         />
-
         {
           showPlatform &&
             <ListItemIcon>
