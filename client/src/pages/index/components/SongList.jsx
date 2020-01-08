@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
 
 import SongItem from './SongItem';
 
@@ -24,10 +23,6 @@ class SongList extends Component {
     );
   }
 }
-
-SongList.propTypes = {
-  songs: propTypes.array.isRequired,
-};
 
 const styles = {
   ul: {

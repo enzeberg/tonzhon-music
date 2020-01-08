@@ -9,23 +9,17 @@ import to2D from '../lib/change_1d_to_2d';
 
 // 一个Result就是一个有边框的面板
 class Result extends Component {
-  constructor() {
-    super();
-    // this.renderSongs = this.renderSongs.bind(this);
-    // this.renderAlbums = this.renderAlbums.bind(this);
-    // this.renderArtists = this.renderArtists.bind(this);
-
-    // don't delete the following line!
-    this.onPageChange = this.onPageChange.bind(this);
+  constructor(props) {
+    super(props);
   }
 
-  renderSongs(songs) {
+  renderSongs = (songs) => {
     return (
       <SongList songs={songs} />
     );
   }
 
-  renderAlbums(albums) {
+  renderAlbums = (albums) => {
     let albumsIn2D = to2D(albums, 4);
     return albumsIn2D.map((albumRow, rowIndex) => (
       <Row type="flex" justify="space-around" key={rowIndex}>
@@ -55,7 +49,7 @@ class Result extends Component {
     ));
   }
 
-  renderArtists(artists) {
+  renderArtists = (artists) => {
     const artistsIn2D = to2D(artists, 4);
     return artistsIn2D.map((artistRow, i) => (
       <Row type="flex" justify="space-around" key={i}>
@@ -75,7 +69,7 @@ class Result extends Component {
     ));
   }
 
-  onPageChange(page) {
+  onPageChange = (page) => {
     const { provider, keyword, type, onResultResponded } = this.props;
     fetch(`/api/search?provider=${provider}&keyword=${keyword}&type=${type}&page=${page}`)
       .then(res => res.json())
@@ -126,7 +120,6 @@ const styles = {
   resultContainer: {
     marginTop: 10
   }
-
 };
 
 function mapStateToProps(state) {

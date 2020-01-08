@@ -88,16 +88,10 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
     searchStatus: state.searchStatus,
     searchResults: state.searchResults,
     searchParameters: state.searchParameters
   };
 }
-function mapDispatchToProps(dispatch) {
-  return {
 
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

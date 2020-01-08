@@ -146,8 +146,6 @@ const search = (keyword, type, limit, offset) => {
   }
 };
 
-// searchSongs('qiangu', 4, 0)
-// .then(songs => console.log(songs)).catch(err => console.error(err))
 module.exports = {
   search,
   searchSongs,

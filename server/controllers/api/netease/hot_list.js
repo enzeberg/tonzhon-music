@@ -1,4 +1,3 @@
-// const util = require('./util/util');
 const createRequest = require('./util1/request');
 const neteaseMusicUrl = 'https://music.163.com/#/';
 
@@ -13,10 +12,8 @@ const getHotList = (playlistId) => {
       },
       { crypto: 'linuxapi' },
       result => {
-        // console.log('result: ', result);
         if (result.body && result.body.code === 200) {
           const { tracks } = result.body.playlist;
-          // console.log('tracks: ', tracks);
           resolve({
             songs: songsHandler(tracks),
           });
@@ -56,9 +53,5 @@ const songsHandler = (songs) => {
     platform: 'netease',
   }));
 };
-
-// getHotList('3778678')
-//   .then(object => console.log(object))
-//   .catch(err => console.error(err))
 
 module.exports = { getHotList };

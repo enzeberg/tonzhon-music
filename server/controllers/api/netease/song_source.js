@@ -1,4 +1,4 @@
-const util = require('./util/util');
+const { createWebAPIRequest } = require('./util/util');
 
 const getSongSource = (songId) => {
   const data = {
@@ -8,17 +8,13 @@ const getSongSource = (songId) => {
   };
   const cookie = '';
   return new Promise((resolve, reject) => {
-    util.createWebAPIRequest(
+    createWebAPIRequest(
       "music.163.com",
       "/weapi/song/enhance/player/url",
       "POST",
       data,
       cookie,
       result => {
-        // console.log('result: ', result)
-        // resolve({
-        //   songSource: JSON.parse(result).data[0].url
-        // });
         const parsed = JSON.parse(result);
         if (parsed.data[0].code === 200) {
           resolve({
@@ -36,13 +32,5 @@ const getSongSource = (songId) => {
     );
   });
 };
-
-// getSongSource('108557')
-//   .then(object => console.log(object))
-//   .catch(err => console.error(err))
-
-// getSongSource('167655')
-//   .then(object => console.log(object))
-//   .catch(err => console.error(err))
 
 module.exports = { getSongSource };

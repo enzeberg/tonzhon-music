@@ -7,17 +7,16 @@ import { withRouter } from 'react-router-dom';
 class SearchTypeMenu extends Component {
   constructor(props) {
     super(props);
-    this.onSelect = this.onSelect.bind(this);
   }
 
-  onSelect({ key }) {
+  onSelect = ({ key }) => {
     // only search when the current search type is different from the last one
     if (key !== this.props.searchParameters.type) {
       this.props.updateSearchType(key);
       this.props.history.push(`/search?keyword=${this.props.searchParameters.keyword}&type=${key}`);
     }
-
   }
+  
   render() {
     const { type } = this.props.searchParameters;
     return (
@@ -27,7 +26,6 @@ class SearchTypeMenu extends Component {
         <Menu.Item key="artist">艺人</Menu.Item>
       </Menu>
     );
-
   }
 }
 
@@ -50,5 +48,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)
-                          (SearchTypeMenu));
+export default withRouter(connect(mapStateToProps,
+                                  mapDispatchToProps)(SearchTypeMenu));

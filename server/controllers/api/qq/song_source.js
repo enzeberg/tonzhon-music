@@ -7,8 +7,6 @@ const getSongSource = (songId) => {
       .then(res => res.text())
       .then(text => {
         const parsed = JSON.parse(text);
-        // console.log('parsed text: ', parsed);
-        // console.log('parsed.data.items[0]', parsed.data.items[0]);
         const { filename, vkey } = parsed.data.items[0];
         if (vkey) {
           resolve({
@@ -23,11 +21,5 @@ const getSongSource = (songId) => {
       .catch(err => reject(err));
   });
 };
-
-// const songId = '004GK4aP4TGbbG'; // Love Story
-// const songId = '001Nl0W80sBSwJ'; // 凉凉
-// getSongSource(songId)
-//   .then(obj => console.log(obj))
-//   .catch(err => console.error(err))
 
 module.exports = { getSongSource };

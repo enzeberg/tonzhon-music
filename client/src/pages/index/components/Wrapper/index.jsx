@@ -44,17 +44,15 @@ const styles = {
     marginBottom: 20
   },
   resultContainer: {
-    // padding: window.tongzhong.isMobile ? '0 0' : '0 15px',
     marginTop: 10
   }
-
 };
 
 const providers = {
   netease: {
     themeColor: '#C20C0C',
     logo: neteaseMusicLogo,
-    link: 'http://music.163.com/'
+    link: 'https://music.163.com/'
   },
   qq: {
     themeColor: '#2caf6f',
@@ -64,9 +62,8 @@ const providers = {
   xiami: {
     themeColor: '#FA8723',
     logo: xiamiMusicLogo,
-    link: 'http://www.xiami.com/'
+    link: 'https://www.xiami.com/'
   }
-
 };
 
 export default Wrapper;

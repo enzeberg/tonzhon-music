@@ -29,10 +29,6 @@ class AddTo extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-  };
-}
 function mapDispatchToProps(dispatch) {
   return {
     addToPlaylist: (data) => {
@@ -41,4 +37,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTo);
+export default connect(null, mapDispatchToProps)(AddTo);

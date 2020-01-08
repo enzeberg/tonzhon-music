@@ -33,21 +33,8 @@ const searchSongs = (keyword, limit, page) => {
         reject({ message: '抱歉，未搜索到相关内容！' });
       } else {
         const songs = songsHandler(json.data.song.list);
-        // let zhidaContent, zhidaType;
-
-        // if (json.data.zhida.type === 1) {
-        //   zhidaType = 'artist';
-        //   zhidaContent = constructZhidaArtist(json.data.zhida.zhida_singer);
-        // } else if (json.data.zhida.type === 2) {
-        //   zhidaType = 'album';
-        //   zhidaContent = constructZhidaAlbum(json.data.zhida.zhida_album);
-        // }
         resolve({
           songs: songs,
-          // zhida: {
-          //   type: zhidaType,
-          //   content: zhidaContent
-          // },
           totalCount: json.data.song.totalnum
         });
       }
@@ -113,31 +100,6 @@ const albumsHandler = (albums) => {
     }))
   }));
 };
-// const handlers = {
-//   'song': songsHandler,
-//   'album': albumsHandler
-// };
-// const constructZhidaArtist = (artist) => {
-//   return {
-//     name: artist.singerName,
-//     link: `${qqMusicUrl}singer/${artist.singerMID}.html`,
-//     picUrl: `https://y.gtimg.cn/music/photo_new/T001R150x150M000${artist.singerMID}.jpg`,
-//     songNum: artist.songNum,
-//     albumNum: artist.albumNum,
-//     mvNum: artist.mvNum
-//   };
-// };
-// const constructZhidaAlbum = (album) => {
-//   return {
-//     name: album.albumName,
-//     link: `${qqMusicUrl}album/${album.albumMID}.html`,
-//     picUrl: `https://y.gtimg.cn/music/photo_new/T002R150x150M000${album.albumMID}.jpg`,
-//     artist: {
-//       name: album.singerName,
-//       link: `${qqMusicUrl}singer/${album.singerMID}.html`
-//     }
-//   };
-// };
 
 const search = (keyword, type, limit, offset) => {
   if (type === 'song') {

@@ -72,7 +72,7 @@ function createWebAPIRequest(
 
   request(options, function (error, res, body) {
     if (error) {
-      console.error(error);
+      // console.error(error);
       errorcallback(error);
     } else {
       //解决 网易云 cookie 添加 .music.163.com 域设置。

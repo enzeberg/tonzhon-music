@@ -237,10 +237,6 @@ const searchAlbums = (keyword, limit, page) => {
 const search = (keyword, type, limit, page) => {
   if (type === 'song') {
     return searchSongs(keyword, limit, page);
-    // } else if (type === 'album') {
-    //   return searchSongs(keyword, limit, page);
-    // } else if (type === 'artist') {
-    //   return searchSongs(keyword, limit, page);
   } else {
     return Promise.reject({ message: 'Xiami Music does not support this search type!' });
   }
@@ -250,7 +246,3 @@ module.exports = {
   search,
   searchSongs
 };
-// searchSongs('dsfphkpeoarkherh', 4, 1)
-// searchAlbums('taylor', 40, 1)
-//   .then((res) => {console.log(res)})
-//   .catch((err) => {console.error(err)})

@@ -33,8 +33,4 @@ const getSongSource = (songId) => {
   });
 };
 
-// getSongSource('1774490672')
-//   .then(obj => console.log(obj))
-//   .catch(err => console.error(err))
-
 module.exports = { getSongSource };

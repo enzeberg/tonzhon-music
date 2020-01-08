@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 notification.config({
   placement: 'bottomRight',
   bottom: 50,
-  duration: 3,
+  duration: 1,
 });
 
 class AddTo extends Component {
@@ -36,10 +36,6 @@ class AddTo extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-  };
-}
 function mapDispatchToProps(dispatch) {
   return {
     addToPlaylist: (data) => {
@@ -48,4 +44,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTo);
+export default connect(null, mapDispatchToProps)(AddTo);

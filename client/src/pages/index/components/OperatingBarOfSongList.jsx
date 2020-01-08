@@ -27,9 +27,6 @@ class OperatingBarOfSongList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
 function mapDispatchToProps(dispatch) {
   return {
     playSongList: (songs) => {
@@ -39,5 +36,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps,
-  mapDispatchToProps)(OperatingBarOfSongList);
+export default connect(null, mapDispatchToProps)(OperatingBarOfSongList);

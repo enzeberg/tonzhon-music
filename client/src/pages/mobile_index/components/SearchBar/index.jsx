@@ -31,10 +31,8 @@ class SearchBar extends Component {
         enterButton
         size="large"
       />
-
     );
   }
-
 }
 
 SearchBar.propTypes = {

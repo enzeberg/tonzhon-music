@@ -2,7 +2,7 @@
 
 <img src="./screenshots/qr_code.png" width="64" alt="mobile">
 
-<p>Listen to all the music in one place. Uh, maybe not.</p>
+<h3>Listen to the music from different platforms in one place.</h3>
 
 
 ## Features
