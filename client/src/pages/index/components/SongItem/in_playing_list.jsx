@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Icon, List } from 'antd';
 
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';
 import { connect } from 'react-redux';
-import Artists from '../Artists';
+import './in_playing_list.css';
 
 class SongItem extends Component {
   constructor(props) {
@@ -35,46 +35,39 @@ class SongItem extends Component {
   render() {
     let { song, currentSong } = this.props;
     return (
-      <Row type="flex" align="middle"
-        style={{ width :'100%', color: 'white', padding: '0 20px' }}
+      <List.Item onClick={this.changeCurrentSong}
+        className={currentSong && currentSong.link === song.link ?
+          'list-item playing' : 'list-item'
+        }
+        style={{ border: 'none', padding: '6px 0' }}
       >
-        <Col xs={11} sm={12}>
-          <div className="nowrap">
-            <span>{song.name}</span>
-          </div>
-        </Col>
-        <Col xs={6} sm={6}>
-          <div className="nowrap">
-            <Artists artists={song.artists} fontColor="white" />
-          </div>
-        </Col>
-        <Col xs={3} sm={2}>
-           <img src={logos[song.platform]} alt={song.platform} />
-        </Col>
-        <Col xs={2} sm={2}>
-          <Button
-            onClick={this.changeCurrentSong}
-            shape="circle"
-            icon="caret-right"
-            size="small"
-            ghost
-            type={
-              currentSong && currentSong.link === song.link ?
-                'primary' : 'default'
+        <Row type="flex" align="middle"
+          style={{ width: '100%', color: 'white', padding: '0 20px' }}
+        >
+          <Col span={10} className="nowrap">
+            {song.name}
+          </Col>
+          <Col span={10} className="nowrap">
+            {
+              song.artists.map(artist => artist.name)
+                .reduce((accumulator, currentValue) =>
+                  accumulator + ' / ' + currentValue
+                )
             }
-          />
-        </Col>
-        <Col xs={2} sm={2}>
-          <Button
-            title="删除"
-            onClick={this.deleteFromPlaylist}
-            icon="delete"
-            shape="circle"
-            size="small"
-            ghost
-          />
-        </Col>
-      </Row>
+          </Col>
+          <Col span={2}>
+            <img src={logos[song.platform]} alt={song.platform} />
+          </Col>
+          <Col span={2}>
+            <a onClick={this.deleteFromPlaylist} className="delete-btn">
+              <Icon type="delete" style={{
+                fontSize: 18,
+                verticalAlign: 'middle'
+              }} />
+            </a>
+          </Col>
+        </Row>
+      </List.Item>
     );
   }
 }

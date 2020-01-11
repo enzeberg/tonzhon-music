@@ -1,0 +1,17 @@
+.playingList::-webkit-scrollbar {
+  background-color: #222;
+  width: 7px;
+  border-radius: 10px;
+}
+.playingList::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 10px;
+  /* width: 5px; */
+}
+.playingList::-webkit-scrollbar-track {
+  display: none;
+  border-radius: 10px;
+}
+.playingList::-webkit-scrollbar-track-piece {
+  border-radius: 10px;
+}

@@ -246,7 +246,7 @@ class MusicPlayer extends Component {
         />
 
         <Row type="flex" align="middle" className="container" justify="space-around" >
-          <Col xs={17} sm={3}>
+          <Col span={3}>
             <Button ghost shape="circle" icon="step-backward"
               onClick={() => this.playNext('backward')}
             />
@@ -270,49 +270,56 @@ class MusicPlayer extends Component {
               onClick={() => this.playNext('forward')}
             />
           </Col>
-          <Col xs={24} sm={14} style={{ paddingLeft: 20, paddingRight: 20 }}>
-            <Row type="flex" align="middle" justify="space-between" style={{ height: 20 }}>
-              <Col xs={11} sm={15}>
-                <div className="nowrap">
-                  {
-                    currentSong &&
-                    <span>
-                      <span style={{ marginRight: 12, color: 'white' }}>
-                        <a href={currentSong.link}
-                          style={{ color: 'white', marginRight: 4, fontSize: 16 }}
-                          target="_blank"
-                        >
-                          <strong>{currentSong.name}</strong>
-                        </a>
-                        {currentSong.mvLink &&
-                          <MVIcon link={currentSong.mvLink}
-                            fontColor="white"
-                          />}
-                      </span>
-                      <span className="nowrap">
-                        {
-                          currentSong.artists &&
-                          <Artists artists={currentSong.artists}
-                            fontColor="white"
-                          />
-                        }
-                      </span>
-                    </span>
-                  }
-                </div>
-              </Col>
-              <Col xs={9} sm={5} style={{ fontSize: 'small', fontWeight: 'lighter', color: 'rgb(230, 230, 230)' }}>
-                {currentSong && `来自${platforms[currentSong.platform]}`}
-              </Col>
-              <Col xs={0} sm={4} style={{ textAlign: 'right' }}>
-                {
-                  this.state.getMusicUrlStatus === 'failed' ? '加载失败' :
-                    (
-                      this.state.songLoaded ? `${progress} / ${total}` :
-                        '00:00 / 00:00'
-                    )
-                }
-              </Col>
+          <Col span={14} style={{ paddingLeft: 20, paddingRight: 20 }}>
+            <Row type="flex" align="middle" justify="space-between"
+              style={{ height: 20 }}
+            >
+              {
+                currentSong &&
+                  <>
+                    <Col span={7} className="nowrap">
+                      <a href={currentSong.link}
+                        style={{ color: 'white', marginRight: 4, fontSize: 16 }}
+                        target="_blank"
+                        title={currentSong.name}
+                      >
+                        <strong>{currentSong.name}</strong>
+                      </a>
+                    </Col>
+                    <Col span={2}>
+                      {
+                        currentSong.mvLink &&
+                        <MVIcon link={currentSong.mvLink}
+                          fontColor="white"
+                        />
+                      }
+                    </Col>
+                    <Col span={6} className="nowrap">
+                      {
+                        currentSong.artists &&
+                        <Artists artists={currentSong.artists}
+                          fontColor="white"
+                        />
+                      }
+                    </Col>
+                    <Col span={5} style={{
+                        fontSize: 'small', fontWeight: 'lighter',
+                        color: 'rgb(230, 230, 230)',
+                      }}
+                    >
+                      {`来自${platforms[currentSong.platform]}`}
+                    </Col>
+                    <Col span={4} style={{ textAlign: 'right' }}>
+                      {
+                        this.state.getMusicUrlStatus === 'failed' ? '加载失败' :
+                          (
+                            this.state.songLoaded ? `${progress} / ${total}` :
+                              '00:00 / 00:00'
+                          )
+                      }
+                    </Col>
+                  </>
+              }
             </Row>
             <Slider min={0}
               max={this.state.songDuration ? parseInt(this.state.songDuration) : 0}
@@ -323,7 +330,7 @@ class MusicPlayer extends Component {
               style={{ margin: '8px 0' }}
             />
           </Col>
-          <Col sm={1}>
+          <Col span={1}>
             {/* <a href={this.state.songSource} download>
               <Icon type="download" />
             </a> */}
@@ -334,7 +341,7 @@ class MusicPlayer extends Component {
               // style={{ color:'white' }}
             />
           </Col>
-          <Col xs={1} sm={1}>
+          <Col span={1}>
             <Tooltip
               title={modeExplanations[this.state.playMode]}
             >
@@ -347,14 +354,14 @@ class MusicPlayer extends Component {
               </a>
             </Tooltip>
           </Col>
-          <Col xs={10} sm={3}>
+          <Col span={3}>
             <Row type="flex" align="middle">
-              <Col xs={3} sm={6}>
+              <Col span={6}>
                 <a onClick={this.muteOrNot}>
                   <Icon1 icon={this.state.muted ? volume_mute : volume_2} />
                 </a>
               </Col>
-              <Col xs={21} sm={18} style={{ paddingRight: 5 }}>
+              <Col span={18} style={{ paddingRight: 5 }}>
                 <Slider min={0} max={1} step={0.01}
                   defaultValue={this.state.volume}
                   onChange={this.changeVolume}
@@ -362,7 +369,7 @@ class MusicPlayer extends Component {
               </Col>
             </Row>
           </Col>
-          <Col xs={2} sm={1}>
+          <Col span={1}>
             <Button ghost icon="bars" onClick={this.clickPlayingListBtn}
               title="播放列表"
               style={{ float: 'right' }}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { List } from 'antd';
 
 import SongItem from './SongItem';
 
@@ -8,27 +9,21 @@ class SongList extends Component {
   }
 
   render() {
-    let { songs } = this.props;
     return (
-      <div>
-        <ul style={styles.ul}>
-          {
-            songs.map((song, index) => (
-              <SongItem song={song} key={song.link} index={index} showPlatform={this.props.showPlatform}
-              isLiked={this.props.allIsLiked} />
-            ))
-          }
-        </ul>
-      </div>
+      <List
+        itemLayout="horizontal"
+        dataSource={this.props.songs}
+        renderItem={song => {
+          return (
+            <SongItem key={song.link}
+              song={song}
+              showPlatform={this.props.showPlatform}
+            />
+          );
+        }}
+      />
     );
   }
 }
-
-const styles = {
-  ul: {
-    listStyle: 'none',
-    padding: '0 15px',
-  }
-};
 
 export default SongList;

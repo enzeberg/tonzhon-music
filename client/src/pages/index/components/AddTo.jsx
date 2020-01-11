@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { notification, Button } from 'antd';
+import { notification, Icon } from 'antd';
 import { connect } from 'react-redux';
 
 notification.config({
@@ -22,16 +22,12 @@ class AddTo extends Component {
 
   render() {
     return (
-      <Button
-        title="添加到播放列表"
-        onClick={this.handleClick}
-        shape="circle"
-        icon="plus"
-        style={{
-          backgroundColor: 'rgba(0, 0, 0, 0)',
-        }}
-        size={this.props.iconSize}
-      />
+      <a onClick={this.handleClick} title="添加到播放列表">
+        <Icon type="plus" style={{
+          fontSize: 20,
+          verticalAlign: 'middle',
+        }} />
+      </a>
     );
   }
 }

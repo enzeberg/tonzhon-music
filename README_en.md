@@ -14,7 +14,7 @@
 - Hot list (including QQ Music and Netease Music)
 - Record search history
 
-<img src="./screenshots/desktop.PNG" alt="desktop">
+<img src="./screenshots/0111.PNG" alt="desktop">
 
 ### Mobile
 - Search

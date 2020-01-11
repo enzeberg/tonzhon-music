@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 const themeColor = '#EA7030';
 const musicPlayer = {
-  background: 'rgba(120, 120, 120, 1)',
+  background: '#222',
   color: 'white',
 };
 const playingList = {

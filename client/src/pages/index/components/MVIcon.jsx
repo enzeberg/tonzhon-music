@@ -11,7 +11,7 @@ export default function MVIcon({ link, fontColor }) {
     >
       <Icon
         icon={ic_ondemand_video}
-        size={22}
+        size={20}
         style={{ verticalAlign: 'middle', color: fontColor }}
       />
     </a>
