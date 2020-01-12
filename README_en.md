@@ -4,6 +4,10 @@
 
 <h3>Listen to the music from different platforms in one place.</h3>
 
+## Addresses
+- Shenzhen: <a href="http://mini.tongzhong.xyz" target="_blank">mini.tongzhong.xyz</a>
+- Shanghai: <a href="http://sh.mini.tongzhong.xyz" target="_blank">sh.mini.tongzhong.xyz</a>
+- Beijing: <a href="http://bj.mini.tongzhong.xyz" target="_blank">bj.mini.tongzhong.xyz</a>
 
 ## Features
 ### Desktop

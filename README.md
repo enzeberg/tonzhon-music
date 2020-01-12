@@ -5,10 +5,15 @@
 
 <h3>将QQ音乐、网易云音乐和虾米音乐上的歌添加到一个列表来播放！</h3>
 
+## 地址
+- 深圳：<a href="http://mini.tongzhong.xyz" target="_blank">mini.tongzhong.xyz</a>
+- 上海：<a href="http://sh.mini.tongzhong.xyz" target="_blank">sh.mini.tongzhong.xyz</a>
+- 北京：<a href="http://bj.mini.tongzhong.xyz" target="_blank">bj.mini.tongzhong.xyz</a>
+
 ## 功能
 ### 桌面版
 - 搜索
- (支持使用查询字符串搜索，如: <a href="http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song" >http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song</a>.)
+ (支持使用查询字符串搜索，如: <a href="http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song" target="_blank">http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song</a>.)
 - 播放
 - 下载
 - 热歌榜（包括QQ音乐和网易云音乐）
