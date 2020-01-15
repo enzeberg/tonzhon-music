@@ -110,17 +110,11 @@ class Result extends Component {
              total={result.data.totalCount} />
         }
       >
-        <div style={ styles.resultContainer }>{mainPart}</div>
+        {mainPart}
       </Wrapper>
     );
   }
 }
-
-const styles = {
-  resultContainer: {
-    marginTop: 10
-  }
-};
 
 function mapStateToProps(state) {
   return {

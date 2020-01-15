@@ -11,7 +11,7 @@ const search = (req, res, next) => {
     });
   }
 
-  limit = limit || 4;
+  limit = limit || 6;
   page = page || 1;
 
   if (provider === 'netease') {

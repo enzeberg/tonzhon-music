@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Slider, Button, Icon, Tooltip } from 'antd';
+import { Row, Col, Slider, Button, Tooltip } from 'antd';
 import { withBaseIcon } from 'react-icons-kit';
 import { repeat } from 'react-icons-kit/ikons/repeat';
 import { ic_repeat_one } from 'react-icons-kit/md/ic_repeat_one'
@@ -42,9 +42,8 @@ class MusicPlayer extends Component {
       getMusicUrlStatus: 'notYet',
       playStatus: 'pausing',
       playMode: localStorage.getItem('playMode') || 'loop',
-      volume:
-        localStorage.getItem('volume') ?
-          Number(localStorage.getItem('volume')) : 0.6,
+      volume: localStorage.getItem('volume') ?
+                Number(localStorage.getItem('volume')) : 0.6,
       songSource: null,
       muted: false,
       playProgress: 0,
@@ -245,7 +244,7 @@ class MusicPlayer extends Component {
           ref={(audio) => { this.audio = audio; }}
         />
 
-        <Row type="flex" align="middle" className="container" justify="space-around" >
+        <Row type="flex" align="middle" className="container" justify="space-around">
           <Col span={3}>
             <Button ghost shape="circle" icon="step-backward"
               onClick={() => this.playNext('backward')}

@@ -28,7 +28,7 @@ class Wrapper extends Component {
             {this.props.pagination}
           </Col>
         </Row>
-        <div style={{ marginTop: 20 }}>
+        <div style={{ marginTop: 10 }}>
           {this.props.children}
         </div>
       </div>
@@ -43,9 +43,6 @@ const styles = {
     padding: '15px 10px',
     marginBottom: 20
   },
-  resultContainer: {
-    marginTop: 10
-  }
 };
 
 const providers = {

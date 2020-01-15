@@ -44,7 +44,7 @@ class HotList extends Component {
   render() {
     const { songs } = this.state;
     return (
-      <div>
+      <>
         <div style={{ paddingLeft: 620 }}>
           {
             songs.length !== 0 && <OperatingBarOfSongList songs={songs} />
@@ -55,7 +55,7 @@ class HotList extends Component {
           <Icon type="loading" /> :
           <SongList songs={songs} />
         }
-      </div>
+      </>
     );
   }
 }

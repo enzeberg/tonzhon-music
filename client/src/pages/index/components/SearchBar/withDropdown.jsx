@@ -8,12 +8,9 @@ const Search = Input.Search;
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    // don't delete the following lines!
-    this.onSearch = this.onSearch.bind(this);
-    this.onSelect = this.onSelect.bind(this);
   }
 
-  onSearch(keyword) {
+  onSearch = (keyword) => {
     if (keyword !== '' &&
       keyword !== this.props.searchParameters.keyword) {
       this.props.updateSearchKeyword(keyword);
@@ -21,7 +18,7 @@ class SearchBar extends Component {
     }
   }
 
-  onSelect({ key }) {
+  onSelect = ({ key }) => {
     let inputNode = document.querySelector('input#searchInput');
     // inputNode.setAttribute('value', key);
     inputNode.value = key;
@@ -33,10 +30,13 @@ class SearchBar extends Component {
     const { searchHistory } = this.props;
 
     const menu = (
-      <Menu selectable onSelect={this.onSelect}
-      >
+      <Menu selectable onSelect={this.onSelect}>
         <Menu.ItemGroup key="history" title={
-          <div style={{ alignItems: 'center', justifyContent: 'space-between', display: 'flex' }}><span>搜索历史</span>
+          <div style={{ alignItems: 'center', justifyContent: 'space-between',
+              display: 'flex'
+            }}
+          >
+            <span>搜索历史</span>
             <Button icon="delete"
               type="circle"
               onClick={() => this.props.clearSearchHistory()}
@@ -63,7 +63,6 @@ class SearchBar extends Component {
           defaultValue={keyword || ''}
           onSearch={this.onSearch}
           enterButton
-          size="large"
           id="searchInput"
         />
       </Dropdown>
