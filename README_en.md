@@ -5,14 +5,14 @@
 <h3>Listen to the music from different platforms in one place.</h3>
 
 ## Addresses
-- Shenzhen: <a href="http://mini.tongzhong.xyz" target="_blank">mini.tongzhong.xyz</a>
-- Shanghai: <a href="http://sh.mini.tongzhong.xyz" target="_blank">sh.mini.tongzhong.xyz</a>
-- Beijing: <a href="http://bj.mini.tongzhong.xyz" target="_blank">bj.mini.tongzhong.xyz</a>
+- Shenzhen: [tongzhong.xyz](http://tongzhong.xyz), [mini.tongzhong.xyz](http://mini.tongzhong.xyz)
+- Shanghai: [sh.mini.tongzhong.xyz](http://sh.mini.tongzhong.xyz)
+- Beijing: [bj.mini.tongzhong.xyz](http://bj.mini.tongzhong.xyz)
 
 ## Features
 ### Desktop
 - Search
- (Searching with query string is supported, try: <a href="http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song" >http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song</a>.)
+ (Searching with query string is supported, try: [http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song](http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song).)
 - Play
 - Download
 - Hot list (including QQ Music and Netease Music)
@@ -46,10 +46,8 @@ Open `http://localhost:8081` to visit the page that uses the production build.
 Open `http://localhost:3000/` for desktop, and `http://localhost:3000/m/` for mobile.
 
 ## Thanks
-<ul>
-<li><a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify/NeteaseCloudMusicApi</a></li>
-<li><a href="https://github.com/LIU9293/musicAPI">LIU9293/musicAPI</a></li>
-</ul>
+- [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
+- [LIU9293/musicAPI](https://github.com/LIU9293/musicAPI)
 
 ## License
 MIT
