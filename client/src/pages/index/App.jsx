@@ -5,7 +5,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import TheHeader from './components/Header';
 import TheFooter from './components/Footer';
-import SearchTypeMenu from './components/SearchTypeMenu';
 import Result from './components/Result';
 import SearchWithURL from './components/SearchWithURL';
 import NotFound from './components/NotFound';
@@ -22,7 +21,7 @@ class App extends Component {
   }
 
   render() {
-    let { searchStatus, searchResults, searchParameters } = this.props;
+    let { searchStatus, searchResults } = this.props;
     return (
       <BrowserRouter>
         <Layout>
@@ -42,7 +41,7 @@ class App extends Component {
           <Content>
             <div className="container"
               style={{
-                marginTop: 65,
+                marginTop: 72,
                 marginBottom: 20,
                 borderBottom: '1px solid #DBDBDB',
               }}
@@ -51,16 +50,10 @@ class App extends Component {
                 <Route exact path="/" component={Hot}/>
                 <Route path="/search" render={() => (
                   <>
-                    {
-                      searchStatus !== 'not_searched_yet' && <SearchTypeMenu />
-                    }
-                    {
-                      searchParameters.type === 'song' && <TopSongs />
-                    }
+                    <TopSongs />
                     {
                       Object.keys(searchResults).map((key) => (
                         <Result
-                          searchType={searchParameters.type}
                           result={searchResults[key]}
                           provider={key}
                           key={key} />
@@ -92,7 +85,6 @@ function mapStateToProps(state) {
   return {
     searchStatus: state.searchStatus,
     searchResults: state.searchResults,
-    searchParameters: state.searchParameters
   };
 }
 

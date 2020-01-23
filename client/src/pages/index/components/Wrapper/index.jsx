@@ -28,9 +28,7 @@ class Wrapper extends Component {
             {this.props.pagination}
           </Col>
         </Row>
-        <div style={{ marginTop: 10 }}>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
   }
@@ -40,8 +38,8 @@ const styles = {
   wrapper: {
     border: '1px solid',
     borderRadius: 5,
-    padding: '15px 10px',
-    marginBottom: 20
+    padding: '10px 10px 0',
+    marginBottom: 15
   },
 };
 

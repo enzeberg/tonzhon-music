@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   render() {
-    let { searchStatus, searchResults, searchParameters } = this.props;
+    let { searchStatus, searchResults } = this.props;
     return (
       <BrowserRouter basename={process.env.NODE_ENV === 'development' ? '/m' : '/'}>
         <Layout>
@@ -47,13 +47,10 @@ class App extends Component {
                 <Route exact path="/" />
                 <Route path="/search" render={() => (
                   <div>
-                    {
-                      searchParameters.type === 'song' && <TopSongs />
-                    }
+                    <TopSongs />
                     {
                       Object.keys(searchResults).map((key) => (
                         <Result
-                          searchType={searchParameters.type}
                           result={searchResults[key]}
                           provider={key}
                           key={key} />
@@ -82,7 +79,6 @@ function mapStateToProps(state) {
   return {
     searchStatus: state.searchStatus,
     searchResults: state.searchResults,
-    searchParameters: state.searchParameters
   };
 }
 

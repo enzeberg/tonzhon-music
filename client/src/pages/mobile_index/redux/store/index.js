@@ -2,22 +2,19 @@ import { createStore } from 'redux';
 import reducers from '../reducers';
 
 const store = createStore(reducers);
-const { providers,  searchParameters } = store.getState();
-let lastKeyword = searchParameters.keyword,
-    lastType = searchParameters.type;
+const { providers,  searchKeyword } = store.getState();
+let lastKeyword = searchKeyword;
 
 store.subscribe(() => {
-  const { searchParameters } = store.getState();
-  const { keyword, type } = searchParameters;
-  if (lastKeyword !== keyword || lastType !== type) {
-    // 更新lastKeyword,lastType必须放在包含dispatch方法的函数前面，否则会造成无限递归
-    lastKeyword = keyword;
-    lastType = type;
-    updateSearchHistory(keyword);
+  const { searchKeyword } = store.getState();
+  if (lastKeyword !== searchKeyword) {
+    // 更新 lastKeyword 必须放在包含dispatch方法的函数前面，否则会造成无限递归
+    lastKeyword = searchKeyword;
+    updateSearchHistory(searchKeyword);
     onSearch();
     let resultsResponded = 0;
     providers.forEach((provider) => {
-      fetch(`/api/search?provider=${provider}&keyword=${window.encodeURIComponent(keyword)}&type=${type}`, {
+      fetch(`/api/search?provider=${provider}&keyword=${window.encodeURIComponent(searchKeyword)}`, {
         // withCredentials: true
         credentials: 'include'
       })

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input } from 'antd';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 const Search = Input.Search;
@@ -9,19 +8,18 @@ const Search = Input.Search;
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.onSearch = this.onSearch.bind(this);
   }
 
-  onSearch(keyword) {
+  onSearch = (keyword) => {
     if (keyword !== '' &&
-        keyword !== this.props.searchParameters.keyword) {
+        keyword !== this.props.keyword) {
       this.props.updateSearchKeyword(keyword);
-      this.props.history.push(`/search?keyword=${window.encodeURIComponent(keyword)}&type=${this.props.searchParameters.type}`);
+      this.props.history.push(`/search?keyword=${window.encodeURIComponent(keyword)}`);
     }
   }
 
   render() {
-    const { keyword } = this.props.searchParameters;
+    const { keyword } = this.props;
 
     return (
       <Search
@@ -35,13 +33,9 @@ class SearchBar extends Component {
   }
 }
 
-SearchBar.propTypes = {
-  searchParameters: PropTypes.object.isRequired
-};
-
 function mapStateToProps(state) {
   return {
-    searchParameters: state.searchParameters
+    keyword: state.searchKeyword
   };
 }
 function mapDispatchToProps(dispatch) {

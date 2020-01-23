@@ -13,7 +13,7 @@
 ## 功能
 ### 桌面版
 - 搜索
- (支持使用查询字符串搜索，如: [http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song](http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song))
+ (支持使用查询字符串搜索，如: [http://mini.tongzhong.xyz/search?keyword=Iron%20Man](http://mini.tongzhong.xyz/search?keyword=Iron%20Man))
 - 播放
 - 下载
 - 热歌榜（包括QQ音乐和网易云音乐）

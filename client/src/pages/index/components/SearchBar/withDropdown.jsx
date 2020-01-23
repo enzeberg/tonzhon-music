@@ -12,9 +12,9 @@ class SearchBar extends Component {
 
   onSearch = (keyword) => {
     if (keyword !== '' &&
-      keyword !== this.props.searchParameters.keyword) {
+      keyword !== this.props.keyword) {
       this.props.updateSearchKeyword(keyword);
-      this.props.history.push(`/search?keyword=${window.encodeURIComponent(keyword)}&type=${this.props.searchParameters.type}`);
+      this.props.history.push(`/search?keyword=${window.encodeURIComponent(keyword)}`);
     }
   }
 
@@ -26,8 +26,7 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { keyword } = this.props.searchParameters;
-    const { searchHistory } = this.props;
+    const { keyword, searchHistory } = this.props;
 
     const menu = (
       <Menu selectable onSelect={this.onSelect}>
@@ -73,7 +72,7 @@ class SearchBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    searchParameters: state.searchParameters,
+    keyword: state.searchKeyword,
     searchHistory: state.searchHistory,
   };
 }

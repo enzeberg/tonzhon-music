@@ -39,7 +39,7 @@ class TopSongs extends Component {
     return this.state.topSongs.length === 0 ? null : (
       <div style={{
           padding: '0px 10px',
-          marginBottom: 20,
+          marginBottom: 15,
           backgroundColor: 'rgb(250,250,250)',
           borderRadius: 5 
         }}

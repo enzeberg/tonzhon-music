@@ -12,7 +12,7 @@
 ## Features
 ### Desktop
 - Search
- (Searching with query string is supported, try: [http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song](http://mini.tongzhong.xyz/search?keyword=Iron%20Man&type=song).)
+ (Searching with query string is supported, try: [http://mini.tongzhong.xyz/search?keyword=Iron%20Man](http://mini.tongzhong.xyz/search?keyword=Iron%20Man).)
 - Play
 - Download
 - Hot list (including QQ Music and Netease Music)

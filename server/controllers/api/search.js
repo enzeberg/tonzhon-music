@@ -3,8 +3,8 @@ const qq = require('./qq/search');
 const xiami = require('./xiami/search');
 
 const search = (req, res, next) => {
-  let { keyword, type, provider, limit, page } = req.query;
-  if (!(keyword && type && provider)) {
+  let { keyword, provider, limit, page } = req.query;
+  if (!(keyword && provider)) {
     return res.json({
       searchSuccess: false,
       message: 'Lack of necessary parameters!'
@@ -15,7 +15,7 @@ const search = (req, res, next) => {
   page = page || 1;
 
   if (provider === 'netease') {
-    netease.search(keyword, type, limit, page)
+    netease.search(keyword, limit, page)
       .then(data => res.json({
         searchSuccess: true,
         data: data
@@ -25,7 +25,7 @@ const search = (req, res, next) => {
       }));
 
   } else if (provider === 'qq') {
-    qq.search(keyword, type, limit, page)
+    qq.search(keyword, limit, page)
       .then(data => res.json({
         searchSuccess: true,
         data: data
@@ -34,7 +34,7 @@ const search = (req, res, next) => {
         message: err.message
       }));
   } else if (provider === 'xiami') {
-    xiami.search(keyword, type, limit, page)
+    xiami.search(keyword, limit, page)
       .then(data => res.json({
         searchSuccess: true,
         data: data

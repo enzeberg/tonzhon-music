@@ -12,15 +12,9 @@ class Result extends Component {
     super(props);
   }
 
-  renderSongs(songs) {
-    return (
-      <SongList songs={songs} shouldSendOperatingData />
-    );
-  }
-
-  onPageChange(page) {
-    const { provider, keyword, type, onResultResponded } = this.props;
-    fetch(`/api/search?provider=${provider}&keyword=${keyword}&type=${type}&page=${page}`)
+  onPageChange = (page) => {
+    const { provider, keyword, onResultResponded } = this.props;
+    fetch(`/api/search?provider=${provider}&keyword=${keyword}&page=${page}`)
       .then(res => res.json())
       .then(json => {
         onResultResponded(provider, json);
@@ -34,7 +28,7 @@ class Result extends Component {
     const { result, searchType, provider } = this.props;
     let mainPart;
     if (result.searchSuccess) {
-      mainPart = this.renderSongs(result.data.songs);
+      mainPart = <SongList songs={result.data.songs} />;
     } else {
       mainPart = <h3>{result.message}</h3>;
     }
@@ -61,8 +55,7 @@ class Result extends Component {
 
 function mapStateToProps(state) {
   return {
-    keyword: state.searchParameters.keyword,
-    type: state.searchParameters.type
+    keyword: state.searchKeyword,
   };
 }
 function mapDispatchToProps(dispatch) {

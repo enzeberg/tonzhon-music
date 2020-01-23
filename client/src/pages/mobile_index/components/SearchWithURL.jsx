@@ -8,16 +8,14 @@ class SearchWithURL extends Component {
   }
 
   componentDidMount() {
-    const { location, searchParameters } = this.props;
+    const { location, keywordFromStore } = this.props;
     const query = location.search.slice(1);
     // keyword in the store is encoded
-    const keywordFromStore = searchParameters.keyword;
-    const typeFromStore = searchParameters.type;
     // querystring.parse() will decode URI component
     const { keyword, type } = querystring.parse(query);
     if (keyword && type) {
-      if (window.encodeURIComponent(keyword) !== keywordFromStore || type !== typeFromStore) {
-        this.props.updateSearchParameters({ keyword, type });
+      if (window.encodeURIComponent(keyword) !== keywordFromStore) {
+        this.props.updateSearchKeyword(keyword);
       }
     }
   }
@@ -31,12 +29,12 @@ class SearchWithURL extends Component {
 
 function mapStateToProps(state) {
   return {
-    searchParameters: state.searchParameters,
+    keywordFromStore: state.searchKeyword,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    updateSearchParameters: (data) => {
+    updateSearchKeyword: (data) => {
       dispatch({ type: 'UPDATE_SEARCH_PARAMETERS', data });
     },
   };
