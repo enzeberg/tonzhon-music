@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Icon, Layout } from 'antd';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import T_Header from './components/Header/like_desktop';
+import T_Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Result from './components/Result';
 import SearchWithURL from './components/SearchWithURL';
