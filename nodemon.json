@@ -1,0 +1,12 @@
+{
+  "ignore": [
+    "client/*",
+    "node_modules/*",
+    "screenshots/*",
+    ".babelrc",
+    "package-lock.json",
+    "package.json",
+    "README_en.md",
+    "README.md"
+  ]
+}
