@@ -47,7 +47,7 @@ class Player extends Component {
       songSource: null,
       muted: false,
       playProgress: 0,
-      playingListVisible: true,
+      playingListVisible: false,
     };
     this.playOrPause = this.playOrPause.bind(this);
     this.play = this.play.bind(this);
