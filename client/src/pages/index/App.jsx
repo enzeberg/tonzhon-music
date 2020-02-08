@@ -9,7 +9,7 @@ import Result from './components/Result';
 import SearchWithURL from './components/SearchWithURL';
 import NotFound from './components/NotFound';
 import TopSongs from './components/TopSongs';
-import MusicPlayer from './components/MusicPlayer';
+import Player from './components/Player';
 import Hot from './components/Hot';
 import './App.css';
 
@@ -74,7 +74,7 @@ class App extends Component {
           <Footer style={{ marginBottom: 80 }}>
             <TheFooter />
           </Footer>
-          <MusicPlayer />
+          <Player />
         </Layout>
       </BrowserRouter>
     );

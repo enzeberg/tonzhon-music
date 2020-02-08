@@ -23,7 +23,8 @@ class SongItem extends Component {
     }
   }
 
-  deleteFromPlaylist = () => {
+  deleteFromPlaylist = (e) => {
+    e.stopPropagation();
     const index = this.props.playingList.findIndex(song =>
                   song.link === this.props.song.link);
     if (index + 1 === this.props.playingList.length) {
@@ -35,16 +36,25 @@ class SongItem extends Component {
   render() {
     let { song, currentSong } = this.props;
     return (
-      <List.Item onClick={this.changeCurrentSong}
+      <List.Item
+        onClick={this.changeCurrentSong}
         className={currentSong && currentSong.link === song.link ?
-          'list-item playing' : 'list-item'
+          'playing' : ''
         }
-        style={{ border: 'none', padding: '6px 0' }}
+        style={{ border: 'none', padding: '6px 10px' }}
+        extra={
+          <a onClick={this.deleteFromPlaylist} className="delete-btn">
+            <Icon type="delete" style={{
+              fontSize: 18,
+              verticalAlign: 'middle'
+            }} />
+          </a>
+        }
       >
         <Row type="flex" align="middle"
-          style={{ width: '100%', color: 'white', padding: '0 20px' }}
+          style={{ width: '100%', color: 'white', }}
         >
-          <Col span={10} className="nowrap">
+          <Col span={12} className="nowrap">
             {song.name}
           </Col>
           <Col span={10} className="nowrap">
@@ -57,14 +67,6 @@ class SongItem extends Component {
           </Col>
           <Col span={2}>
             <img src={logos[song.platform]} alt={song.platform} />
-          </Col>
-          <Col span={2}>
-            <a onClick={this.deleteFromPlaylist} className="delete-btn">
-              <Icon type="delete" style={{
-                fontSize: 18,
-                verticalAlign: 'middle'
-              }} />
-            </a>
           </Col>
         </Row>
       </List.Item>

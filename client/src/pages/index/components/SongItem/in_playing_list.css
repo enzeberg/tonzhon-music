@@ -1,11 +1,3 @@
 a.delete-btn {
   color: white;
 }
-
-.list-item:hover {
-  cursor: pointer;
-  background-color: rgb(50, 50, 50);
-}
-.list-item.playing {
-  background-color: rgb(60, 60, 60);
-}

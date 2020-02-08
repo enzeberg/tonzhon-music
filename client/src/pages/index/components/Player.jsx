@@ -35,7 +35,7 @@ const modeExplanations = {
   single: '单曲循环',
 };
 
-class MusicPlayer extends Component {
+class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +47,7 @@ class MusicPlayer extends Component {
       songSource: null,
       muted: false,
       playProgress: 0,
-      playingListVisible: false,
+      playingListVisible: true,
     };
     this.playOrPause = this.playOrPause.bind(this);
     this.play = this.play.bind(this);
@@ -368,10 +368,9 @@ class MusicPlayer extends Component {
               </Col>
             </Row>
           </Col>
-          <Col span={1}>
+          <Col span={1} style={{ textAlign: 'right' }}>
             <Button ghost icon="bars" onClick={this.clickPlayingListBtn}
               title="播放列表"
-              style={{ float: 'right' }}
             />
           </Col>
         </Row>
@@ -432,4 +431,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer);
+export default connect(mapStateToProps, mapDispatchToProps)(Player);
