@@ -6,9 +6,10 @@
 <h3>将QQ音乐、网易云音乐和虾米音乐上的歌添加到一个列表来播放！</h3>
 
 ## 地址
-- 深圳：[tongzhong.xyz](http://tongzhong.xyz), [mini.tongzhong.xyz](http://mini.tongzhong.xyz)
-- 上海：[sh.mini.tongzhong.xyz](http://sh.mini.tongzhong.xyz)
-- 北京：[bj.mini.tongzhong.xyz](http://bj.mini.tongzhong.xyz)
+- [tongzhong.xyz](http://tongzhong.xyz) (深圳)
+- [mini.tongzhong.xyz](http://mini.tongzhong.xyz) (上海, 深圳)
+- [sh.mini.tongzhong.xyz](http://sh.mini.tongzhong.xyz) (上海)
+- [sz.mini.tongzhong.xyz](http://sz.mini.tongzhong.xyz) (深圳)
 
 ## 功能
 ### 桌面版
