@@ -26,6 +26,7 @@
     "es6-promise": "^4.1.1",
     "express": "^4.16.3",
     "express-useragent": "^1.0.12",
+    "isomorphic-fetch": "^2.2.1",
     "morgan": "~1.9.0",
     "node-fetch": "^2.1.1",
     "pac-proxy-agent": "^3.0.0",
