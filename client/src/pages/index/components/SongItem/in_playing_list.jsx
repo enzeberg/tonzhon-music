@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Icon, List } from 'antd';
+import { Row, Col, List } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
@@ -44,10 +45,12 @@ class SongItem extends Component {
         style={{ border: 'none', padding: '6px 10px' }}
         extra={
           <a onClick={this.deleteFromPlaylist} className="delete-btn">
-            <Icon type="delete" style={{
-              fontSize: 18,
-              verticalAlign: 'middle'
-            }} />
+            <DeleteOutlined
+              style={{
+                fontSize: 18,
+                verticalAlign: 'middle'
+              }}
+            />
           </a>
         }
       >

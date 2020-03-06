@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { notification, Icon } from 'antd';
+import { notification } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 
 notification.config({
@@ -23,10 +24,12 @@ class AddTo extends Component {
   render() {
     return (
       <a onClick={this.handleClick} title="添加到播放列表">
-        <Icon type="plus" style={{
-          fontSize: 20,
-          verticalAlign: 'middle',
-        }} />
+        <PlusOutlined
+          style={{
+            fontSize: 20,
+            display: 'block',
+          }}
+        />
       </a>
     );
   }

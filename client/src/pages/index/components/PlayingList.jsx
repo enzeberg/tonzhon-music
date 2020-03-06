@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Button, List, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 
@@ -16,7 +17,9 @@ class PlayingList extends Component {
         <Row type="flex" align="middle" justify="space-between" style={styles.header}>
           <Col span={20}>播放列表</Col>
           <Col span={4} style={{ textAlign: 'right' }}>
-            <Button icon="delete" ghost onClick={this.props.clearPlaylist}>
+            <Button icon={<DeleteOutlined />} ghost
+              onClick={this.props.clearPlaylist}
+            >
               清空
             </Button>
           </Col>

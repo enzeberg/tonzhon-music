@@ -5,6 +5,7 @@ import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';
 import { connect } from 'react-redux';
+import { DeleteOutlined } from '@ant-design/icons';
 
 class SongItem extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class SongItem extends Component {
           <Button
             title="删除"
             onClick={this.deleteFromPlaylist}
-            icon="delete"
+            icon={<DeleteOutlined />}
             style={{
               // color: 'white',
               border: 'none',
@@ -87,10 +88,8 @@ const logos = {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
     currentSong: state.playlist[state.playIndex],
     playlist: state.playlist,
-    playAction: state.playAction,
     playIndex: state.playIndex,
   };
 }

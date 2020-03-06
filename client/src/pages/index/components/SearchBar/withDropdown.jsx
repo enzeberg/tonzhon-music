@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, Menu, Input, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -36,7 +37,7 @@ class SearchBar extends Component {
             }}
           >
             <span>搜索历史</span>
-            <Button icon="delete"
+            <Button icon={<DeleteOutlined />}
               type="circle"
               onClick={() => this.props.clearSearchHistory()}
             />

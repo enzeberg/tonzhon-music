@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { GithubOutlined } from '@ant-design/icons';
 
 export default function Footer() {
   return (
@@ -7,8 +7,8 @@ export default function Footer() {
       <a href="https://github.com/enzeberg/tongzhong-music"
         target="blank"
       >
-        <Icon type="github" style={{ fontSize: 'large' }} />
+        <GithubOutlined style={{ fontSize: 'large' }} />
       </a>
     </div>
   );
-};
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Icon, Layout } from 'antd';
+import { Layout } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import TheHeader from './components/Header';
@@ -29,7 +30,9 @@ class App extends Component {
             <Route path="/search" component={SearchWithURL} />
           </Switch>
 
-          <Header style={{ position: 'fixed',
+          <Header
+            style={{
+              position: 'fixed',
               width: '100%',
               zIndex: 1040,
               borderBottom: '1px solid #DBDBDB',
@@ -44,6 +47,7 @@ class App extends Component {
                 marginTop: 72,
                 marginBottom: 20,
                 borderBottom: '1px solid #DBDBDB',
+                minHeight: 900,
               }}
             >
               <Switch>
@@ -62,7 +66,7 @@ class App extends Component {
                     <div className="loading-anim-wrapper">
                       {
                         searchStatus === 'searching' &&
-                          <Icon type="loading"/>
+                          <LoadingOutlined />
                       }
                     </div>
                   </>

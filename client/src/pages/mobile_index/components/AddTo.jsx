@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { notification, Button } from 'antd';
 import { connect } from 'react-redux';
+import { PlusOutlined } from '@ant-design/icons';
 
 class AddTo extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class AddTo extends Component {
         title="添加到播放列表"
         onClick={this.handleClick}
         shape="circle"
-        icon="plus"
+        icon={<PlusOutlined />}
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}

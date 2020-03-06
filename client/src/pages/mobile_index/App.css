@@ -41,3 +41,9 @@ a.no-copyright {
 .playlist::-webkit-scrollbar-track-piece {
     border-radius: 10px;
 }
+
+.player-icon {
+  color: black;
+  display: block;
+  font-size: 25px;
+}

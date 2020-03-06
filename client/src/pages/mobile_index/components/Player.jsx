@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Slider, Button, notification, Tooltip, Drawer } from 'antd';
-import { withBaseIcon } from 'react-icons-kit';
-import { repeat } from 'react-icons-kit/ikons/repeat';
-import { ic_repeat_one } from 'react-icons-kit/md/ic_repeat_one'
-import { shuffle } from 'react-icons-kit/ikons/shuffle';
+import {
+  StepBackwardOutlined,
+  StepForwardOutlined,
+  CaretRightOutlined,
+  LoadingOutlined,
+  PauseOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
+import {
+  MdRepeat as LoopIcon,
+  MdRepeatOne as SingleIcon,
+  MdShuffle as ShuffleIcon
+} from 'react-icons/md';
 
 import Playlist from './Playlist';
 import { toMinAndSec } from '../lib/time_converter';
@@ -19,13 +28,10 @@ notification.config({
   duration: 3,
 });
 
-const Icon1 = withBaseIcon({
-  size: 22, style: { color: 'black', verticalAlign: 'middle' }
-});
-const modeIcons = {
-  loop: repeat,
-  single: ic_repeat_one,
-  shuffle: shuffle,
+const playModeIcons = {
+  loop: <LoopIcon className="player-icon" />,
+  single: <SingleIcon className="player-icon" />,
+  shuffle: <ShuffleIcon className="player-icon" />,
 };
 
 const playModes = ['loop', 'single', 'shuffle'];
@@ -37,7 +43,7 @@ const modeExplanations = {
 
 const isiOS = Boolean(navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/));
 
-class MusicPlayer extends Component {
+class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -271,11 +277,11 @@ class MusicPlayer extends Component {
             style={{ marginBottom: 10 }}
           >
             <Col span={20}>
-              <Button shape="circle" icon="step-backward"
+              <Button shape="circle" icon={<StepBackwardOutlined />}
                 onClick={() => this.playNext('backward')}
                 style={{ marginRight: 20 }}
               />
-              <Button shape="circle" icon="step-forward"
+              <Button shape="circle" icon={<StepForwardOutlined />}
                 onClick={() => this.playNext('forward')}
               />
             </Col>
@@ -287,9 +293,7 @@ class MusicPlayer extends Component {
                   onClick={this.switchPlayMode}
                   style={{ float: 'right' }}
                 >
-                  <Icon1
-                    icon={modeIcons[this.state.playMode]}
-                  />
+                  { playModeIcons[this.state.playMode] }
                 </a>
               </Tooltip>
             </Col>
@@ -326,13 +330,17 @@ class MusicPlayer extends Component {
           <Col span={3}>
             <Button ghost shape="circle"
               icon={
-                getMusicUrlStatus === 'notYet' ? 'caret-right' :
-                  (
-                    getMusicUrlStatus === 'started' ? 'loading' :
-                      (
-                        getMusicUrlStatus === 'ok' ?
-                          (playStatus === 'playing' ? 'pause' : 'caret-right') :
-                          'caret-right'
+                getMusicUrlStatus === 'notYet' ? <CaretRightOutlined />
+                  : (
+                    getMusicUrlStatus === 'started' ? <LoadingOutlined />
+                      : (
+                        getMusicUrlStatus === 'ok'
+                          ? (
+                            playStatus === 'playing'
+                              ? <PauseOutlined />
+                              : <CaretRightOutlined />
+                          )
+                          : <CaretRightOutlined />
                       )
                   )
               }
@@ -341,7 +349,8 @@ class MusicPlayer extends Component {
             />
           </Col>
           <Col span={3} style={{ float: 'right' }}>
-            <Button ghost icon="bars" onClick={this.clickPlaylistBtn}
+            <Button ghost icon={<UnorderedListOutlined />}
+              onClick={this.clickPlaylistBtn}
               title="播放列表"
               style={{ float: 'right' }}
             />
@@ -406,4 +415,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer);
+export default connect(mapStateToProps, mapDispatchToProps)(Player);

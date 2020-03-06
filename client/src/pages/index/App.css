@@ -27,6 +27,12 @@ a:hover {
   justify-content: center;
 }
 
+.player-icon {
+  color: white;
+  display: block;
+  font-size: 25px;
+}
+
 @media only screen and (min-width: 992px) {
   .container {
     width: 1000px;

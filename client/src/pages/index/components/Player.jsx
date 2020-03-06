@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {
+  CaretRightOutlined,
+  StepForwardOutlined,
+  StepBackwardOutlined,
+  LoadingOutlined,
+  PauseOutlined,
+  DownloadOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
 import { Row, Col, Slider, Button, Tooltip } from 'antd';
-import { withBaseIcon } from 'react-icons-kit';
-import { repeat } from 'react-icons-kit/ikons/repeat';
-import { ic_repeat_one } from 'react-icons-kit/md/ic_repeat_one'
-import { shuffle } from 'react-icons-kit/ikons/shuffle';
-import { volume_2 } from 'react-icons-kit/ikons/volume_2';
-import { volume_mute } from 'react-icons-kit/ikons/volume_mute';
+import {
+  MdRepeat as LoopIcon,
+  MdRepeatOne as SingleIcon,
+  MdShuffle as ShuffleIcon
+} from 'react-icons/md';
+import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi';
 
 import Artists from './Artists';
 import MVIcon from './MVIcon';
@@ -14,25 +23,17 @@ import PlayingList from './PlayingList';
 import { toMinAndSec } from '../lib/time_converter';
 import { musicPlayer } from '../../../config';
 
-const Icon1 = withBaseIcon({
-  size: 20,
-  style: {
-    color: 'white',
-    verticalAlign: 'middle',
-    paddingLeft: 10
-  },
-});
-const modeIcons = {
-  loop: repeat,
-  single: ic_repeat_one,
-  shuffle: shuffle,
+const playModeIcons = {
+  loop: <LoopIcon className="player-icon" />,
+  single: <SingleIcon className="player-icon" />,
+  shuffle: <ShuffleIcon className="player-icon" />,
 };
 
-const playModes = ['loop', 'shuffle', 'single'];
+const playModes = ['loop', 'single', 'shuffle', ];
 const modeExplanations = {
   loop: '循环',
-  shuffle: '随机',
   single: '单曲循环',
+  shuffle: '随机',
 };
 
 class Player extends Component {
@@ -246,26 +247,30 @@ class Player extends Component {
 
         <Row type="flex" align="middle" className="container" justify="space-around">
           <Col span={3}>
-            <Button ghost shape="circle" icon="step-backward"
+            <Button ghost shape="circle" icon={<StepBackwardOutlined />}
               onClick={() => this.playNext('backward')}
             />
             <Button ghost shape="circle" size="large"
               onClick={this.playOrPause}
               style={{ margin: '0 10px' }}
               icon={
-                getMusicUrlStatus === 'notYet' ? 'caret-right' :
-                  (
-                    getMusicUrlStatus === 'started' ? 'loading' :
-                      (
-                        getMusicUrlStatus === 'ok' ?
-                          (playStatus === 'playing' ? 'pause' : 'caret-right') :
-                          'caret-right'
+                getMusicUrlStatus === 'notYet' ? <CaretRightOutlined />
+                  : (
+                    getMusicUrlStatus === 'started' ? <LoadingOutlined />
+                      : (
+                        getMusicUrlStatus === 'ok'
+                          ? (
+                            playStatus === 'playing'
+                              ? <PauseOutlined />
+                              : <CaretRightOutlined />
+                          )
+                          : <CaretRightOutlined />
                       )
                   )
               }
               disabled={!currentSong}
             />
-            <Button ghost shape="circle" icon="step-forward"
+            <Button ghost shape="circle" icon={<StepForwardOutlined />}
               onClick={() => this.playNext('forward')}
             />
           </Col>
@@ -288,8 +293,9 @@ class Player extends Component {
                     <Col span={2}>
                       {
                         currentSong.mvLink &&
-                        <MVIcon link={currentSong.mvLink}
-                          fontColor="white"
+                        <MVIcon
+                          link={currentSong.mvLink}
+                          color="white"
                         />
                       }
                     </Col>
@@ -321,7 +327,9 @@ class Player extends Component {
               }
             </Row>
             <Slider min={0}
-              max={this.state.songDuration ? parseInt(this.state.songDuration) : 0}
+              max={
+                this.state.songDuration ? parseInt(this.state.songDuration) : 0
+              }
               value={this.state.playProgress}
               tipFormatter={(value) => toMinAndSec(value)}
               onChange={this.changePlayProgress}
@@ -330,37 +338,38 @@ class Player extends Component {
             />
           </Col>
           <Col span={1}>
-            {/* <a href={this.state.songSource} download>
-              <Icon type="download" />
-            </a> */}
-            <Button icon="download" ghost shape="circle"
-              // type="link" size="large"
-              href={this.state.songSource} target="_blank"
-              download disabled={this.state.songSource === null}
-              // style={{ color:'white' }}
+            <Button icon={<DownloadOutlined />} ghost shape="circle"
+              href={this.state.songSource}
+              target="_blank"
+              download
+              disabled={this.state.songSource === null}
             />
           </Col>
-          <Col span={1}>
+          <Col span={1} style={{ paddingLeft: 3 }}>
             <Tooltip
               title={modeExplanations[this.state.playMode]}
             >
               <a
                 onClick={this.switchPlayMode}
               >
-                <Icon1
-                  icon={modeIcons[this.state.playMode]}
-                />
+                {
+                  playModeIcons[this.state.playMode]
+                }
               </a>
             </Tooltip>
           </Col>
           <Col span={3}>
             <Row type="flex" align="middle">
-              <Col span={6}>
+              <Col span={4}>
                 <a onClick={this.muteOrNot}>
-                  <Icon1 icon={this.state.muted ? volume_mute : volume_2} />
+                  {
+                    this.state.muted
+                      ? <MuteIcon className="player-icon" />
+                      : <VolumeIcon className="player-icon" />
+                  }
                 </a>
               </Col>
-              <Col span={18} style={{ paddingRight: 5 }}>
+              <Col span={20}>
                 <Slider min={0} max={1} step={0.01}
                   defaultValue={this.state.volume}
                   onChange={this.changeVolume}
@@ -369,7 +378,8 @@ class Player extends Component {
             </Row>
           </Col>
           <Col span={1} style={{ textAlign: 'right' }}>
-            <Button ghost icon="bars" onClick={this.clickPlayingListBtn}
+            <Button ghost icon={<UnorderedListOutlined />}
+              onClick={this.clickPlayingListBtn}
               title="播放列表"
             />
           </Col>

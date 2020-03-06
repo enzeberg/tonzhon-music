@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Icon, Layout } from 'antd';
+import { Layout } from 'antd';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import T_Header from './components/Header';
+import TheHeader from './components/Header';
 import SearchBar from './components/SearchBar';
 import Result from './components/Result';
 import SearchWithURL from './components/SearchWithURL';
 import NotFound from './components/NotFound';
 import TopSongs from './components/TopSongs';
-import MusicPlayer from './components/MusicPlayer';
+import Player from './components/Player';
 import './App.css';
 import { themeColor } from '../../config';
+import { LoadingOutlined } from '@ant-design/icons';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 class App extends Component {
   constructor(props) {
@@ -23,14 +24,15 @@ class App extends Component {
   render() {
     let { searchStatus, searchResults } = this.props;
     return (
-      <BrowserRouter basename={process.env.NODE_ENV === 'development' ? '/m' : '/'}>
+      <BrowserRouter
+        basename={process.env.NODE_ENV === 'development' ? '/m' : '/'}
+      >
         <Layout>
           <Switch>
             <Route path="/search" component={SearchWithURL} />
           </Switch>
-
           <Header style={{ position: 'fixed', width: '100%', zIndex: 1040 }}>
-            <T_Header />
+            <TheHeader />
           </Header>
           <Content>
             <div
@@ -46,7 +48,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" />
                 <Route path="/search" render={() => (
-                  <div>
+                  <>
                     <TopSongs />
                     {
                       Object.keys(searchResults).map((key) => (
@@ -59,16 +61,18 @@ class App extends Component {
                     <div className="loading-anim-wrapper">
                       {
                         searchStatus === 'searching' &&
-                          <Icon type="loading" style={{fontSize: 30, color: themeColor}} />
+                          <LoadingOutlined
+                            style={{ fontSize: 30, color: themeColor }}
+                          />
                       }
                     </div>
-                  </div>
+                  </>
                 )}/>
                 <Route path="/*" render={NotFound}/>
               </Switch>
             </div>
           </Content>
-          <MusicPlayer />
+          <Player />
         </Layout>
       </BrowserRouter>
     );

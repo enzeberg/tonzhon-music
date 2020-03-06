@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'antd';
+import { CaretRightOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 
 import AddTo from './AddTo';
@@ -13,7 +14,7 @@ class OperatingBarOfSongList extends Component {
     return (
       <Row type="flex" align="middle" justify="space-around">
         <Col>
-          <Button icon="caret-right"
+          <Button icon={<CaretRightOutlined />}
             onClick={() => this.props.playSongList(this.props.songs)}
           >
             播放全部

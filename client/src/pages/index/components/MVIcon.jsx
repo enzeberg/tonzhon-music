@@ -1,18 +1,19 @@
 import React from 'react';
-import Icon from 'react-icons-kit';
-import { ic_ondemand_video } from 'react-icons-kit/md/ic_ondemand_video';
+import { MdOndemandVideo } from 'react-icons/md';
 
-export default function MVIcon({ link, fontColor }) {
+export default function MVIcon({ link, color }) {
   return (
     <a
        href={link}
        target="_blank"
        title="MV"
     >
-      <Icon
-        icon={ic_ondemand_video}
-        size={20}
-        style={{ verticalAlign: 'middle', color: fontColor }}
+      <MdOndemandVideo
+        style={{
+          display: 'block',
+          fontSize: 20,
+          color: color || 'black',
+        }}
       />
     </a>
   );

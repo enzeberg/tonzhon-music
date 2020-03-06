@@ -5,3 +5,7 @@
 a.play-btn.playing {
   color: #EA7030;
 }
+
+.song-list li:hover {
+  background-color: #f4f4f4;
+}

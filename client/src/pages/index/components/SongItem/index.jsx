@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Icon, List } from 'antd';
+import { Row, Col, List } from 'antd';
+import { PlayCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 
 import neteaseMusicLogo from './images/netease_16.ico';
@@ -30,7 +31,7 @@ class SongItem extends Component {
     let { song, currentSong } = this.props;
     let anchorClass = song.hasCopyright ? '' : 'no-copyright';
     return (
-      <List.Item style={{ padding: '7px 0' }}>
+      <List.Item style={{ padding: '5px 10px' }}>
         <Row type="flex" align="middle" style={{ width: '100%', fontSize: 14 }}>
           <Col span={8} className="nowrap">
             <a href={song.link}
@@ -57,7 +58,11 @@ class SongItem extends Component {
           <Col span={2}>
             {
               this.props.showPlatform &&
-                <img src={logos[song.platform]} alt={song.platform} />
+                <img
+                  src={logos[song.platform]}
+                  alt={song.platform}
+                  style={{ display: 'block' }}
+                />
             }
           </Col>
           <Col span={2}>
@@ -67,9 +72,10 @@ class SongItem extends Component {
                   'play-btn playing' : 'play-btn'
               }
             >
-              <Icon type="play-circle" style={{
+              <PlayCircleOutlined
+                style={{
                   fontSize: 20,
-                  verticalAlign: 'middle',
+                  display: 'block',
                 }}
               />
             </a>

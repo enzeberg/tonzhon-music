@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import SongList from './SongList';
 import OperatingBarOfSongList from './OperatingBarOfSongList';
@@ -43,20 +43,18 @@ class HotList extends Component {
 
   render() {
     const { songs } = this.state;
-    return (
-      <>
-        <div style={{ paddingLeft: 620 }}>
-          {
-            songs.length !== 0 && <OperatingBarOfSongList songs={songs} />
-          }
-        </div>
+    return <>
+      <div style={{ paddingLeft: 620 }}>
         {
-          this.state.loading ?
-          <Icon type="loading" /> :
-          <SongList songs={songs} />
+          songs.length !== 0 && <OperatingBarOfSongList songs={songs} />
         }
-      </>
-    );
+      </div>
+      {
+        this.state.loading ?
+        <LoadingOutlined /> :
+        <SongList songs={songs} />
+      }
+    </>;
   }
 }
 

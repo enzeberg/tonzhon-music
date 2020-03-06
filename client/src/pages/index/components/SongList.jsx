@@ -21,6 +21,7 @@ class SongList extends Component {
             />
           );
         }}
+        className="song-list"
       />
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { AutoComplete, Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -33,7 +34,7 @@ class SearchBar extends Component {
       <OptGroup key="history"
         label={
           <span>搜索历史
-            <Button icon="delete"
+            <Button icon={<LegacyIcon type="delete" />}
               onClick={() => this.props.clearSearchHistory()}
               style={{ float: 'right' }}
             />
