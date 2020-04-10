@@ -4,7 +4,6 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 
 import ItemInPlaylist from './SongItem/item_in_playlist';
-import { playingList } from '../../../config';
 
 class PlayingList extends Component {
   constructor(props) {
@@ -49,7 +48,7 @@ class PlayingList extends Component {
                   <List.Item
                     key={`${song.platform}${song.originalId}`}
                   >
-                    <ItemInPlaylist song={song} rowWidth={playingList.width} />
+                    <ItemInPlaylist song={song} />
                   </List.Item>
                 );
               }}

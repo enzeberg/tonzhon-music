@@ -4,7 +4,7 @@ import { Button, List, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 
 import ItemInPlaylist from './SongItem/in_playing_list';
-import { playingList } from '../../../config';
+// import { playingList } from '../../../config';
 
 class PlayingList extends Component {
   constructor(props) {
@@ -72,9 +72,8 @@ const styles = {
     position: 'absolute',
     bottom: 64,
     color: 'white',
-    left: '50%',
-    marginLeft: -playingList.width / 2,
-    width: playingList.width,
+    right: (document.body.clientWidth - 1000) / 2,
+    width: 600,
     height: 320,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,

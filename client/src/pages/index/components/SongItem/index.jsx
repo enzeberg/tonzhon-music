@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';
-import Artists from '../Artists';
+import ArtistLinks from '../ArtistLinks';
 import MVIcon from '../MVIcon';
 import AddTo from '../AddTo';
 import './index.css';
@@ -47,15 +47,15 @@ class SongItem extends Component {
             </a>
           </Col>
           <Col span={1}>{song.mvLink && <MVIcon link={song.mvLink} />}</Col>
-          <Col span={5} className="nowrap">
-            <Artists artists={song.artists} />
+          <Col span={6} className="nowrap">
+            <ArtistLinks artists={song.artists} />
           </Col>
-          <Col span={5} className="nowrap">
+          <Col span={6} className="nowrap">
             <a href={song.album.link} target="_blank" title={song.album.name}>
-              《{song.album.name}》
+              {song.album.name}
             </a>
           </Col>
-          <Col span={2}>
+          <Col span={1}>
             {
               this.props.showPlatform &&
                 <img
@@ -65,7 +65,7 @@ class SongItem extends Component {
                 />
             }
           </Col>
-          <Col span={2}>
+          <Col span={1}>
             <a onClick={this.changeCurrentSong}
               className={
                 currentSong && currentSong.link === song.link ?

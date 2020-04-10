@@ -1,3 +1,8 @@
+# 0.1.1 (2020-04-10)
+- move `<PlayingList />` to the right
+- improve `<SongItem />`, `<Artists />`
+- add `<ArtistLinks />`
+
 # 0.1.0 (2020-03-06)
 - 升级到 Ant Design v4
 - 用 react-icons 替换 react-icons-kit

@@ -7,6 +7,7 @@ import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';
 import { connect } from 'react-redux';
 import './in_playing_list.css';
+import Artists from '../Artists';
 
 class SongItem extends Component {
   constructor(props) {
@@ -61,12 +62,7 @@ class SongItem extends Component {
             {song.name}
           </Col>
           <Col span={10} className="nowrap">
-            {
-              song.artists.map(artist => artist.name)
-                .reduce((accumulator, currentValue) =>
-                  accumulator + ' / ' + currentValue
-                )
-            }
+            <Artists artists={song.artists} />
           </Col>
           <Col span={2}>
             <img src={logos[song.platform]} alt={song.platform} />

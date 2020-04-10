@@ -9,13 +9,9 @@ const musicPlayer = {
   background: '#222',
   color: 'white',
 };
-const playingList = {
-  width: 600,
-}
 
 export {
   serverUrl,
   themeColor,
   musicPlayer,
-  playingList,
 };

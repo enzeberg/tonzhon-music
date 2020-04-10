@@ -17,7 +17,7 @@ import {
 } from 'react-icons/md';
 import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi';
 
-import Artists from './Artists';
+import ArtistLinks from './ArtistLinks';
 import MVIcon from './MVIcon';
 import PlayingList from './PlayingList';
 import { toMinAndSec } from '../lib/time_converter';
@@ -43,17 +43,14 @@ class Player extends Component {
       getMusicUrlStatus: 'notYet',
       playStatus: 'pausing',
       playMode: localStorage.getItem('playMode') || 'loop',
-      volume: localStorage.getItem('volume') ?
-                Number(localStorage.getItem('volume')) : 0.6,
+      volume: localStorage.getItem('volume')
+              ? Number(localStorage.getItem('volume')) : 0.6,
       songSource: null,
       muted: false,
       playProgress: 0,
       playingListVisible: false,
     };
     this.playOrPause = this.playOrPause.bind(this);
-    this.play = this.play.bind(this);
-    this.pause = this.pause.bind(this);
-    this.getSongSource = this.getSongSource.bind(this);
     this.changePlayProgress = this.changePlayProgress.bind(this);
     this.muteOrNot = this.muteOrNot.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
@@ -74,11 +71,11 @@ class Player extends Component {
     this.audio.addEventListener('play', () => {
       document.title = `${this.props.currentSong.name} -
                         ${this.props.currentSong.artists
-          .map(item => item.name)
-          .reduce(
-            (accumulator, currentValue) =>
-              accumulator + ' / ' + currentValue
-          )}`;
+                        .map(item => item.name)
+                        .reduce(
+                          (accumulator, currentValue) =>
+                            accumulator + ' / ' + currentValue
+                        )}`;
       if (this.interval) { clearInterval(this.interval); }
       this.interval = setInterval(() => {
         this.setState({
@@ -140,7 +137,7 @@ class Player extends Component {
       this.pause();
     }
   }
-  getSongSourceAndPlay = (song) => {
+  getSongSourceAndPlay(song) {
     this.getSongSource(song.platform, song.originalId, () => {
       this.play();
     });
@@ -246,7 +243,7 @@ class Player extends Component {
         />
 
         <Row type="flex" align="middle" className="container" justify="space-around">
-          <Col span={3}>
+          <Col span={4}>
             <Button ghost shape="circle" icon={<StepBackwardOutlined />}
               onClick={() => this.playNext('backward')}
             />
@@ -274,7 +271,7 @@ class Player extends Component {
               onClick={() => this.playNext('forward')}
             />
           </Col>
-          <Col span={14} style={{ paddingLeft: 20, paddingRight: 20 }}>
+          <Col span={14} style={{ paddingRight: 40 }}>
             <Row type="flex" align="middle" justify="space-between"
               style={{ height: 20 }}
             >
@@ -302,7 +299,7 @@ class Player extends Component {
                     <Col span={6} className="nowrap">
                       {
                         currentSong.artists &&
-                        <Artists artists={currentSong.artists}
+                        <ArtistLinks artists={currentSong.artists}
                           fontColor="white"
                         />
                       }

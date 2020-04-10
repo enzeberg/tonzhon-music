@@ -15,7 +15,7 @@ import {
   MdShuffle as ShuffleIcon
 } from 'react-icons/md';
 
-import Playlist from './Playlist';
+import PlayingList from './PlayingList';
 import { toMinAndSec } from '../lib/time_converter';
 import { musicPlayer } from '../../../config';
 import neteaseMusicLogo from '../images/netease_16.ico';
@@ -53,7 +53,7 @@ class Player extends Component {
       songSource: null,
       playProgress: 0,
       playerDetailsVisible: false,
-      playlistVisible: false,
+      playingListVisible: false,
     };
     this.playOrPause = this.playOrPause.bind(this);
     this.play = this.play.bind(this);
@@ -221,7 +221,7 @@ class Player extends Component {
 
   clickPlaylistBtn() {
     this.setState({
-      playlistVisible: !this.state.playlistVisible,
+      playingListVisible: !this.state.playingListVisible,
     });
   }
 
@@ -357,7 +357,7 @@ class Player extends Component {
           </Col>
         </Row>
         {
-          <Playlist visible={this.state.playlistVisible} />
+          <PlayingList visible={this.state.playingListVisible} />
         }
       </div>
     );

@@ -1,24 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-export default function Artists ({ artists, fontColor }) {
-  const newArtists = [];
-  const n = artists.length;
-  for (let i = 0; i < n; i++) {
-    let artist = artists[i];
-    newArtists.push(
-      <a
-        key={artist.link}
-        href={artist.link}
-        target="_blank"
-        title={artist.name}
-        style={{ color: fontColor }}
-      >
-        {artist.name}
-      </a>
-    );
-    if (i < n - 1) {
-      newArtists.push(' / ');
-    }
-  }
-  return newArtists;
+export default function Artists ({ artists }) {
+  return artists.map((artist, index) => {
+      return (
+        <Fragment key={artist.link}>
+          {artist.name}
+          &ensp;
+        </Fragment>
+      );
+    });
 };
