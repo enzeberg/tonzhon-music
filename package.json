@@ -1,9 +1,9 @@
 {
   "name": "tongzhong-music",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "url": "http://mini.tongzhong.xyz",
   "author": {
-    "name": "Li Enze",
+    "name": "enzeberg",
     "email": "enzeberg@outlook.com"
   },
   "scripts": {

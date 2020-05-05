@@ -5,10 +5,8 @@
 <h3>Listen to the music from different platforms in one place.</h3>
 
 ## Addresses
-- [tongzhong.xyz](http://tongzhong.xyz) (Shenzhen)
-- [mini.tongzhong.xyz](http://mini.tongzhong.xyz) (Shanghai, Shenzhen)
-- [sh.mini.tongzhong.xyz](http://sh.mini.tongzhong.xyz) (Shanghai)
-- [sz.mini.tongzhong.xyz](http://sz.mini.tongzhong.xyz) (Shenzhen)
+- [tongzhong.xyz](http://tongzhong.xyz)
+- [mini.tongzhong.xyz](http://mini.tongzhong.xyz)
 
 ## Features
 ### Desktop

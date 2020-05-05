@@ -1,5 +1,5 @@
 const querystring = require('querystring');
-const request = require('../../../utils/request');
+const request = require('../../utils/request');
 
 const xiamiSite = 'https://www.xiami.com/';
 

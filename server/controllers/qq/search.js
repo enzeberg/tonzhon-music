@@ -1,4 +1,4 @@
-const request = require('../../../utils/request');
+const request = require('../../utils/request');
 const querystring = require('querystring');
 const qqMusicUrl = 'https://y.qq.com/n/yqq/';
 

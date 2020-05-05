@@ -1,3 +1,6 @@
+# 0.1.2 (2020-05-05)
+- fix bug: can't load the songs of QQ Music
+
 # 0.1.1 (2020-04-10)
 - move `<PlayingList />` to the right
 - improve `<SongItem />`, `<Artists />`
