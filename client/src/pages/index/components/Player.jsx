@@ -403,7 +403,8 @@ const styles = {
 const platforms = {
   qq: 'QQ音乐',
   netease: '网易云音乐',
-  xiami: '虾米音乐'
+  xiami: '虾米音乐',
+  kuwo: '酷我音乐',
 };
 
 function mapStateToProps(state) {

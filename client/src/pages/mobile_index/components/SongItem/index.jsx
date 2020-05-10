@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';
+import kuwoMusicLogo from '../../images/kuwo_16.ico';
 
 class SongItem extends Component {
   constructor(props) {
@@ -64,7 +65,8 @@ class SongItem extends Component {
 const logos = {
   qq: qqMusicLogo,
   netease: neteaseMusicLogo,
-  xiami: xiamiMusicLogo
+  xiami: xiamiMusicLogo,
+  kuwo: kuwoMusicLogo,
 };
 
 function mapStateToProps(state) {

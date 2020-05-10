@@ -4,6 +4,7 @@ import { Row, Col } from 'antd';
 import neteaseMusicLogo from './images/netease_32.ico';
 import qqMusicLogo from './images/qq_32.ico';
 import xiamiMusicLogo from './images/xiami_32.ico';
+import kuwoMusicLogo from './images/kuwo_32.ico';
 
 class Wrapper extends Component {
   constructor(props) {
@@ -58,7 +59,12 @@ const providers = {
     themeColor: '#FA8723',
     logo: xiamiMusicLogo,
     link: 'https://www.xiami.com/'
-  }
+  },
+  kuwo: {
+    themeColor: '#ffe443',
+    logo: kuwoMusicLogo,
+    link: 'http://www.kuwo.cn',
+  },
 };
 
 export default Wrapper;

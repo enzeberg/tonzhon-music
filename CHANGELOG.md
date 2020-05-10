@@ -1,3 +1,6 @@
+# 0.1.3 (2020-05-10)
+- add Kuwo Music: issue #9
+
 # 0.1.2 (2020-05-05)
 - fix bug: can't load the songs of QQ Music
 

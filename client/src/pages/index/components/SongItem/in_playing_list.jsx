@@ -5,6 +5,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
 import xiamiMusicLogo from './images/xiami_16.ico';
+import kuwoMusicLogo from './images/kuwo_16.ico';
 import { connect } from 'react-redux';
 import './in_playing_list.css';
 import Artists from '../Artists';
@@ -76,7 +77,8 @@ class SongItem extends Component {
 const logos = {
   qq: qqMusicLogo,
   netease: neteaseMusicLogo,
-  xiami: xiamiMusicLogo
+  xiami: xiamiMusicLogo,
+  kuwo: kuwoMusicLogo,
 };
 
 function mapStateToProps(state) {
