@@ -1,3 +1,7 @@
+# 0.1.4 (2020-06-02)
+- Automatically skip songs that failed to load (issue #10)
+- Add favicon
+
 # 0.1.3 (2020-05-10)
 - add Kuwo Music: issue #9
 

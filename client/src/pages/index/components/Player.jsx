@@ -9,7 +9,7 @@ import {
   DownloadOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
-import { Row, Col, Slider, Button, Tooltip } from 'antd';
+import { Row, Col, Slider, Button, Tooltip, notification } from 'antd';
 import {
   MdRepeat as LoopIcon,
   MdRepeatOne as SingleIcon,
@@ -171,14 +171,25 @@ class Player extends Component {
         } else {
           this.setState({
             getMusicUrlStatus: 'failed',
+          }, () => {
+            this.afterLoadingFailure();
           });
         }
       })
       .catch(err => {
         this.setState({
           getMusicUrlStatus: 'failed',
+        }, () => {
+          this.afterLoadingFailure();
         });
       });
+  }
+
+  afterLoadingFailure() {
+    notification.open({
+      message: '加载失败，已跳过',
+    });
+    this.playNext('forward');
   }
 
   changePlayProgress(value) {
@@ -313,7 +324,7 @@ class Player extends Component {
                     </Col>
                     <Col span={4} style={{ textAlign: 'right' }}>
                       {
-                        this.state.getMusicUrlStatus === 'failed' ? '加载失败' :
+                        getMusicUrlStatus === 'failed' ? '加载失败' :
                           (
                             this.state.songLoaded ? `${progress} / ${total}` :
                               '00:00 / 00:00'

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 notification.config({
   placement: 'bottomRight',
   bottom: 50,
-  duration: 1,
+  duration: 2,
 });
 
 class AddTo extends Component {
