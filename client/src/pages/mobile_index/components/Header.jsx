@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'antd';
+// import { Row, Col } from 'antd';
 
 import { themeColor } from '../../../config';
 
@@ -12,28 +12,25 @@ class Header extends Component {
   render() {
     return (
       <div style={{ padding: '10px 9px', borderBottom: '1px solid #DBDBDB', }}>
-        <Row type="flex" align="middle" className="container" >
-          <Col >
-            <div style={styles.header}>
-              <Link to="/" style={{ textDecoration: 'none' }}>
-                <h2 style={{ display: 'inline', color: themeColor }}
-                >
-                  Tongzhong Mini
-                </h2>
-              </Link>
-            </div>
+        {/* <Row type="flex" align="middle" className="container" >
+          <Col>
+            
           </Col>
-        </Row>
+        </Row> */}
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <h2
+            style={{
+              display: 'inline',
+              color: themeColor,
+              fontWeight: 360,
+            }}
+          >
+            Tongzhong Mini
+              </h2>
+        </Link>
       </div>
     );
   }
 }
-
-const styles = {
-  header: {
-    color: themeColor,
-    fontWeight: 200,
-  },
-};
 
 export default Header;

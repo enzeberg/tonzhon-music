@@ -38,10 +38,9 @@ class TopSongs extends Component {
   render() {
     return this.state.topSongs.length === 0 ? null : (
       <div style={{
-          padding: '0px 10px',
-          marginBottom: 15,
-          backgroundColor: 'rgb(250,250,250)',
-          borderRadius: 5 
+          padding: '8px 10px',
+          backgroundColor: 'white',
+          borderRadius: 2,
         }}
       >
         <SongList songs={this.state.topSongs} showPlatform />

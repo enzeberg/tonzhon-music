@@ -1,3 +1,6 @@
+# 0.1.5 (2020-06-12)
+- Improve UI
+
 # 0.1.4 (2020-06-02)
 - Automatically skip songs that failed to load (issue #10)
 - Add favicon

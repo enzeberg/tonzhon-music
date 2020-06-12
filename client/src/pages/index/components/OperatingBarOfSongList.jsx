@@ -38,3 +38,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(OperatingBarOfSongList);
+
+{/* <>
+  <Button icon={<CaretRightOutlined />}
+    onClick={() => this.props.playSongList(this.props.songs)}
+  >
+    播放全部
+        </Button>
+  <AddTo data={this.props.songs} />
+</> */}

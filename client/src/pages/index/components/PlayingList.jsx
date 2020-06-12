@@ -72,7 +72,7 @@ const styles = {
     position: 'absolute',
     bottom: 64,
     color: 'white',
-    right: (document.body.clientWidth - 1000) / 2,
+    right: `${(document.body.clientWidth - 1000) / 2}px`,
     width: 600,
     height: 320,
     borderTopLeftRadius: 5,

@@ -25,7 +25,11 @@ class App extends Component {
     let { searchStatus, searchResults } = this.props;
     return (
       <BrowserRouter>
-        <Layout>
+        <Layout
+          style={{
+            backgroundColor: '#f7f7f7',
+          }}
+        >
           <Switch>
             <Route path="/search" component={SearchWithURL} />
           </Switch>
@@ -35,19 +39,20 @@ class App extends Component {
               position: 'fixed',
               width: '100%',
               zIndex: 1040,
-              borderBottom: '1px solid #DBDBDB',
+              // borderBottom: '1px solid #DBDBDB',
               padding: '12px 0',
+              boxShadow: '0 1px 3px rgba(26,26,26,.1)',
             }}
           >
             <TheHeader />
           </Header>
+
           <Content>
             <div className="container"
               style={{
-                marginTop: 72,
-                marginBottom: 20,
-                borderBottom: '1px solid #DBDBDB',
-                minHeight: 900,
+                marginTop: 74,
+                marginBottom: 80,
+                minHeight: 500,
               }}
             >
               <Switch>
@@ -75,9 +80,9 @@ class App extends Component {
               </Switch>
             </div>
           </Content>
-          <Footer style={{ marginBottom: 80 }}>
+          {/* <Footer style={{ marginBottom: 80 }}>
             <TheFooter />
-          </Footer>
+          </Footer> */}
           <Player />
         </Layout>
       </BrowserRouter>

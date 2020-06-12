@@ -6,5 +6,6 @@ module.exports = {
   'layout-trigger-height': 'auto',
   'layout-zero-trigger-height': 'auto',
   'layout-header-padding': 0,
-  'layout-footer-padding': 0
+  'layout-footer-padding': 0,
+  'layout-footer-background': '#f7f7f7',
 };

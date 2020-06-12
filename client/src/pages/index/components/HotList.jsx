@@ -44,7 +44,7 @@ class HotList extends Component {
   render() {
     const { songs } = this.state;
     return <>
-      <div style={{ paddingLeft: 620 }}>
+      <div style={{ paddingLeft: 600 }}>
         {
           songs.length !== 0 && <OperatingBarOfSongList songs={songs} />
         }

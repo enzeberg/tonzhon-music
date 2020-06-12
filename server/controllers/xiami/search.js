@@ -3,8 +3,6 @@ const request = require('../../utils/request');
 
 const xiamiSite = 'https://www.xiami.com/';
 
-require('isomorphic-fetch');
-
 const options = {
   host: 'api.xiami.com',
   method: 'GET',

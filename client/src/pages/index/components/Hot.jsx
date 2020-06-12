@@ -21,7 +21,7 @@ class Hot extends Component {
 
   render() {
     return (
-        <Layout style={{ background: 'none' }}>
+        <Layout style={{ background: 'white', padding: 10 }}>
           <Sider style={{ background: 'none', marginRight: 20 }}
           >
             <h2>热歌榜</h2>
@@ -39,7 +39,7 @@ class Hot extends Component {
             </Menu.Item>
             </Menu>
           </Sider>
-          <Content style={{ background: 'none' }}>
+          <Content style={{ background: 'none', }}>
             <HotList platform={this.state.platform} />
           </Content>
         </Layout>

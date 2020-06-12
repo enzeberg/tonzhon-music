@@ -31,13 +31,13 @@ class App extends Component {
           <Switch>
             <Route path="/search" component={SearchWithURL} />
           </Switch>
-          <Header style={{ position: 'fixed', width: '100%', zIndex: 1040 }}>
+          <Header style={{ width: '100%', zIndex: 1040 }}>
             <TheHeader />
           </Header>
           <Content>
             <div
               style={{
-                marginTop: 50,
+                marginTop: 5,
                 padding: '10px 2px 0',
                 marginBottom: 80,
               }}
