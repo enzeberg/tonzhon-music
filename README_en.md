@@ -14,16 +14,13 @@
  (Searching with query string is supported, try: [http://mini.tongzhong.xyz/search?keyword=Iron%20Man](http://mini.tongzhong.xyz/search?keyword=Iron%20Man).)
 - Play
 - Download
+- Get playlist from Netease (try: [http://mini.tongzhong.xyz/netease-playlist/5132177936](http://mini.tongzhong.xyz/netease-playlist/5132177936))
 - Hot list (including QQ Music and Netease Music)
 - Record search history
-
-<img src="./screenshots/0111.PNG" alt="desktop">
 
 ### Mobile
 - Search
 - Play
-
-<img src="./screenshots/m.PNG" alt="mobile">
 
 ## Usage
     # Install dependencies

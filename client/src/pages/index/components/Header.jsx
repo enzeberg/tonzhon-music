@@ -14,8 +14,8 @@ class Header extends Component {
   render() {
     return (
       <Row type="flex" align="middle" className="container">
-        <Col span={7}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+        <Col span={6}>
+          <Link to="/">
             <h1
               style={{
                 display: 'inline',
@@ -27,7 +27,12 @@ class Header extends Component {
               </h1>
           </Link>
         </Col>
-        <Col span={15}>
+        <Col span={4}>
+          <Link to="/netease-playlist/1" style={{ fontSize: 16 }}>
+            网易歌单
+          </Link>
+        </Col>
+        <Col span={12}>
           <SearchBar />
         </Col>
         <Col span={2} style={{ textAlign: 'right' }}>
