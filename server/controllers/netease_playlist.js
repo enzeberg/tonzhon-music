@@ -1,8 +1,8 @@
-const netease = require('./netease/playlist');
+const getPlaylist = require('./netease/playlist');
 
 module.exports = (req, res, next) => {
   const { playlistId } = req.params;
-  netease.getPlaylist(playlistId)
+  getPlaylist(playlistId)
     .then(data => res.json({
       status: 'ok',
       data: data

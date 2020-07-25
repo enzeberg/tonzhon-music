@@ -40,17 +40,20 @@ const search = (keyword, limit, page) => {
         } else {
           const songs = json.data.songs.map((song, i) => ({
             originalId: song.song_id,
+            newId: `xiami${song.song_id}`,
             name: song.song_name,
-            link: `${xiamiSite}song/${song.song_id}`,
+            // link: `${xiamiSite}song/${song.song_id}`,
             artists: [{
               name: song.artist_name,
-              link: `${xiamiSite}artist/${song.artist_id}`
+              // link: `${xiamiSite}artist/${song.artist_id}`,
+              id: song.artist_id,
             }],
             album: {
               name: song.album_name,
-              link: `${xiamiSite}album/${song.album_id}`
+              // link: `${xiamiSite}album/${song.album_id}`
+              id: song.album_id,
             },
-            hasCopyright: true,
+            // hasCopyright: true,
             platform: 'xiami',
           }));
           return resolve({

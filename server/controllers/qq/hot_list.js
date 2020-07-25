@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const qqMusicUrl = 'https://y.qq.com/n/yqq/';
 
 const getHotList = () => {
   return new Promise((resolve, reject) => {
@@ -8,34 +7,40 @@ const getHotList = () => {
       .then(text => {
         const parsed = JSON.parse(text);
         resolve({
-          songs: parsed.detail.data.songInfoList.map(songMapper),
+          songs: songsMapper(parsed.detail.data.songInfoList),
         });
       })
       .catch(err => reject(err));
   });
 };
 
-const songMapper = (song) => {
-  const mvId = song.mv.vid;
-  return ({
-    originalId: song.mid,
-    name: song.name,
-    link: `${qqMusicUrl}song/${song.mid}.html`,
-    alias: song.subtitle, // if no lyric: ''
-    mvLink: mvId ? `${qqMusicUrl}mv/v/${mvId}.html` : null,
-    artists: song.singer.map((artist) => {
-      return {
-        name: artist.name,
-        link: `${qqMusicUrl}singer/${artist.mid}.html`
-      };
-
-    }),
-    album: {
-      name: song.album.name,
-      link: `${qqMusicUrl}album/${song.album.mid}.html`
-    },
-    hasCopyright: true,
-    platform: 'qq',
+// 跟搜索接口的数据格式不一样
+const songsMapper = (songs) => {
+  return songs.map(song => {
+    const mvId = song.mv.vid;
+    return ({
+      originalId: song.mid,
+      newId: `qq${song.mid}`,
+      name: song.name,
+      // link: `${qqMusicUrl}song/${song.mid}.html`,
+      alias: song.subtitle, // if no lyric: ''
+      // mvLink: mvId ? `${qqMusicUrl}mv/v/${mvId}.html` : null,
+      mv: mvId ? mvId : null,
+      artists: song.singer.map((artist) => {
+        return {
+          name: artist.name,
+          // link: `${qqMusicUrl}singer/${artist.mid}.html`,
+          id: artist.mid,
+        };
+      }),
+      album: {
+        name: song.album.name,
+        // link: `${qqMusicUrl}album/${song.album.mid}.html`,
+        id: song.album.mid
+      },
+      // hasCopyright: true,
+      platform: 'qq',
+    });
   });
 };
 

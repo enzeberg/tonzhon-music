@@ -105,7 +105,7 @@ class Player extends Component {
     if (currentSong) {
       // updating playlist will cause component receive props, so the judgement
       // is necessary
-      if ((prevSong && currentSong.link !== prevSong.link) || !prevSong) {
+      if ((prevSong && currentSong.newId !== prevSong.newId) || !prevSong) {
         this.audio.pause();
         this.setState({
           songSource: null,
@@ -397,7 +397,7 @@ function mapDispatchToProps(dispatch) {
     changePlayIndex: (currentSong, playlist, playMode, direction) => {
       let nextPlayIndex;
       const currentIndex = playlist.findIndex(song =>
-        song.link === currentSong.link);
+        song.newId === currentSong.newId);
       if (playMode === 'loop') {
         if (direction === 'forward') {
           nextPlayIndex = playlist[currentIndex + 1] ? currentIndex + 1 : 0;

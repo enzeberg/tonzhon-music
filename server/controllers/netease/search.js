@@ -1,7 +1,7 @@
 const enc = require('../../utils/crypto');
 const querystring = require('querystring');
 const request = require('../../utils/request');
-const neteaseMusicUrl = 'https://music.163.com/#/';
+const songsMapper = require('./songs_mapper');
 
 const host = 'music.163.com';
 const path = '/weapi/cloudsearch/get/web?csrf_token=';
@@ -40,7 +40,7 @@ const search = (keyword, limit, page) => {
       const list = json.result.songs;
       if (list) {
         resolve({
-          songs: songsHandler(list),
+          songs: songsMapper(list),
           totalCount: json.result.songCount
         });
       } else {
@@ -48,29 +48,6 @@ const search = (keyword, limit, page) => {
       }
     }).catch(err => reject(err));
   });
-};
-
-const songsHandler = (songs) => {
-  return songs.map((song, index) => ({
-    originalId: song.id,
-    name: song.name,
-    link: `${neteaseMusicUrl}song?id=${song.id}`,
-    alias: song.alia[0], // if no alia: undefined
-    mvLink: song.mv ? `${neteaseMusicUrl}mv?id=${song.mv}` : null,
-    artists: song.ar.map((artist) => {
-      return {
-        name: artist.name,
-        link: `${neteaseMusicUrl}artist?id=${artist.id}`
-      }
-    }),
-    album: {
-      name: song.al.name,
-      link: `${neteaseMusicUrl}album?id=${song.al.id}`
-    },
-    hasCopyright: song.privilege.cp === 1,
-    fee: song.fee,
-    platform: 'netease',
-  }));
 };
 
 module.exports = {

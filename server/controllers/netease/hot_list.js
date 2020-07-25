@@ -1,5 +1,5 @@
 const createRequest = require('./util1/request');
-const neteaseMusicUrl = 'https://music.163.com/#/';
+const songsMapper = require('./songs_mapper');
 
 const getHotList = (playlistId) => {
   return new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ const getHotList = (playlistId) => {
         if (result.body && result.body.code === 200) {
           const { tracks } = result.body.playlist;
           resolve({
-            songs: songsHandler(tracks),
+            songs: songsMapper(tracks),
           });
         } else {
           reject({
@@ -28,30 +28,6 @@ const getHotList = (playlistId) => {
       }
     );
   });
-};
-
-const songsHandler = (songs) => {
-  return songs.map((song, index) => ({
-    originalId: song.id,
-    name: song.name,
-    link: `${neteaseMusicUrl}song?id=${song.id}`,
-    alias: song.alia[0], // if no alia: undefined
-    mvLink: song.mv ? `${neteaseMusicUrl}mv?id=${song.mv}` : null,
-    artists: song.ar.map((artist) => {
-      return {
-        name: artist.name,
-        link: `${neteaseMusicUrl}artist?id=${artist.id}`
-      }
-    }),
-    album: {
-      name: song.al.name,
-      link: `${neteaseMusicUrl}album?id=${song.al.id}`
-    },
-    // hasCopyright: song.privilege.cp === 1,
-    hasCopyright: true,
-    fee: song.fee,
-    platform: 'netease',
-  }));
 };
 
 module.exports = { getHotList };

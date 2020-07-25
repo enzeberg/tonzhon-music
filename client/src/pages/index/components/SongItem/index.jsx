@@ -11,6 +11,10 @@ import ArtistLinks from '../ArtistLinks';
 import MVIcon from '../MVIcon';
 import AddTo from '../AddTo';
 import './index.css';
+import {
+    buildSongLink,
+    buildAlbumLink,
+} from '../../../../utils/link';
 
 class SongItem extends Component {
   constructor(props) {
@@ -19,7 +23,9 @@ class SongItem extends Component {
 
   changeCurrentSong = () => {
     const index = this.props.playingList.findIndex(song =>
-      song.link === this.props.song.link);
+      song.originalId === this.props.song.originalId
+      && song.platform === this.props.song.platform);
+    console.log(index);
     if (index === -1) {
       this.props.addToPlayingList(this.props.song);
       this.props.updatePlayIndex(this.props.playingList.length);
@@ -30,16 +36,16 @@ class SongItem extends Component {
 
   render() {
     let { song, currentSong } = this.props;
-    let anchorClass = song.hasCopyright ? '' : 'no-copyright';
+    // let anchorClass = song.hasCopyright ? '' : 'no-copyright';
     return (
       <List.Item style={{ padding: '5px 10px' }}>
         <Row type="flex" align="middle" style={{ width: '100%', fontSize: 14 }}>
           <Col span={8} className="nowrap">
-            <a href={song.link}
+            <a href={buildSongLink(song.platform, song.originalId)}
               title={`${song.name}${song.alias ? ` - ${song.alias}` : ''}\n` +
                 `${song.hasCopyright ? '' : '（此歌曲在该平台可能存在版权问题。）'}`}
               target="_blank"
-              className={anchorClass}
+              // className={anchorClass}
             >
               <span>{song.name}</span>
               <span className="song-alias">
@@ -47,12 +53,17 @@ class SongItem extends Component {
               </span>
             </a>
           </Col>
-          <Col span={1}>{song.mvLink && <MVIcon link={song.mvLink} />}</Col>
-          <Col span={6} className="nowrap">
-            <ArtistLinks artists={song.artists} />
+          <Col span={1}>
+            {song.mv && <MVIcon platform={song.platform} id={song.mv} />}
           </Col>
           <Col span={6} className="nowrap">
-            <a href={song.album.link} target="_blank" title={song.album.name}>
+            <ArtistLinks platform={song.platform} artists={song.artists} />
+          </Col>
+          <Col span={6} className="nowrap">
+            <a
+              href={buildAlbumLink(song.platform, song.album.id)}
+              target="_blank" title={song.album.name}
+            >
               {song.album.name}
             </a>
           </Col>
@@ -69,8 +80,9 @@ class SongItem extends Component {
           <Col span={1}>
             <a onClick={this.changeCurrentSong}
               className={
-                currentSong && currentSong.link === song.link ?
-                  'play-btn playing' : 'play-btn'
+                currentSong && currentSong.originalId === song.originalId
+                  && currentSong.platform === song.platform
+                  ? 'play-btn playing' : 'play-btn'
               }
             >
               <PlayCircleOutlined

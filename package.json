@@ -1,6 +1,6 @@
 {
   "name": "tongzhong-music",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "url": "http://mini.tongzhong.xyz",
   "author": {
     "name": "enzeberg",
@@ -33,7 +33,8 @@
     "react-icons": "^3.9.0",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "simple-netease-cloud-music": "^0.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

@@ -1,6 +1,6 @@
 const request = require('../../utils/request');
 const querystring = require('querystring');
-const qqMusicUrl = 'https://y.qq.com/n/yqq/';
+const songsMapper = require('./songs_mapper');
 
 const options = {
   host: 'c.y.qq.com',
@@ -32,7 +32,7 @@ const search = (keyword, limit, page) => {
       if (json.message === 'no results') {
         reject({ message: '抱歉，未搜索到相关内容！' });
       } else {
-        const songs = songsHandler(json.data.song.list);
+        const songs = songsMapper(json.data.song.list);
         resolve({
           songs: songs,
           totalCount: json.data.song.totalnum
@@ -40,29 +40,6 @@ const search = (keyword, limit, page) => {
       }
     }).catch(err => reject(err));
   });
-};
-
-const songsHandler = (songs) => {
-  return songs.map((song, index) => ({
-    originalId: song.songmid,
-    name: song.songname,
-    link: `${qqMusicUrl}song/${song.songmid}.html`,
-    alias: song.lyric, // if no lyric: ''
-    mvLink: song.vid ? `${qqMusicUrl}mv/v/${song.vid}.html` : null,
-    artists: song.singer.map((artist) => {
-      return {
-        name: artist.name,
-        link: `${qqMusicUrl}singer/${artist.mid}.html`
-      };
-
-    }),
-    album: {
-      name: song.albumname,
-      link: `${qqMusicUrl}album/${song.albummid}.html`
-    },
-    hasCopyright: true,
-    platform: 'qq',
-  }));
 };
 
 module.exports = {

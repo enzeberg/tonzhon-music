@@ -17,7 +17,7 @@ class SongItem extends Component {
 
   changeCurrentSong = () => {
     const index = this.props.playingList.findIndex(song =>
-      song.link === this.props.song.link);
+      song.newId === this.props.song.newId);
     if (index === -1) {
       this.props.addToPlayingList(this.props.song);
       this.props.updatePlayIndex(this.props.playingList.length);
@@ -29,7 +29,7 @@ class SongItem extends Component {
   deleteFromPlaylist = (e) => {
     e.stopPropagation();
     const index = this.props.playingList.findIndex(song =>
-                  song.link === this.props.song.link);
+                  song.newId === this.props.song.newId);
     if (index + 1 === this.props.playingList.length) {
       this.props.updatePlayIndex(0);
     }
@@ -41,7 +41,7 @@ class SongItem extends Component {
     return (
       <List.Item
         onClick={this.changeCurrentSong}
-        className={currentSong && currentSong.link === song.link ?
+        className={currentSong && currentSong.newId === song.newId ?
           'playing' : ''
         }
         style={{ border: 'none', padding: '6px 10px' }}

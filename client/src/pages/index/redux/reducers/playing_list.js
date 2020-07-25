@@ -5,14 +5,13 @@ const playingList = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TO_PLAYING_LIST':
       let { data } = action;
-      const links = state.map(song => song.link);
       if (Array.isArray(data)) {
         data = data.filter((song) => {
-          return !links.includes(song.link);
+          return state.every(item => item.newId !== song.newId);
         });
         list = state.concat(data);
       } else if (typeof data === 'object') {
-        if (links.includes(data.link)) {
+        if (state.findIndex(item => item.newId === data.newId) > -1) {
           list = state;
         } else {
           list = [...state, data];

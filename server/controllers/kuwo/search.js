@@ -23,17 +23,20 @@ const search = (keyword, limit, page) => {
         if (json.code === 200) {
           const songs = json.data.list.map((song, i) => ({
             originalId: song.rid,
+            newId: `kuwo${song.rid}`,
             name: song.name,
-            link: `${kuwoSite}/play_detail/${song.rid}`,
+            // link: `${kuwoSite}/play_detail/${song.rid}`,
             artists: [{
               name: song.artist,
-              link: `${kuwoSite}/singer_detail/${song.artistid}`
+              // link: `${kuwoSite}/singer_detail/${song.artistid}`,
+              id: song.artistid,
             }],
             album: {
               name: song.album,
-              link: `${kuwoSite}/album_detail/${song.albumid}`
+              // link: `${kuwoSite}/album_detail/${song.albumid}`,
+              id: song.albumid,
             },
-            hasCopyright: true,
+            // hasCopyright: true,
             platform: 'kuwo',
           }));
           resolve({

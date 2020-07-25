@@ -22,6 +22,7 @@ import MVIcon from './MVIcon';
 import PlayingList from './PlayingList';
 import { toMinAndSec } from '../lib/time_converter';
 import { musicPlayer } from '../../../config';
+import { buildSongLink } from '../../../utils/link';
 
 const playModeIcons = {
   loop: <LoopIcon className="player-icon" />,
@@ -104,7 +105,8 @@ class Player extends Component {
     const currentSong = this.props.currentSong;
 
     if (currentSong) {
-      if ((prevSong && currentSong.link !== prevSong.link) || !prevSong) {
+      if ((prevSong && currentSong.newId !== prevSong.newId)
+          || !prevSong) {
         this.audio.pause();
         this.setState({
           songSource: null,
@@ -290,7 +292,11 @@ class Player extends Component {
                 currentSong &&
                   <>
                     <Col span={7} className="nowrap">
-                      <a href={currentSong.link}
+                      <a
+                        href={
+                          buildSongLink(currentSong.platform,
+                            currentSong.originalId)
+                        }
                         style={{ color: 'white', marginRight: 4, fontSize: 16 }}
                         target="_blank"
                         title={currentSong.name}
@@ -300,9 +306,10 @@ class Player extends Component {
                     </Col>
                     <Col span={2}>
                       {
-                        currentSong.mvLink &&
+                        currentSong.mv &&
                         <MVIcon
-                          link={currentSong.mvLink}
+                          platform={currentSong.platform}
+                          id={currentSong.mv}
                           color="white"
                         />
                       }
@@ -311,6 +318,7 @@ class Player extends Component {
                       {
                         currentSong.artists &&
                         <ArtistLinks artists={currentSong.artists}
+                          platform={currentSong.platform}
                           fontColor="white"
                         />
                       }
@@ -430,7 +438,7 @@ function mapDispatchToProps(dispatch) {
     changePlayIndex: (currentSong, playingList, playMode, direction) => {
       let nextPlayIndex;
       const currentIndex = playingList.findIndex(song =>
-        song.link === currentSong.link);
+        song.newId === currentSong.newId);
       if (playMode === 'loop') {
         if (direction === 'forward') {
           nextPlayIndex = playingList[currentIndex + 1] ? currentIndex + 1 : 0;

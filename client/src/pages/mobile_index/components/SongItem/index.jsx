@@ -14,7 +14,8 @@ class SongItem extends Component {
 
   playOrPause(shouldPlay) {
     if (shouldPlay) {
-      const index = this.props.playlist.findIndex(song => song.link === this.props.song.link);
+      const index = this.props.playlist.findIndex(
+        song => song.newId === this.props.song.newId);
       if (index === -1) {
         this.props.addToPlaylist(this.props.song);
         this.props.updatePlayIndex(this.props.playlist.length);
@@ -31,12 +32,12 @@ class SongItem extends Component {
     let { song, currentSong, showPlatform } = this.props;
     // let anchorClass = song.hasCopyright ? '' : 'no-copyright';
     const shouldPlay =
-      (!currentSong  || currentSong.link !== song.link) ||
-      (currentSong.link === song.link && this.props.playAction === 'pause');
+      (!currentSong  || currentSong.newId !== song.newId) ||
+      (currentSong.newId === song.newId && this.props.playAction === 'pause');
     return (
       <ListItem button
         onClick={() => this.playOrPause(shouldPlay)}
-        key={song.link}
+        key={song.newId}
         style={{
           color: song.hasCopyright ? 'black' : '#aaa',
           padding: 0,

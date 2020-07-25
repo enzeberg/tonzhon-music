@@ -40,7 +40,7 @@ class PlaylistContainer extends Component {
         });
         if (json.status === 'ok') {
           this.setState({
-            playlistName: json.data.playlistName,
+            playlistName: json.data.name,
             songs: json.data.songs,
           });
         }
