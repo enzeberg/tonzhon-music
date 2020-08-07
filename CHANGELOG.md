@@ -1,6 +1,11 @@
+# 0.1.8 (2020-08-07)
+- Reconstruct the playing list
+- Adjust the code format
+- Improve UI
+
 # 0.1.7 (2020-07-25)
 - improve the "getting Netease Playlist" feature (issue #12)
-- 调整数据格式（若你在此之前使用过 Tongzhong Mini ，请清空播放列表，否则新的 Tongzhong Mini 无法正常工作）
+- 调整数据格式
 
 # 0.1.6 (2020-07-22)
 - get playlist from Netease (issue #12)

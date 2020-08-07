@@ -9,7 +9,7 @@ import xiamiMusicLogo from './images/xiami_16.ico';
 import kuwoMusicLogo from './images/kuwo_16.ico';
 import ArtistLinks from '../ArtistLinks';
 import MVIcon from '../MVIcon';
-import AddTo from '../AddTo';
+import AddToPlayingList from './AddToPlayingList';
 import './index.css';
 import {
     buildSongLink,
@@ -23,9 +23,7 @@ class SongItem extends Component {
 
   changeCurrentSong = () => {
     const index = this.props.playingList.findIndex(song =>
-      song.originalId === this.props.song.originalId
-      && song.platform === this.props.song.platform);
-    console.log(index);
+      song.newId === this.props.song.newId);
     if (index === -1) {
       this.props.addToPlayingList(this.props.song);
       this.props.updatePlayIndex(this.props.playingList.length);
@@ -94,7 +92,7 @@ class SongItem extends Component {
             </a>
           </Col>
           <Col span={1}>
-            <AddTo data={song} />
+            <AddToPlayingList data={song} />
           </Col>
         </Row>
       </List.Item>
@@ -118,7 +116,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addToPlayingList: (song) => {
-      dispatch({ type: 'ADD_TO_PLAYING_LIST', data: song });
+      dispatch({ type: 'ADD_SONG_TO_PLAYING_LIST', data: song });
     },
     updatePlayIndex: (index) => {
       dispatch({ type: 'UPDATE_PLAY_INDEX', data: index });

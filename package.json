@@ -1,6 +1,6 @@
 {
   "name": "tongzhong-music",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "url": "http://mini.tongzhong.xyz",
   "author": {
     "name": "enzeberg",
@@ -27,7 +27,6 @@
     "morgan": "~1.9.0",
     "node-fetch": "^2.1.1",
     "pac-proxy-agent": "^4.1.0",
-    "querystring": "^0.2.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-icons": "^3.9.0",

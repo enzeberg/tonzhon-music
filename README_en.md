@@ -1,6 +1,6 @@
 # tongzhong-music
 
-<img src="./screenshots/qr_code.png" width="64" alt="mobile">
+<img src="./qr_code.png" width="64" alt="mobile">
 
 <h3>Listen to the music from different platforms in one place.</h3>
 

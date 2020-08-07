@@ -21,16 +21,16 @@ a:hover {
   white-space: nowrap;
 }
 
-.loading-anim-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .player-icon {
   color: white;
   display: block;
   font-size: 25px;
+}
+
+.white-card {
+  background-color: white;
+  border-radius: 2px;
+  padding: 10px;
 }
 
 @media only screen and (min-width: 992px) {

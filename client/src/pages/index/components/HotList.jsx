@@ -43,18 +43,25 @@ class HotList extends Component {
 
   render() {
     const { songs } = this.state;
-    return <>
-      <div style={{ paddingLeft: 600 }}>
+    return (
+      <>
+        <div
+          style={{
+            textAlign: 'right',
+            marginBottom: '10px',
+          }}
+        >
+          {
+            songs.length > 0 && <OperatingBarOfSongList songs={songs} />
+          }
+        </div>
         {
-          songs.length !== 0 && <OperatingBarOfSongList songs={songs} />
+          this.state.loading ?
+            <LoadingOutlined /> :
+            <SongList songs={songs} />
         }
-      </div>
-      {
-        this.state.loading ?
-        <LoadingOutlined /> :
-        <SongList songs={songs} />
-      }
-    </>;
+      </>
+    );
   }
 }
 

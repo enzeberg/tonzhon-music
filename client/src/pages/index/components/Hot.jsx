@@ -21,7 +21,7 @@ class Hot extends Component {
 
   render() {
     return (
-        <Layout style={{ background: 'white', padding: 10 }}>
+        <Layout className="white-card">
           <Sider style={{ background: 'none', marginRight: 20 }}
           >
             <h2>热歌榜</h2>

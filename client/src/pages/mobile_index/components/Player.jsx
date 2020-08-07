@@ -16,7 +16,7 @@ import {
 } from 'react-icons/md';
 
 import PlayingList from './PlayingList';
-import { toMinAndSec } from '../lib/time_converter';
+import { toMinAndSec } from '../../../utils/time_converter';
 import { musicPlayer } from '../../../config';
 import neteaseMusicLogo from '../images/netease_16.ico';
 import qqMusicLogo from '../images/qq_16.ico';

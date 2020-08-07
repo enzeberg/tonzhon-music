@@ -53,12 +53,12 @@ class PlaylistContainer extends Component {
     return (
       <>
         <Row type="flex" align="middle" justify="space-between"
-          style={{ marginBottom: 7 }}
+          style={{ marginBottom: '10px' }}
         >
-          <Col span={19} style={{ fontSize: 20 }}>
+          <Col span={16} style={{ fontSize: 20 }}>
             {playlistName}
           </Col>
-          <Col span={5}>
+          <Col span={8} style={{ textAlign: 'right' }}>
             {
               songs.length > 0 &&
               <OperatingBarOfSongList songs={songs} />

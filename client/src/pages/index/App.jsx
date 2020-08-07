@@ -70,12 +70,10 @@ class App extends Component {
                             key={key} />
                         ))
                       }
-                      <div className="loading-anim-wrapper">
-                        {
-                          searchStatus === 'searching' &&
-                          <LoadingOutlined />
-                        }
-                      </div>
+                      {
+                        searchStatus === 'searching' &&
+                        <LoadingOutlined />
+                      }
                     </>
                   )}
                 />

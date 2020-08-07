@@ -37,12 +37,7 @@ class TopSongs extends Component {
 
   render() {
     return this.state.topSongs.length === 0 ? null : (
-      <div style={{
-          padding: '8px 10px',
-          backgroundColor: 'white',
-          borderRadius: 2,
-        }}
-      >
+      <div className="white-card">
         <SongList songs={this.state.topSongs} showPlatform />
       </div>
     );

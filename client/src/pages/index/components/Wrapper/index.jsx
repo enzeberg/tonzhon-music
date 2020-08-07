@@ -15,17 +15,17 @@ class Wrapper extends Component {
     const { provider } = this.props;
     const { logo, link } = providers[provider];
     return (
-      <div style={styles.wrapper}>
-        <Row type="flex" align="middle" style={{ marginBottom: 8 }}>
-          <Col span={12}>
+      <div style={styles.wrapper} className="white-card">
+        <Row type="flex" align="middle" style={{ marginBottom: '10px' }}>
+          <Col span={10}>
             <a href={link} target="_blank" alt={provider}>
               <img src={logo} alt="" />
             </a>
           </Col>
-          <Col span={7}>
+          <Col span={8}>
             {this.props.pagination}
           </Col>
-          <Col span={5}>
+          <Col span={6} style={{ textAlign: 'right' }}>
             {this.props.operatingBar}
           </Col>
         </Row>
@@ -37,11 +37,7 @@ class Wrapper extends Component {
 
 const styles = {
   wrapper: {
-    // border: '1px solid',
-    borderRadius: 2,
-    padding: '8px 10px',
     marginTop: 10,
-    backgroundColor: 'white',
   },
 };
 
