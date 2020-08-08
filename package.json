@@ -67,7 +67,7 @@
     "fork-ts-checker-webpack-plugin-alt": "^0.4.14",
     "fs-extra": "^7.0.1",
     "html-webpack-plugin": "^4.0.0-alpha.2",
-    "jest": "^24.1.0",
+    "jest": "^26.2.2",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.3",
