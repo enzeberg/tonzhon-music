@@ -53,11 +53,11 @@ class Player extends Component {
     };
     this.playOrPause = this.playOrPause.bind(this);
     this.changePlayProgress = this.changePlayProgress.bind(this);
-    this.muteOrNot = this.muteOrNot.bind(this);
+    this.onVolumeBtnClick = this.onVolumeBtnClick.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
     this.playNext = this.playNext.bind(this);
     this.switchPlayMode = this.switchPlayMode.bind(this);
-    this.clickPlayingListBtn = this.clickPlayingListBtn.bind(this);
+    this.onPlayingListBtnClick = this.onPlayingListBtnClick.bind(this);
   }
 
   componentDidMount() {
@@ -199,7 +199,7 @@ class Player extends Component {
     this.setState({ playProgress: value });
   }
 
-  muteOrNot() {
+  onVolumeBtnClick() {
     if (this.state.muted) {
       this.audio.muted = false;
       this.setState({ muted: false });
@@ -238,7 +238,7 @@ class Player extends Component {
     });
   }
 
-  clickPlayingListBtn() {
+  onPlayingListBtnClick() {
     this.setState({
       playingListVisible: !this.state.playingListVisible,
     });
@@ -377,7 +377,7 @@ class Player extends Component {
           <Col span={3}>
             <Row type="flex" align="middle">
               <Col span={4}>
-                <a onClick={this.muteOrNot}>
+                <a onClick={this.onVolumeBtnClick}>
                   {
                     this.state.muted
                       ? <MuteIcon className="player-icon" />
@@ -395,7 +395,7 @@ class Player extends Component {
           </Col>
           <Col span={1} style={{ textAlign: 'right' }}>
             <Button ghost icon={<UnorderedListOutlined />}
-              onClick={this.clickPlayingListBtn}
+              onClick={this.onPlayingListBtnClick}
               title="播放列表"
             />
           </Col>

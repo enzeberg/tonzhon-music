@@ -6,7 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import TheHeader from './components/Header';
 // import TheFooter from './components/Footer';
-import Result from './components/Result';
+import SearchResult from './components/SearchResult';
 import SearchWithURL from './components/SearchWithURL';
 import NotFound from './components/NotFound';
 import TopSongs from './components/TopSongs';
@@ -15,7 +15,7 @@ import Hot from './components/Hot';
 import NeteasePlaylistPage from './components/NeteasePlaylistPage';
 import './App.css';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 class App extends Component {
   constructor(props) {
@@ -64,10 +64,11 @@ class App extends Component {
                       <TopSongs />
                       {
                         Object.keys(searchResults).map((key) => (
-                          <Result
+                          <SearchResult
                             result={searchResults[key]}
                             provider={key}
-                            key={key} />
+                            key={key}
+                          />
                         ))
                       }
                       {

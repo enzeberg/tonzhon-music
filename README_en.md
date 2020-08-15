@@ -41,9 +41,5 @@ Open `http://localhost:8081` to visit the page that uses the production build.
     npm start
 Open `http://localhost:3000/` for desktop, and `http://localhost:3000/m/` for mobile.
 
-## Thanks
-- [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
-- [LIU9293/musicAPI](https://github.com/LIU9293/musicAPI)
-
 ## License
 MIT

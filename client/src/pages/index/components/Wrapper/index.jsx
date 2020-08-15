@@ -15,7 +15,11 @@ class Wrapper extends Component {
     const { provider } = this.props;
     const { logo, link } = providers[provider];
     return (
-      <div style={styles.wrapper} className="white-card">
+      <div className="white-card"
+        style={{
+          marginTop: '10px',
+        }}
+      >
         <Row type="flex" align="middle" style={{ marginBottom: '10px' }}>
           <Col span={10}>
             <a href={link} target="_blank" alt={provider}>
@@ -35,30 +39,20 @@ class Wrapper extends Component {
   }
 }
 
-const styles = {
-  wrapper: {
-    marginTop: 10,
-  },
-};
-
 const providers = {
   netease: {
-    // themeColor: '#C20C0C',
     logo: neteaseMusicLogo,
     link: 'https://music.163.com/'
   },
   qq: {
-    // themeColor: '#2caf6f',
     logo: qqMusicLogo,
     link: 'https://y.qq.com/'
   },
   xiami: {
-    // themeColor: '#FA8723',
     logo: xiamiMusicLogo,
     link: 'https://www.xiami.com/'
   },
   kuwo: {
-    // themeColor: '#ffe443',
     logo: kuwoMusicLogo,
     link: 'http://www.kuwo.cn',
   },

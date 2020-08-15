@@ -4,7 +4,6 @@ import { Button, List, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 
 import ItemInPlaylist from './SongItem/in_playing_list';
-// import { playingList } from '../../../config';
 
 class PlayingList extends Component {
   constructor(props) {
@@ -14,7 +13,9 @@ class PlayingList extends Component {
   render() {
     return (
       <div style={styles.wrapper}>
-        <Row type="flex" align="middle" justify="space-between" style={styles.header}>
+        <Row type="flex" align="middle" justify="space-between"
+          style={styles.header}
+        >
           <Col span={20}>播放列表</Col>
           <Col span={4} style={{ textAlign: 'right' }}>
             <Button icon={<DeleteOutlined />} ghost
@@ -25,7 +26,8 @@ class PlayingList extends Component {
           </Col>
         </Row>
         <List
-          id="playingList" style={styles.list}
+          id="playingList"
+          style={styles.list}
           itemLayout="horizontal"
           dataSource={this.props.dataSource}
           renderItem={song => {

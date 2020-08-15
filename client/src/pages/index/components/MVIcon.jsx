@@ -6,9 +6,9 @@ import { buildMvLink } from '../../../utils/link';
 export default function MVIcon({ platform, id, color }) {
   return (
     <a
-       href={buildMvLink(platform, id)}
-       target="_blank"
-       title="MV"
+      href={buildMvLink(platform, id)}
+      target="_blank"
+      title="MV"
     >
       <MdOndemandVideo
         style={{

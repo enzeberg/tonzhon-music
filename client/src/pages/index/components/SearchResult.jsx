@@ -6,8 +6,7 @@ import SongList from './SongList';
 import Wrapper from './Wrapper';
 import OperatingBarOfSongList from './OperatingBarOfSongList';
 
-// 一个Result就是一个有边框的面板
-class Result extends Component {
+class SearchResult extends Component {
   constructor(props) {
     super(props);
   }
@@ -67,4 +66,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps,
-                       mapDispatchToProps)(Result);
+                       mapDispatchToProps)(SearchResult);

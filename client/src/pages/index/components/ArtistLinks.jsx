@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  buildMvLink, buildArtistLink,
+  buildArtistLink,
 } from '../../../utils/link';
 
 export default function ArtistLinks({ platform, artists, fontColor }) {

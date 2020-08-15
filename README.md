@@ -45,9 +45,5 @@
     npm start
 桌面版打开 `http://localhost:3000/`，移动版打开`http://localhost:3000/m/`。（注意是 `/m/`）
 
-## 致谢
-- [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
-- [LIU9293/musicAPI](https://github.com/LIU9293/musicAPI)
-
 ## License
 MIT
