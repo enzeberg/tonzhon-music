@@ -8,7 +8,7 @@ const getHotList = (playlistId) => {
       'https://music.163.com/weapi/v3/playlist/detail',
       {
         id: playlistId,
-        n: 30,
+        n: 50,
       },
       { crypto: 'linuxapi' },
       result => {
@@ -30,4 +30,4 @@ const getHotList = (playlistId) => {
   });
 };
 
-module.exports = { getHotList };
+module.exports = getHotList;

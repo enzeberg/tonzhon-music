@@ -44,4 +44,4 @@ const songsMapper = (songs) => {
   });
 };
 
-module.exports = { getHotList };
+module.exports = getHotList;

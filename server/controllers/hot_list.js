@@ -1,11 +1,12 @@
-const qq = require('./qq/hot_list');
-const netease = require('./netease/hot_list');
-// const xiami = require('./xiami/hot_list');
+const getHotListFromQQ = require('./qq/hot_list');
+const getHotListFromNetease = require('./netease/hot_list');
+// const getXiamiHotList = require('./xiami/hot_list');
+const getHotListFromKuwo = require('./kuwo/hot_list');
 
 module.exports = (req, res, next) => {
-  const { platform, originalId } = req.params;
+  const { platform } = req.params;
   if (platform === 'qq') {
-    qq.getHotList(originalId)
+    getHotListFromQQ()
       .then(data => res.json({
         status: 'ok',
         data: data
@@ -15,7 +16,7 @@ module.exports = (req, res, next) => {
         message: err.message
       }));
   } else if (platform === 'netease') {
-    netease.getHotList('3778678')
+    getHotListFromNetease('3778678')
       .then(data => res.json({
         status: 'ok',
         data: data
@@ -24,8 +25,8 @@ module.exports = (req, res, next) => {
         status: 'failed',
         message: err.message
       }));
-  } else if (platform === 'xiami') {
-    xiami.getHotList(originalId)
+  } else if (platform === 'kuwo') {
+    getHotListFromKuwo()
       .then(data => res.json({
         status: 'ok',
         data: data

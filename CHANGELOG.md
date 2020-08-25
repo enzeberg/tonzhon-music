@@ -1,3 +1,8 @@
+# 0.1.9 (2020-08-25)
+- feat: add Kuwo's Hot song list
+- Improve SearchBar
+- Filter search results
+
 # 0.1.8 (2020-08-07)
 - Reconstruct the playing list
 - Adjust the code format

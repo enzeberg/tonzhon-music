@@ -15,7 +15,7 @@
 - Play
 - Download
 - Get playlist from Netease (try: [http://mini.tongzhong.xyz/netease-playlist/5132177936](http://mini.tongzhong.xyz/netease-playlist/5132177936))
-- Hot list (including QQ Music and Netease Music)
+- Hot list (including QQ Music, Netease Music and Kuwo Music)
 - Record search history
 
 ### Mobile

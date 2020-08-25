@@ -19,7 +19,7 @@
 - 下载
 - 加载网易云音乐的歌单
  （如：[http://mini.tongzhong.xyz/netease-playlist/5132177936](http://mini.tongzhong.xyz/netease-playlist/5132177936))
-- 热歌榜（包括QQ音乐和网易云音乐）
+- 热歌榜（包括QQ音乐、网易云音乐和酷我音乐）
 - 记录搜索历史
 
 ### 移动版

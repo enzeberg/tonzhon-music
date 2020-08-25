@@ -3,7 +3,7 @@ import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { GithubOutlined } from '@ant-design/icons';
 
-import SearchBar from './SearchBar/withDropdown';
+import SearchBar from './SearchBar';
 import { themeColor } from '../../../config';
 
 class Header extends Component {

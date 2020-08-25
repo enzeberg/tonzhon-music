@@ -37,6 +37,9 @@ class Hot extends Component {
             <Menu.Item key="qq">
               QQ音乐
             </Menu.Item>
+            <Menu.Item key="kuwo">
+              酷我音乐
+            </Menu.Item>
             </Menu>
           </Sider>
           <Content style={{ background: 'none', }}>

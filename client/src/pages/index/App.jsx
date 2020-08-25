@@ -59,24 +59,40 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Hot} />
                 <Route path="/search"
-                  render={() => (
-                    <>
-                      <TopSongs />
-                      {
-                        Object.keys(searchResults).map((key) => (
-                          <SearchResult
-                            result={searchResults[key]}
-                            provider={key}
-                            key={key}
-                          />
-                        ))
-                      }
-                      {
-                        searchStatus === 'searching' &&
-                        <LoadingOutlined />
-                      }
-                    </>
-                  )}
+                  render={
+                    () => {
+                      const filtered = Object.keys(searchResults)
+                                        .filter(key => {
+                                          const result = searchResults[key];
+                                          return result.searchSuccess &&
+                                            result.data.totalCount > 0;
+                                        });
+                      return (
+                        <>
+                          <TopSongs />
+                          {
+                            filtered.map((key) => (
+                              <SearchResult
+                                result={searchResults[key]}
+                                provider={key}
+                                key={key}
+                              />
+                            ))
+                          }
+                          {
+                            filtered.length === 0 && searchStatus === 'done' &&
+                            <div className="white-card">
+                              抱歉，未搜索到相关内容。
+                            </div>
+                          }
+                          {
+                            searchStatus === 'searching' &&
+                            <LoadingOutlined />
+                          }
+                        </>
+                      );
+                    }
+                  }
                 />
                 <Route path="/netease-playlist/:playlistId"
                   component={NeteasePlaylistPage}

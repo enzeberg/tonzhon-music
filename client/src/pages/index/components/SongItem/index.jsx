@@ -40,8 +40,10 @@ class SongItem extends Component {
         <Row type="flex" align="middle" style={{ width: '100%', fontSize: 14 }}>
           <Col span={8} className="nowrap">
             <a href={buildSongLink(song.platform, song.originalId)}
-              title={`${song.name}${song.alias ? ` - ${song.alias}` : ''}\n` +
-                `${song.hasCopyright ? '' : '（此歌曲在该平台可能存在版权问题。）'}`}
+              title={
+                `${song.name}${song.alias ? ` - ${song.alias}` : ''}`
+                // + `\n${song.hasCopyright ? '' : '（此歌曲在该平台可能存在版权问题。）'}`
+              }
               target="_blank"
               // className={anchorClass}
             >

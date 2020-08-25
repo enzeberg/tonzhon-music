@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { DeleteOutlined } from '@ant-design/icons';
 import { AutoComplete, Input, Button } from 'antd';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-const Search = Input.Search;
-const Option = AutoComplete.Option;
-const OptGroup = AutoComplete.OptGroup;
-
+const { Search } = Input;
 
 class SearchBar extends Component {
   constructor(props) {
@@ -19,69 +15,61 @@ class SearchBar extends Component {
   onSearch(keyword) {
     keyword = keyword.trim();
     if (keyword !== '' &&
-        keyword !== this.props.searchParameters.keyword) {
+      keyword !== this.props.keyword) {
       this.props.updateSearchKeyword(keyword);
-      this.props.history.push(`/search?keyword=${window.encodeURIComponent(keyword)}&type=${this.props.searchParameters.type}`);
+      this.props.history.push(`/search?keyword=${window.encodeURIComponent(keyword)}`);
     }
   }
 
-
   render() {
-    const { keyword } = this.props.searchParameters;
-    const { searchHistory } = this.props;
+    const { keyword, searchHistory } = this.props;
 
-    const options = [
-      <OptGroup key="history"
-        label={
-          <span>搜索历史
-            <Button icon={<LegacyIcon type="delete" />}
+    const searchHistoryOptions = [
+      {
+        // label: '搜索历史',
+        label: (
+          <div
+            style={{
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              display: 'flex'
+            }}
+          >
+            <span>搜索历史</span>
+            <Button icon={<DeleteOutlined />}
+              type="circle"
               onClick={() => this.props.clearSearchHistory()}
-              style={{ float: 'right' }}
             />
-          </span>
-        }
-      >
-        {
-          searchHistory.map(item => (
-            <Option key={item} value={`${item} `}>
-              {item}
-            </Option>
-          ))
-        }
-      </OptGroup>
+          </div>
+        ),
+        options: searchHistory.map(item => ({
+          value: item,
+        }))
+      }
     ];
 
     return (
       <AutoComplete
-        dropdownMatchSelectWidth={false}
-        // dropdownStyle={{ width: 300 }}
-        size="large"
         style={{ width: '100%' }}
-        dataSource={options}
-        // optionLabelProp="value"
+        options={searchHistoryOptions}
         onSelect={this.onSearch}
         defaultActiveFirstOption={false}
       >
         <Search
-          placeholder="歌曲/专辑/艺人"
-          defaultValue={ keyword || '' }
+          placeholder="歌曲 | 专辑 | 艺人"
+          defaultValue={keyword || ''}
+          // value={keyword || ''}
           onSearch={this.onSearch}
           enterButton
-          size="large"
         />
       </AutoComplete>
     );
   }
-
 }
-
-SearchBar.propTypes = {
-  searchParameters: PropTypes.object.isRequired
-};
 
 function mapStateToProps(state) {
   return {
-    searchParameters: state.searchParameters,
+    keyword: state.searchKeyword,
     searchHistory: state.searchHistory,
   };
 }
@@ -98,4 +86,3 @@ function mapDispatchToProps(dispatch) {
 
 export default withRouter(connect(mapStateToProps,
                                   mapDispatchToProps)(SearchBar));
-

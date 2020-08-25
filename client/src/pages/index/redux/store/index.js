@@ -44,7 +44,7 @@ const onResultResponded = (provider, data) => {
 };
 
 const searchEnded = () => {
-  store.dispatch({ type: 'UPDATE_SEARCH_STATUS', data: 'searched' });
+  store.dispatch({ type: 'UPDATE_SEARCH_STATUS', data: 'done' });
 };
 
 const updateSearchHistory = (keyword) => {

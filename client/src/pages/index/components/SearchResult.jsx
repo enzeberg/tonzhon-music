@@ -25,28 +25,31 @@ class SearchResult extends Component {
 
   render() {
     const { result, provider } = this.props;
-    let mainPart;
-    if (result.searchSuccess) {
-      mainPart = <SongList songs={result.data.songs} />;
-    } else {
-      mainPart = <h3>{result.message}</h3>;
-    }
+
+    // when the search results are filtered in App.jsx, the following code is useless.
+    // let mainPart;
+    // if (result.searchSuccess) {
+    //   mainPart = <SongList songs={result.data.songs} />;
+    // } else {
+    //   mainPart = <h3>{result.message}</h3>;
+    // }
 
     return (
       <Wrapper provider={provider}
         operatingBar={
-          result.searchSuccess &&
           <OperatingBarOfSongList songs={result.data.songs} />
         }
-        pagination={ result.searchSuccess &&
+        pagination={
           <Pagination
-             simple
-             onChange={this.onPageChange}
-             defaultPageSize={4}
-             total={result.data.totalCount} />
+            simple
+            onChange={this.onPageChange}
+            defaultPageSize={4}
+            total={result.data.totalCount}
+          />
         }
       >
-        {mainPart}
+        {/* {mainPart} */}
+        <SongList songs={result.data.songs} />
       </Wrapper>
     );
   }
