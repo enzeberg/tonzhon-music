@@ -25,7 +25,7 @@ class Header extends Component {
               fontWeight: 360,
             }}
           >
-            Tongzhong Mini
+            Tonzhon Lite
               </h2>
         </Link>
       </div>

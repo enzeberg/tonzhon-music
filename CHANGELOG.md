@@ -1,3 +1,7 @@
+# 0.2.0 (2021-02-06)
+- removed: remove Xiami Music
+- Rename "Tongzhong Mini" to "Tonzhon Lite"
+
 # 0.1.9 (2020-08-25)
 - feat: add Kuwo's Hot song list
 - Improve SearchBar

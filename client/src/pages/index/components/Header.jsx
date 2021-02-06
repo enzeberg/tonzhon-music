@@ -23,8 +23,8 @@ class Header extends Component {
                 fontWeight: 360,
               }}
             >
-              Tongzhong Mini
-              </h1>
+              Tonzhon Lite
+            </h1>
           </Link>
         </Col>
         <Col span={4}>
@@ -36,7 +36,7 @@ class Header extends Component {
           <SearchBar />
         </Col>
         <Col span={2} style={{ textAlign: 'right' }}>
-          <a href="https://github.com/enzeberg/tongzhong-music"
+          <a href="https://github.com/enzeberg/tonzhon-music"
             target="blank"
           >
             <GithubOutlined style={{ fontSize: 'large' }} />

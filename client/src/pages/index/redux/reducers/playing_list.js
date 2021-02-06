@@ -19,7 +19,7 @@ const playingList = (state = initialState, action) => {
       list = state.concat(data);
       saveToStorage(list);
       return list;
-    case 'NEW_PLAYING_LIST': // There's NEW_PLAYLIST (新建歌单)
+    case 'NEW_PLAYING_LIST':
       list = data;
       saveToStorage(list);
       return list;

@@ -1,20 +1,18 @@
-# tongzhong-music
-
-<img src="./qr_code.png" width="64" alt="QR code">
+# tonzhon-music
 
 <h3>Listen to the music from different platforms in one place.</h3>
 
 ## Addresses
-- [tongzhong.xyz](http://tongzhong.xyz)
-- [mini.tongzhong.xyz](http://mini.tongzhong.xyz)
+- [tonzhon.com](http://tonzhon.com)
+- [lite.tonzhon.com](http://lite.tonzhon.com)
 
 ## Features
 ### Desktop
 - Search
- (Searching with query string is supported, try: [http://mini.tongzhong.xyz/search?keyword=Iron%20Man](http://mini.tongzhong.xyz/search?keyword=Iron%20Man).)
+ (Searching with query string is supported, try: [http://lite.tonzhon.com/search?keyword=Iron%20Man](http://lite.tonzhon.com/search?keyword=Iron%20Man).)
 - Play
 - Download
-- Get playlist from Netease (try: [http://mini.tongzhong.xyz/netease-playlist/5132177936](http://mini.tongzhong.xyz/netease-playlist/5132177936))
+- Get playlist from Netease (try: [http://lite.tonzhon.com/netease-playlist/5132177936](http://lite.tonzhon.com/netease-playlist/5132177936))
 - Hot list (including QQ Music, Netease Music and Kuwo Music)
 - Record search history
 
