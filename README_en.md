@@ -3,7 +3,7 @@
 <h3>Listen to the music from different platforms in one place.</h3>
 
 ## Addresses
-- [tonzhon.com](http://tonzhon.com)
+- [https://tonzhon.com](https://tonzhon.com)
 - [lite.tonzhon.com](http://lite.tonzhon.com)
 
 ## Features

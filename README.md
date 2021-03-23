@@ -7,7 +7,7 @@
 <h3>将QQ音乐、网易云音乐和酷我音乐上的歌添加到一个列表来播放！</h3>
 
 ## 地址
-- [tonzhon.com](http://tonzhon.com)
+- [https://tonzhon.com](https://tonzhon.com)
 - [lite.tonzhon.com](http://lite.tonzhon.com)
 
 ## 功能
