@@ -2,6 +2,8 @@
 
 <h3>Listen to the music from different platforms in one place.</h3>
 
+This repository is the early Tonzhon Lite, now Tonzhon Lite has been split into `tonzhon-lite`, `tonzhon-lite-server` and `tonzhon-lite-mobile`.
+
 ## Addresses
 - [https://tonzhon.com](https://tonzhon.com)
 - [lite.tonzhon.com](http://lite.tonzhon.com)

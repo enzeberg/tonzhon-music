@@ -6,6 +6,8 @@
 
 <h3>将QQ音乐、网易云音乐和酷我音乐上的歌添加到一个列表来播放！</h3>
 
+This repository is the early Tonzhon Lite, now Tonzhon Lite has been split into `tonzhon-lite`, `tonzhon-lite-server` and `tonzhon-lite-mobile`.
+
 ## 地址
 - [https://tonzhon.com](https://tonzhon.com)
 - [lite.tonzhon.com](http://lite.tonzhon.com)
