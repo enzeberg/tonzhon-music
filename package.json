@@ -1,14 +1,8 @@
 {
   "name": "tonzhon-music",
   "version": "0.2.0",
-  "url": "http://lite.tonzhon.com",
-  "author": {
-    "name": "enzeberg",
-    "email": "enzeberg@outlook.com"
-  },
   "scripts": {
     "server": "cross-env NODE_ENV=development && node ./server/bin/www",
-    "dev-server": "cross-env NODE_ENV=development && nodemon ./server/bin/www",
     "prod-server": "cross-env NODE_ENV=production pm2 start ./server/bin/www",
     "start": "node ./client/scripts/start",
     "build": "node ./client/scripts/build",
@@ -108,9 +102,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/enzeberg/tonzhon-music"
-  },
   "license": "MIT"
 }
