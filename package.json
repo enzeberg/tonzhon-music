@@ -19,7 +19,7 @@
     "express": "^4.17.1",
     "express-useragent": "^1.0.12",
     "morgan": "~1.9.0",
-    "node-fetch": "^3.1.1",
+    "node-fetch": "^3.2.10",
     "pac-proxy-agent": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
