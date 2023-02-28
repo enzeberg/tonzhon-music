@@ -1,4 +1,4 @@
-[![铜钟 / Tonzhon](/images/tonzhon_banner.png)](https://tonzhon.com)
+[![铜钟 / Tonzhon](/images/tonzhon.webp)](https://tonzhon.com)
 
 ## 项目背景
 当今的音乐资源十分分散，我们经常需要去往不同的音乐平台来满足我们的听歌需求，相当麻烦。铜钟将几家音乐平台上的音乐内容聚集到一起，来尽力满足我们「在一处聆听所有音乐」的诉求。
