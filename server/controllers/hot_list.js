@@ -1,6 +1,5 @@
 const getHotListFromQQ = require('./qq/hot_list');
 const getHotListFromNetease = require('./netease/hot_list');
-// const getXiamiHotList = require('./xiami/hot_list');
 const getHotListFromKuwo = require('./kuwo/hot_list');
 
 module.exports = (req, res, next) => {
