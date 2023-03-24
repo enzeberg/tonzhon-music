@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
-import xiamiMusicLogo from './images/xiami_16.ico';
 import kuwoMusicLogo from '../../images/kuwo_16.ico';
 
 class SongItem extends Component {
@@ -66,7 +65,6 @@ class SongItem extends Component {
 const logos = {
   qq: qqMusicLogo,
   netease: neteaseMusicLogo,
-  xiami: xiamiMusicLogo,
   kuwo: kuwoMusicLogo,
 };
 

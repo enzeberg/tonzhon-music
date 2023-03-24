@@ -1,6 +1,5 @@
 const qq = 'https://y.qq.com/n/yqq/';
 const netease = 'https://music.163.com/#/';
-const xiami = 'https://www.xiami.com/';
 const kuwo = 'http://www.kuwo.cn';
 
 function buildSongLink(platform, id) {
@@ -9,8 +8,6 @@ function buildSongLink(platform, id) {
       return `${qq}song/${id}.html`;
     case 'netease':
       return `${netease}song?id=${id}`;
-    case 'xiami':
-      return `${xiami}song/${id}`;
     case 'kuwo':
       return `${kuwo}/play_detail/${id}`;
     default:
@@ -35,8 +32,6 @@ function buildArtistLink(platform, id) {
       return `${qq}singer/${id}.html`;
     case 'netease':
       return `${netease}artist?id=${id}`;
-    case 'xiami':
-      return `${xiami}artist/${id}`;
     case 'kuwo':
       return `${kuwo}/singer_detail/${id}`;
     default:
@@ -50,8 +45,6 @@ function buildAlbumLink(platform, id) {
       return `${qq}album/${id}.html`;
     case 'netease':
       return `${netease}album?id=${id}`;
-    case 'xiami':
-      return `${xiami}album/${id}`;
     case 'kuwo':
       return `${kuwo}/album_detail/${id}`;
     default:

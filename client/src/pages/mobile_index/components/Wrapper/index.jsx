@@ -3,7 +3,6 @@ import { Row, Col } from 'antd';
 
 import neteaseMusicLogo from './images/netease_16.ico';
 import qqMusicLogo from './images/qq_16.ico';
-import xiamiMusicLogo from './images/xiami_16.ico';
 import kuwoMusicLogo from '../../images/kuwo_16.ico';
 
 class Wrapper extends Component {
@@ -50,10 +49,6 @@ const providers = {
   qq: {
     themeColor: '#2caf6f',
     logo: qqMusicLogo,
-  },
-  xiami: {
-    themeColor: '#FA8723',
-    logo: xiamiMusicLogo,
   },
   kuwo: {
     themeColor: '#ffe443',
