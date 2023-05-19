@@ -70,12 +70,12 @@ const resolveModule = (resolveFn, filePath) => {
 //   pageTwo: 'to/pageTwo/index.js',
 // }
 function scanPages() {
-  const dirs = fs.readdirSync(resolveApp('client/src/pages/'));
+  const dirs = fs.readdirSync(resolveApp('src/pages/'));
   const pages = {};
   dirs.forEach((file) => {
-    const state = fs.statSync(resolveApp('client/src/pages/' + file));
+    const state = fs.statSync(resolveApp('src/pages/' + file));
     if (state.isDirectory()) {
-      pages[file] = resolveApp('client/src/pages/' + file + '/index.js');
+      pages[file] = resolveApp('src/pages/' + file + '/index.js');
     }
   });
   return pages;
@@ -85,19 +85,19 @@ function scanPages() {
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('client/build'),
-  appPublic: resolveApp('client/public'),
-  appHtml: resolveApp('client/public/index.html'),
-  mobileIndexHtml: resolveApp('client/public/mobile_index.html'),
-  appIndexJs: resolveModule(resolveApp, 'client/src/pages/index/index'),
+  appBuild: resolveApp('build'),
+  appPublic: resolveApp('public'),
+  appHtml: resolveApp('public/index.html'),
+  mobileIndexHtml: resolveApp('public/mobile_index.html'),
+  appIndexJs: resolveModule(resolveApp, 'src/pages/index/index'),
   mobileIndexJs:
-    resolveModule(resolveApp, 'client/src/pages/mobile_index/index'),
+    resolveModule(resolveApp, 'src/pages/mobile_index/index'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('client/src'),
+  appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveModule(resolveApp, 'client/src/setupTests'),
-  proxySetup: resolveApp('client/src/setupProxy.js'),
+  testsSetup: resolveModule(resolveApp, 'src/setupTests'),
+  proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
