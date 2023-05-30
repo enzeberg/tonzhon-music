@@ -1,4 +1,5 @@
 [![铜钟 / Tonzhon](/images/tonzhon_860_140_r25.webp)](https://tonzhon.com)
+![QR code](images/qrcode.png)
 
 ## 关于铜钟
 铜钟是一个主打「听歌」功能的 web app, 致力于为人们带来卓越的听歌体验。铜钟有着丰富的音乐资源，简洁清爽的 UI 和方便的交互。在铜钟上，你不仅可以方便地找到并聆听你喜欢的歌曲，还可以将它们保存下来。
