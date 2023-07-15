@@ -7,8 +7,7 @@ import { withRouter } from 'react-router-dom';
 const { Search } = Input;
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
     this.onSearch = this.onSearch.bind(this);
   }
 
@@ -23,7 +22,6 @@ class SearchBar extends Component {
 
   render() {
     const { keyword, searchHistory } = this.props;
-
     const searchHistoryOptions = [
       {
         // label: '搜索历史',
@@ -84,5 +82,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps,
-                                  mapDispatchToProps)(SearchBar));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBar));

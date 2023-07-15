@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'antd';
-
-import neteaseMusicLogo from './images/netease_16.ico';
-import qqMusicLogo from './images/qq_16.ico';
-import kuwoMusicLogo from '../../images/kuwo_16.ico';
 import { connect } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
 
 class SongItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   changeCurrentSong = () => {
     const index = this.props.playlist.findIndex(song =>
       song.newId === this.props.song.newId);
@@ -33,7 +25,7 @@ class SongItem extends Component {
   }
 
   render() {
-    let { song, currentSong } = this.props;
+    let { song } = this.props;
     return (
       <Row type="flex" align="middle"
         style={{
@@ -43,8 +35,7 @@ class SongItem extends Component {
         }}
         onClick={this.changeCurrentSong}
       >
-        <Col span={12}
-        >
+        <Col span={14}>
           <div className="nowrap">
             <span>{song.name}</span>
           </div>
@@ -58,10 +49,6 @@ class SongItem extends Component {
                 )
             }
           </div>
-        </Col>
-        <Col span={2}>
-          <img src={logos[song.platform]} alt={song.platform}
-          />
         </Col>
         <Col span={2}>
           <Button
@@ -79,12 +66,6 @@ class SongItem extends Component {
     );
   }
 }
-
-const logos = {
-  qq: qqMusicLogo,
-  netease: neteaseMusicLogo,
-  kuwo: kuwoMusicLogo,
-};
 
 function mapStateToProps(state) {
   return {

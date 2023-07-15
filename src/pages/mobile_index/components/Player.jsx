@@ -14,13 +14,9 @@ import {
   MdRepeatOne as SingleIcon,
   MdShuffle as ShuffleIcon
 } from 'react-icons/md';
-
 import PlayingList from './PlayingList';
 import { toMinAndSec } from '../../../utils/time_converter';
 import { musicPlayer } from '../../../config';
-import neteaseMusicLogo from '../images/netease_16.ico';
-import qqMusicLogo from '../images/qq_16.ico';
-import kuwoMusicLogo from '../images/kuwo_16.ico';
 
 notification.config({
   placement: 'bottomRight',
@@ -45,7 +41,6 @@ const isiOS = Boolean(navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 
 class Player extends Component {
   constructor(props) {
-    super(props);
     this.state = {
       getMusicUrlStatus: 'notYet',
       playStatus: 'pausing',
@@ -247,7 +242,6 @@ class Player extends Component {
           src={this.state.songSource}
           ref={(audio) => { this.audio = audio; }}
         />
-
         <Drawer visible={this.state.playerDetailsVisible}
           title={currentSong && currentSong.name}
           onCancel={this.handleCancel}
@@ -299,10 +293,8 @@ class Player extends Component {
             </Col>
           </Row>
         </Drawer>
-
-        <Row type="flex" align="middle" justify="space-between"
-        >
-          <Col span={14} onClick={this.switchPlayerDetailsVisible}>
+        <Row type="flex" align="middle" justify="space-between">
+          <Col span={18} onClick={this.switchPlayerDetailsVisible}>
             {
               currentSong &&
               <div >
@@ -320,13 +312,6 @@ class Player extends Component {
               </div>
             }
           </Col>
-          <Col span={4}>
-            {
-              currentSong &&
-              <img src={logos[currentSong.platform]} alt={currentSong.platform} />
-            }
-          </Col>
-
           <Col span={3}>
             <Button ghost shape="circle"
               icon={
@@ -375,12 +360,6 @@ const styles = {
     color: musicPlayer.color,
     zIndex: 1001, // .ant-drawer's z-index = 1000
   },
-};
-
-const logos = {
-  qq: qqMusicLogo,
-  netease: neteaseMusicLogo,
-  kuwo: kuwoMusicLogo,
 };
 
 function mapStateToProps(state) {

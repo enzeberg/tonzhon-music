@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
 
 class AddTo extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClick = () => {
     this.props.addToPlaylist(this.props.data);
     notification.open({

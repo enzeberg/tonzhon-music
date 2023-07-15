@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
-import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
+import { ListItem, ListItemText } from '@material-ui/core';
 import { connect } from 'react-redux';
 
-import neteaseMusicLogo from './images/netease_16.ico';
-import qqMusicLogo from './images/qq_16.ico';
-import kuwoMusicLogo from '../../images/kuwo_16.ico';
-
 class SongItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   playOrPause(shouldPlay) {
     if (shouldPlay) {
       const index = this.props.playlist.findIndex(
@@ -28,8 +20,7 @@ class SongItem extends Component {
   }
 
   render() {
-    let { song, currentSong, showPlatform } = this.props;
-    // let anchorClass = song.hasCopyright ? '' : 'no-copyright';
+    let { song, currentSong } = this.props;
     const shouldPlay =
       (!currentSong  || currentSong.newId !== song.newId) ||
       (currentSong.newId === song.newId && this.props.playAction === 'pause');
@@ -38,7 +29,6 @@ class SongItem extends Component {
         onClick={() => this.playOrPause(shouldPlay)}
         key={song.newId}
         style={{
-          color: song.hasCopyright ? 'black' : '#aaa',
           padding: 0,
           borderBottom: '0.1px solid #ccc',
         }}
@@ -49,24 +39,10 @@ class SongItem extends Component {
               accumulator + ' / ' + currentValue
           )}
         />
-        {
-          showPlatform &&
-            <ListItemIcon>
-              <img src={logos[song.platform]} alt=""
-                style={{ width: 16, height: 16 }}
-              />
-            </ListItemIcon>
-        }
       </ListItem>
     );
   }
 }
-
-const logos = {
-  qq: qqMusicLogo,
-  netease: neteaseMusicLogo,
-  kuwo: kuwoMusicLogo,
-};
 
 function mapStateToProps(state) {
   return {

@@ -1,44 +1,37 @@
-import React, { Component } from 'react';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, List, Row, Col } from 'antd';
 import { connect } from 'react-redux';
-
 import ItemInPlaylist from './SongItem/in_playing_list';
 
-class PlayingList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div style={styles.wrapper}>
-        <Row type="flex" align="middle" justify="space-between"
-          style={styles.header}
-        >
-          <Col span={20}>播放列表</Col>
-          <Col span={4} style={{ textAlign: 'right' }}>
-            <Button icon={<DeleteOutlined />} ghost
-              onClick={this.props.clearPlaylist}
-            >
-              清空
-            </Button>
-          </Col>
-        </Row>
-        <List
-          id="playingList"
-          style={styles.list}
-          itemLayout="horizontal"
-          dataSource={this.props.dataSource}
-          renderItem={song => {
-            return (
-              <ItemInPlaylist key={song.link}
-                song={song}
-              />
-            );
-          }}
-        />
-        <style jsx="true">{`
+function PlayingList() {
+  return (
+    <div style={styles.wrapper}>
+      <Row type="flex" align="middle" justify="space-between"
+        style={styles.header}
+      >
+        <Col span={20}>播放列表</Col>
+        <Col span={4} style={{ textAlign: 'right' }}>
+          <Button icon={<DeleteOutlined />} ghost
+            onClick={this.props.clearPlaylist}
+          >
+            清空
+          </Button>
+        </Col>
+      </Row>
+      <List
+        id="playingList"
+        style={styles.list}
+        itemLayout="horizontal"
+        dataSource={this.props.dataSource}
+        renderItem={song => {
+          return (
+            <ItemInPlaylist key={song.link}
+              song={song}
+            />
+          );
+        }}
+      />
+      <style jsx="true">{`
           #playingList::-webkit-scrollbar {
             background-color: #222;
             width: 7px;
@@ -64,9 +57,8 @@ class PlayingList extends Component {
             background-color: rgb(60, 60, 60);
           }
         `}</style>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 const styles = {

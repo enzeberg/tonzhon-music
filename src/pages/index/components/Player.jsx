@@ -16,9 +16,7 @@ import {
   MdShuffle as ShuffleIcon
 } from 'react-icons/md';
 import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi';
-
-import ArtistLinks from './ArtistLinks';
-import MVIcon from './MVIcon';
+import Artists from './Artists';
 import PlayingList from './PlayingList';
 import { toMinAndSec } from '../../../utils/time_converter';
 import { musicPlayer } from '../../../config';
@@ -38,8 +36,7 @@ const modeExplanations = {
 };
 
 class Player extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
     this.state = {
       getMusicUrlStatus: 'notYet',
       playStatus: 'pausing',
@@ -291,7 +288,7 @@ class Player extends Component {
               {
                 currentSong &&
                   <>
-                    <Col span={7} className="nowrap">
+                    <Col span={12} className="nowrap">
                       <a
                         href={
                           buildSongLink(currentSong.platform,
@@ -304,31 +301,11 @@ class Player extends Component {
                         <strong>{currentSong.name}</strong>
                       </a>
                     </Col>
-                    <Col span={2}>
-                      {
-                        currentSong.mv &&
-                        <MVIcon
-                          platform={currentSong.platform}
-                          id={currentSong.mv}
-                          color="white"
-                        />
-                      }
-                    </Col>
-                    <Col span={6} className="nowrap">
+                    <Col span={8} className="nowrap">
                       {
                         currentSong.artists &&
-                        <ArtistLinks artists={currentSong.artists}
-                          platform={currentSong.platform}
-                          fontColor="white"
-                        />
+                        <Artists artists={currentSong.artists} />
                       }
-                    </Col>
-                    <Col span={5} style={{
-                        fontSize: 'small', fontWeight: 'lighter',
-                        color: 'rgb(230, 230, 230)',
-                      }}
-                    >
-                      {`来自${platforms[currentSong.platform]}`}
                     </Col>
                     <Col span={4} style={{ textAlign: 'right' }}>
                       {
@@ -408,7 +385,6 @@ class Player extends Component {
   }
 }
 
-
 const styles = {
   player: {
     position: 'fixed',
@@ -418,11 +394,6 @@ const styles = {
     backgroundColor: musicPlayer.background,
     color: musicPlayer.color,
   },
-};
-const platforms = {
-  qq: 'QQ音乐',
-  netease: '网易云音乐',
-  kuwo: '酷我音乐',
 };
 
 function mapStateToProps(state) {

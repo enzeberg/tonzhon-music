@@ -6,10 +6,6 @@ import { withRouter } from 'react-router-dom';
 const Search = Input.Search;
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onSearch = (keyword) => {
     if (keyword !== '' &&
         keyword !== this.props.keyword) {
@@ -20,7 +16,6 @@ class SearchBar extends Component {
 
   render() {
     const { keyword } = this.props;
-
     return (
       <Search
         placeholder="歌曲/专辑/艺人"
@@ -46,5 +41,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps,
-                                  mapDispatchToProps)(SearchBar));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBar));

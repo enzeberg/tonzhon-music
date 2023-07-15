@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import SongList from './SongList';
 
 class TopSongs extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
     this.state = {
       topSongs: []
     };
@@ -38,7 +36,7 @@ class TopSongs extends Component {
   render() {
     return this.state.topSongs.length === 0 ? null : (
       <div className="white-card">
-        <SongList songs={this.state.topSongs} showPlatform />
+        <SongList songs={this.state.topSongs} />
       </div>
     );
   }

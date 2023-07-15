@@ -5,7 +5,6 @@ import SongList from './SongList';
 
 class TopSongs extends Component {
   constructor(props) {
-    super(props);
     this.state = {
       topSongs: []
     };
@@ -29,7 +28,6 @@ class TopSongs extends Component {
               ]
             });
           }
-
         }
       });
     }
@@ -38,7 +36,7 @@ class TopSongs extends Component {
   render() {
     return this.state.topSongs.length === 0 ? null : (
       <div style={{ padding: '0 8px', marginBottom: 15, backgroundColor: 'rgba(240,240,240,0.5)', borderRadius: 5 }}>
-        <SongList songs={this.state.topSongs} showPlatform />
+        <SongList songs={this.state.topSongs} />
       </div>
     );
   }
