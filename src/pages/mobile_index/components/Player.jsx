@@ -15,7 +15,7 @@ import {
   MdShuffle as ShuffleIcon
 } from 'react-icons/md';
 import PlayingList from './PlayingList';
-import { toMinAndSec } from '../../../utils/time_converter';
+import toMinAndSec from '../../../utils/toMinAndSec';
 import { musicPlayer } from '../../../config';
 
 notification.config({

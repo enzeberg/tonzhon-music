@@ -1,4 +1,4 @@
-const toMinAndSec = (seconds) => {
+export default function toMinAndSec(seconds) {
   seconds = Math.floor(seconds);
   let minutes = Math.floor(seconds / 60);
   seconds %= 60;
@@ -9,8 +9,4 @@ const toMinAndSec = (seconds) => {
     seconds =`0${seconds}`;
   }
   return `${minutes}:${seconds}`;
-};
-
-export {
-  toMinAndSec
-};
+}

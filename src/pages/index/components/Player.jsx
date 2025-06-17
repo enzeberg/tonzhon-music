@@ -18,7 +18,7 @@ import {
 import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi';
 import Artists from './Artists';
 import PlayingList from './PlayingList';
-import { toMinAndSec } from '../../../utils/time_converter';
+import toMinAndSec from '../../../utils/toMinAndSec';
 import { musicPlayer } from '../../../config';
 import { buildSongLink } from '../../../utils/link';
 
