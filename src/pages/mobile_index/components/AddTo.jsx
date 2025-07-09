@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { notification, Button } from 'antd';
 import { connect } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';

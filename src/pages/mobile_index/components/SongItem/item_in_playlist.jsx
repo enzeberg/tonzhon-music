@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Row, Col, Button } from 'antd';
 import { connect } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';

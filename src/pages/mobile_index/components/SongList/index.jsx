@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { List } from '@material-ui/core';
 import SongItem from '../SongItem';
 

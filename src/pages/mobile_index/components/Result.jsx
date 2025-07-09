@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Pagination } from 'antd';
 import { connect } from 'react-redux';
 import SongList from './SongList';

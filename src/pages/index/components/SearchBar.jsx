@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { DeleteOutlined } from '@ant-design/icons';
 import { AutoComplete, Input, Button } from 'antd';
 import { connect } from 'react-redux';
