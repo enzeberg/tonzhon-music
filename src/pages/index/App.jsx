@@ -7,9 +7,7 @@ import SearchResult from './components/SearchResult';
 import TopSongs from './components/TopSongs';
 import Player from './components/Player';
 import Hot from './components/Hot';
-import NeteasePlaylistPage from './components/NeteasePlaylistPage';
 import './App.css';
-
 const { Header, Content } = Layout;
 
 function App() {
@@ -78,9 +76,6 @@ function App() {
                     );
                   }
                 }
-              />
-              <Route path="/netease-playlist/:playlistId"
-                component={NeteasePlaylistPage}
               />
             </Switch>
           </div>
