@@ -8,7 +8,7 @@ import playIndex from './play_index';
 
 export default combineReducers({
   // key: state name, value: state value
-  providers: () => ['netease', 'qq', 'kuwo'],
+  providers: () => ['spotify', 'apple', 'youtube'],
   searchHistory,
   searchStatus,
   searchResults,

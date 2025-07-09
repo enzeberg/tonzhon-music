@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import TheHeader from './components/Header';
 import SearchResult from './components/SearchResult';
 import TopSongs from './components/TopSongs';
