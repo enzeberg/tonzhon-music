@@ -3,8 +3,7 @@
   "version": "0.2.2",
   "scripts": {
     "start": "node ./scripts/start",
-    "build": "node ./scripts/build",
-    "test": "node ./scripts/test"
+    "build": "node ./scripts/build"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -51,14 +50,5 @@
       ]
     ]
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "license": "MIT"
 }
