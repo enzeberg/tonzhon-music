@@ -1,6 +1,10 @@
 {
   "name": "tonzhon-music",
   "version": "0.2.2",
+  "description": "Tonzhon: Just listen to songs, no ads! Download songs, create playlists...",
+  "homepage": "https://tonzhon.whamon.com",
+  "keywords": ["铜钟", "铜钟音乐", "tonzhon", "music", "music-player"],
+  "author": "Li Enze",
   "scripts": {
     "start": "node ./scripts/start",
     "build": "node ./scripts/build"
