@@ -4,9 +4,8 @@ import SongList from './SongList';
 import Wrapper from './Wrapper';
 import OperatingBarOfSongList from './OperatingBarOfSongList';
 
-function SearchResult({ result, provider }) {
+function SearchResult({ result, provider, keyword, onResultResponded }) {
   function onPageChange() {
-    const { provider, keyword, onResultResponded } = this.props;
     fetch(`/api/search?provider=${provider}&keyword=${keyword}&page=${page}`)
       .then(res => res.json())
       .then(json => {

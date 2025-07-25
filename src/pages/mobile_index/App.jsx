@@ -12,8 +12,7 @@ import './App.css';
 
 const { Header, Content } = Layout;
 
-function App() {
-  let { searchStatus, searchResults } = this.props;
+function App({ searchStatus, searchResults }) {
   return (
     <BrowserRouter
       basename={process.env.NODE_ENV === 'development' ? '/m' : '/'}
