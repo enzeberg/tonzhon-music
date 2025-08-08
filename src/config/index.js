@@ -1,17 +1,21 @@
-var serverUrl;
-if (process.env.NODE_ENV === 'development') {
-  serverUrl = 'http://localhost:8081/';
-} else if (process.env.NODE_ENV === 'production') {
-  serverUrl = '/';
+function getServerUrl() {
+  const env = process.env.NODE_ENV || 'development'
+
+  const urlMap = {
+    development: 'http://localhost:8081/',
+    production: '/',
+  }
+
+  return urlMap[env]
 }
-const themeColor = '#EA7030';
+
+const serverUrl = getServerUrl()
+
+const themeColor = '#EA7030'
+
 const musicPlayer = {
   background: '#222',
   color: 'white',
-};
+}
 
-export {
-  serverUrl,
-  themeColor,
-  musicPlayer,
-};
+export { serverUrl, themeColor, musicPlayer }
