@@ -1,29 +1,36 @@
-import { Row, Col } from 'antd';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-import { themeColor } from '../../../config';
+import { Link } from 'react-router-dom'
+import SearchBar from './SearchBar'
+import { themeColor } from '../../../config'
 
 function Header() {
   return (
-    <Row type="flex" align="middle" className="container">
-      <Col span={6}>
-        <Link to="/">
+    <div
+      className='container'
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px',
+      }}
+    >
+      <div style={{ flex: '0 0 auto' }}>
+        <Link to='/'>
           <h1
             style={{
               display: 'inline',
               color: themeColor,
               fontWeight: 360,
+              margin: 0,
             }}
           >
             Tonzhon
           </h1>
         </Link>
-      </Col>
-      <Col span={12}>
+      </div>
+      <div style={{ flex: '1' }}>
         <SearchBar />
-      </Col>
-    </Row>
-  );
+      </div>
+    </div>
+  )
 }
 
-export default Header;
+export default Header
