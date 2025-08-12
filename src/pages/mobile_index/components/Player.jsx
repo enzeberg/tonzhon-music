@@ -14,7 +14,7 @@ import {
   MdRepeatOne as SingleIcon,
   MdShuffle as ShuffleIcon
 } from 'react-icons/md';
-import PlayingList from './PlayingList';
+import Listenlist from './Listenlist';
 import toMinAndSec from '../../../utils/toMinAndSec';
 import { musicPlayer } from '../../../config';
 
@@ -342,7 +342,7 @@ class Player extends Component {
           </Col>
         </Row>
         {
-          <PlayingList visible={this.state.playingListVisible} />
+          <Listenlist visible={this.state.playingListVisible} />
         }
       </div>
     );

@@ -17,7 +17,7 @@ import {
 } from 'react-icons/md';
 import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi';
 import Artists from './Artists';
-import PlayingList from './PlayingList';
+import Listenlist from './Listenlist';
 import toMinAndSec from '../../../utils/toMinAndSec';
 import { musicPlayer } from '../../../config';
 import { buildSongLink } from '../../../utils/link';
@@ -378,7 +378,7 @@ class Player extends Component {
           </Col>
         </Row>
         {
-          this.state.playingListVisible && <PlayingList />
+          this.state.playingListVisible && <Listenlist />
         }
       </div>
     );
