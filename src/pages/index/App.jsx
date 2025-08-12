@@ -6,7 +6,6 @@ import TheHeader from './components/Header'
 import SearchResult from './components/SearchResult'
 import TopSongs from './components/TopSongs'
 import Player from './components/Player'
-import Hot from './components/Hot'
 import './App.css'
 const { Header, Content } = Layout
 
@@ -35,7 +34,6 @@ function App({ searchStatus, searchResults }) {
             }}
           >
             <Switch>
-              <Route exact path='/' component={Hot} />
               <Route
                 path='/search'
                 render={() => {
