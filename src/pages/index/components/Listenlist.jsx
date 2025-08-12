@@ -1,7 +1,7 @@
 import { DeleteOutlined } from '@ant-design/icons'
 import { Button, List, Row, Col } from 'antd'
 import { connect } from 'react-redux'
-import ItemInPlaylist from './SongItem/in_playing_list'
+import ItemInListenlist from './SongItem/in_listenlist'
 
 function Listenlist() {
   return (
@@ -12,49 +12,49 @@ function Listenlist() {
         justify='space-between'
         style={styles.header}
       >
-        <Col span={20}>播放列表</Col>
+        <Col span={20}>聆听列表</Col>
         <Col span={4} style={{ textAlign: 'right' }}>
           <Button
             icon={<DeleteOutlined />}
             ghost
-            onClick={this.props.clearPlaylist}
+            onClick={this.props.clearListenlist}
           >
             清空
           </Button>
         </Col>
       </Row>
       <List
-        id='playingList'
+        id='listenlist'
         style={styles.list}
         itemLayout='horizontal'
         dataSource={this.props.dataSource}
         renderItem={(song) => {
-          return <ItemInPlaylist key={song.link} song={song} />
+          return <ItemInListenlist key={song.link} song={song} />
         }}
       />
       <style jsx='true'>{`
-        #playingList::-webkit-scrollbar {
+        #listenlist::-webkit-scrollbar {
           background-color: #222;
           width: 7px;
           border-radius: 10px;
         }
-        #playingList::-webkit-scrollbar-thumb {
+        #listenlist::-webkit-scrollbar-thumb {
           background-color: #999;
           border-radius: 10px;
           /* width: 5px; */
         }
-        #playingList::-webkit-scrollbar-track {
+        #listenlist::-webkit-scrollbar-track {
           display: none;
           border-radius: 10px;
         }
-        #playingList::-webkit-scrollbar-track-piece {
+        #listenlist::-webkit-scrollbar-track-piece {
           border-radius: 10px;
         }
-        #playingList li:hover {
+        #listenlist li:hover {
           cursor: pointer;
           background-color: rgb(50, 50, 50);
         }
-        #playingList li.playing {
+        #listenlist li.playing {
           background-color: rgb(60, 60, 60);
         }
       `}</style>
@@ -89,13 +89,13 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    dataSource: state.playingList,
+    dataSource: state.listenlist,
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
-    clearPlaylist: () => {
-      dispatch({ type: 'CLEAR_PLAYING_LIST' })
+    clearListenlist: () => {
+      dispatch({ type: 'CLEAR_LISTENLIST' })
     },
   }
 }

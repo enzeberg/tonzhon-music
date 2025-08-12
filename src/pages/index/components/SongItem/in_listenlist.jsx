@@ -2,22 +2,22 @@ import { Row, Col, List } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
-import './in_playing_list.css'
+import './in_listenlist.css'
 
 function SongItem({
   song,
   currentSong,
-  playingList,
+  listenlist,
   playIndex,
-  addToPlayingList,
+  addToListenlist,
   updatePlayIndex,
-  deleteSongInPlayingList,
+  deleteSongInListenlist,
 }) {
   const changeCurrentSong = () => {
-    const index = playingList.findIndex((song) => song.newId === song.newId)
+    const index = listenlist.findIndex((song) => song.newId === song.newId)
     if (index === -1) {
-      addToPlayingList(song)
-      updatePlayIndex(playingList.length)
+      addToListenlist(song)
+      updatePlayIndex(listenlist.length)
     } else {
       updatePlayIndex(index)
     }
@@ -25,11 +25,11 @@ function SongItem({
 
   const deleteFromPlaylist = (e) => {
     e.stopPropagation()
-    const index = playingList.findIndex((song) => song.newId === song.newId)
-    if (index + 1 === playingList.length) {
+    const index = listenlist.findIndex((song) => song.newId === song.newId)
+    if (index + 1 === listenlist.length) {
       updatePlayIndex(0)
     }
-    deleteSongInPlayingList(index, playIndex)
+    deleteSongInListenlist(index, playIndex)
   }
   return (
     <List.Item
@@ -39,7 +39,7 @@ function SongItem({
       }
       style={{ border: 'none', padding: '6px 10px' }}
       extra={
-        <a onClick={deleteFromPlaylist} className="delete-btn">
+        <a onClick={deleteFromPlaylist} className='delete-btn'>
           <DeleteOutlined
             style={{
               fontSize: 18,
@@ -49,11 +49,11 @@ function SongItem({
         </a>
       }
     >
-      <Row type="flex" align="middle" style={{ width: '100%', color: 'white' }}>
-        <Col span={14} className="nowrap">
+      <Row type='flex' align='middle' style={{ width: '100%', color: 'white' }}>
+        <Col span={14} className='nowrap'>
           {song.name}
         </Col>
-        <Col span={10} className="nowrap">
+        <Col span={10} className='nowrap'>
           <Artists artists={song.artists} />
         </Col>
       </Row>
@@ -63,21 +63,21 @@ function SongItem({
 
 function mapStateToProps(state) {
   return {
-    currentSong: state.playingList[state.playIndex],
-    playingList: state.playingList,
+    currentSong: state.listenlist[state.playIndex],
+    listenlist: state.listenlist,
     playIndex: state.playIndex,
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
-    addToPlaylist: (song) => {
-      dispatch({ type: 'ADD_TO_PLAYING_LIST', data: song })
+    addToListenlist: (song) => {
+      dispatch({ type: 'ADD_TO_LISTENLIST', data: song })
     },
     updatePlayIndex: (index) => {
       dispatch({ type: 'UPDATE_PLAY_INDEX', data: index })
     },
-    deleteSongInPlayingList: (indexToDelete, playIndex) => {
-      dispatch({ type: 'DELETE_SONG_IN_PLAYING_LIST', data: indexToDelete })
+    deleteSongInListenlist: (indexToDelete, playIndex) => {
+      dispatch({ type: 'DELETE_SONG_IN_LISTENLIST', data: indexToDelete })
       if (indexToDelete < playIndex) {
         dispatch({ type: 'UPDATE_PLAY_INDEX', data: playIndex - 1 })
       }

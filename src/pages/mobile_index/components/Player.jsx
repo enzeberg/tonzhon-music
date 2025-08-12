@@ -336,7 +336,7 @@ class Player extends Component {
           <Col span={3} style={{ float: 'right' }}>
             <Button ghost icon={<UnorderedListOutlined />}
               onClick={this.clickPlaylistBtn}
-              title="播放列表"
+              title="聆听列表"
               style={{ float: 'right' }}
             />
           </Col>

@@ -7,14 +7,14 @@ class AddTo extends Component {
   handleClick = () => {
     this.props.addToPlaylist(this.props.data);
     notification.open({
-      message: '已添加至播放列表',
+      message: '已添加至聆听列表',
     });
   }
 
   render() {
     return (
       <Button
-        title="添加到播放列表"
+        title="添加到聆听列表"
         onClick={this.handleClick}
         shape="circle"
         icon={<PlusOutlined />}

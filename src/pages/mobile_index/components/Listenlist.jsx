@@ -19,7 +19,7 @@ function Listenlist() {
       }}
       title={
         <Row type='flex' align='middle'>
-          <Col span={18}>播放列表</Col>
+          <Col span={18}>聆听列表</Col>
           <Col span={6}>
             <Button
               icon={<DeleteOutlined />}

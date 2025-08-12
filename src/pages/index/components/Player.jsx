@@ -46,7 +46,7 @@ class Player extends Component {
       songSource: null,
       muted: false,
       playProgress: 0,
-      playingListVisible: false,
+      listenlistVisible: false,
     };
     this.playOrPause = this.playOrPause.bind(this);
     this.changePlayProgress = this.changePlayProgress.bind(this);
@@ -54,7 +54,7 @@ class Player extends Component {
     this.changeVolume = this.changeVolume.bind(this);
     this.playNext = this.playNext.bind(this);
     this.switchPlayMode = this.switchPlayMode.bind(this);
-    this.onPlayingListBtnClick = this.onPlayingListBtnClick.bind(this);
+    this.onListenlistBtnClick = this.onListenlistBtnClick.bind(this);
   }
 
   componentDidMount() {
@@ -216,13 +216,13 @@ class Player extends Component {
     if (this.state.playStatus === 'playing') {
       this.pause();
     }
-    const { currentSong, playingList } = this.props;
+    const { currentSong, listenlist } = this.props;
     const { playMode } = this.state;
-    if (playMode === 'single' || playingList.length === 1) {
+    if (playMode === 'single' || listenlist.length === 1) {
       this.audio.currentTime = 0;
       this.play();
     } else {
-      this.props.changePlayIndex(currentSong, playingList, playMode, direction);
+      this.props.changePlayIndex(currentSong, listenlist, playMode, direction);
     }
   }
 
@@ -235,9 +235,9 @@ class Player extends Component {
     });
   }
 
-  onPlayingListBtnClick() {
+  onListenlistBtnClick() {
     this.setState({
-      playingListVisible: !this.state.playingListVisible,
+      listenlistVisible: !this.state.listenlistVisible,
     });
   }
 
@@ -372,13 +372,13 @@ class Player extends Component {
           </Col>
           <Col span={1} style={{ textAlign: 'right' }}>
             <Button ghost icon={<UnorderedListOutlined />}
-              onClick={this.onPlayingListBtnClick}
-              title="播放列表"
+              onClick={this.onListenlistBtnClick}
+              title="聆听列表"
             />
           </Col>
         </Row>
         {
-          this.state.playingListVisible && <Listenlist />
+          this.state.listenlistVisible && <Listenlist />
         }
       </div>
     );
@@ -397,28 +397,28 @@ const styles = {
 };
 
 function mapStateToProps(state) {
-  const currentSong = state.playingList[state.playIndex];
+  const currentSong = state.listenlist[state.playIndex];
   return {
     currentSong: currentSong,
-    playingList: state.playingList,
+    listenlist: state.listenlist,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    changePlayIndex: (currentSong, playingList, playMode, direction) => {
+    changePlayIndex: (currentSong, listenlist, playMode, direction) => {
       let nextPlayIndex;
-      const currentIndex = playingList.findIndex(song =>
+      const currentIndex = listenlist.findIndex(song =>
         song.newId === currentSong.newId);
       if (playMode === 'loop') {
         if (direction === 'forward') {
-          nextPlayIndex = playingList[currentIndex + 1] ? currentIndex + 1 : 0;
+          nextPlayIndex = listenlist[currentIndex + 1] ? currentIndex + 1 : 0;
         } else if (direction === 'backward') {
-          nextPlayIndex = playingList[currentIndex - 1] ? currentIndex - 1 :
-            playingList.length - 1;
+          nextPlayIndex = listenlist[currentIndex - 1] ? currentIndex - 1 :
+            listenlist.length - 1;
         }
       } else if (playMode === 'shuffle') {
         do {
-          nextPlayIndex = Math.floor(Math.random() * playingList.length);
+          nextPlayIndex = Math.floor(Math.random() * listenlist.length);
         } while (nextPlayIndex === currentIndex);
       }
       if (nextPlayIndex !== undefined) {
