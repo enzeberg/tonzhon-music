@@ -1,17 +1,17 @@
-const initialState = {};
+const initialState = {}
 
 const searchResults = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_SEARCH_RESULTS':
       return {
         ...state,
-        [action.provider]: action.data
+        [action.provider]: action.data,
       }
     case 'CLEAR_RESULTS':
-      return {};
+      return {}
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default searchResults;
+export default searchResults

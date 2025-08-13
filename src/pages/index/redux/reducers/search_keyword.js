@@ -1,10 +1,10 @@
 const searchKeyword = (state = '', action) => {
   switch (action.type) {
     case 'UPDATE_SEARCH_KEYWORD':
-      return action.data;
+      return action.data
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default searchKeyword;
+export default searchKeyword
