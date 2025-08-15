@@ -1,4 +1,4 @@
-import { Row, Col, List } from 'antd'
+import { List } from 'antd'
 import { PlayCircleOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
@@ -25,8 +25,8 @@ function SongItem({
 
   return (
     <List.Item style={{ padding: '5px 10px' }}>
-      <Row type='flex' align='middle' style={{ width: '100%', fontSize: 14 }}>
-        <Col span={10} className='nowrap'>
+      <div style={{ display: 'flex', alignItems: 'center', width: '100%', fontSize: 14 }}>
+        <div style={{ flex: 5 }} className='nowrap'>
           <a
             href={buildSongLink(song.platform, song.originalId)}
             title={`${song.name}${song.alias ? ` - ${song.alias}` : ''}`}
@@ -37,11 +37,11 @@ function SongItem({
               {song.alias && ` - ${song.alias}`}
             </span>
           </a>
-        </Col>
-        <Col span={6} className='nowrap'>
+        </div>
+        <div style={{ flex: 3 }} className='nowrap'>
           <Artists artists={song.artists} />
-        </Col>
-        <Col span={6} className='nowrap'>
+        </div>
+        <div style={{ flex: 3 }} className='nowrap'>
           <a
             href={buildAlbumLink(song.platform, song.album.id)}
             target='_blank'
@@ -49,8 +49,8 @@ function SongItem({
           >
             {song.album.name}
           </a>
-        </Col>
-        <Col span={1}>
+        </div>
+        <div style={{ flex: 1, textAlign: 'center' }}>
           <a
             onClick={changeCurrentSong}
             className={
@@ -68,11 +68,11 @@ function SongItem({
               }}
             />
           </a>
-        </Col>
-        <Col span={1}>
+        </div>
+        <div style={{ flex: 1, textAlign: 'center' }}>
           <AddToListenlist data={song} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </List.Item>
   )
 }

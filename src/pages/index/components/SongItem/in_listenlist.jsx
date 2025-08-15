@@ -1,4 +1,4 @@
-import { Row, Col, List } from 'antd'
+import { List } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
@@ -39,7 +39,7 @@ function SongItem({
       }
       style={{ border: 'none', padding: '6px 10px' }}
       extra={
-        <a onClick={deleteFromPlaylist} className='delete-btn'>
+        <a onClick={deleteFromPlaylist} className="delete-btn">
           <DeleteOutlined
             style={{
               fontSize: 18,
@@ -49,14 +49,21 @@ function SongItem({
         </a>
       }
     >
-      <Row type='flex' align='middle' style={{ width: '100%', color: 'white' }}>
-        <Col span={14} className='nowrap'>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          width: '100%',
+          color: 'white',
+        }}
+      >
+        <div style={{ flex: 3 }} className="nowrap">
           {song.name}
-        </Col>
-        <Col span={10} className='nowrap'>
+        </div>
+        <div style={{ flex: 2 }} className="nowrap">
           <Artists artists={song.artists} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </List.Item>
   )
 }
