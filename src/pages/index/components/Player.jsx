@@ -9,7 +9,7 @@ import {
   DownloadOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons'
-import { Row, Col, Slider, Button, Tooltip, notification } from 'antd'
+import { Slider, Button, Tooltip, notification } from 'antd'
 import {
   MdRepeat as LoopIcon,
   MdRepeatOne as SingleIcon,
@@ -269,13 +269,15 @@ class Player extends Component {
           }}
         />
 
-        <Row
-          type="flex"
-          align="middle"
+        <div
           className="container"
-          justify="space-around"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+          }}
         >
-          <Col span={4}>
+          <div style={{ flex: 2 }}>
             <Button
               ghost
               shape="circle"
@@ -311,17 +313,19 @@ class Player extends Component {
               icon={<StepForwardOutlined />}
               onClick={() => this.playNext('forward')}
             />
-          </Col>
-          <Col span={14} style={{ paddingRight: 40 }}>
-            <Row
-              type="flex"
-              align="middle"
-              justify="space-between"
-              style={{ height: 20 }}
+          </div>
+          <div style={{ flex: 7, paddingRight: 40 }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                height: 20,
+              }}
             >
               {currentSong && (
                 <>
-                  <Col span={12} className="nowrap">
+                  <div style={{ flex: 3 }} className="nowrap">
                     <a
                       href={buildSongLink(
                         currentSong.platform,
@@ -333,22 +337,22 @@ class Player extends Component {
                     >
                       <strong>{currentSong.name}</strong>
                     </a>
-                  </Col>
-                  <Col span={8} className="nowrap">
+                  </div>
+                  <div style={{ flex: 2 }} className="nowrap">
                     {currentSong.artists && (
                       <Artists artists={currentSong.artists} />
                     )}
-                  </Col>
-                  <Col span={4} style={{ textAlign: 'right' }}>
+                  </div>
+                  <div style={{ flex: 1, textAlign: 'right' }}>
                     {getMusicUrlStatus === 'failed'
                       ? '加载失败'
                       : this.state.songLoaded
                       ? `${progress} / ${total}`
                       : '00:00 / 00:00'}
-                  </Col>
+                  </div>
                 </>
               )}
-            </Row>
+            </div>
             <Slider
               min={0}
               max={
@@ -360,8 +364,8 @@ class Player extends Component {
               disabled={!this.state.songSource}
               style={{ margin: '8px 0' }}
             />
-          </Col>
-          <Col span={1}>
+          </div>
+          <div style={{ flex: 1, textAlign: 'center' }}>
             <Button
               icon={<DownloadOutlined />}
               ghost
@@ -371,17 +375,17 @@ class Player extends Component {
               download
               disabled={this.state.songSource === null}
             />
-          </Col>
-          <Col span={1} style={{ paddingLeft: 3 }}>
+          </div>
+          <div style={{ flex: 1, textAlign: 'center', paddingLeft: 3 }}>
             <Tooltip title={modeExplanations[this.state.playMode]}>
               <a onClick={this.switchPlayMode}>
                 {playModeIcons[this.state.playMode]}
               </a>
             </Tooltip>
-          </Col>
-          <Col span={3}>
-            <Row type="flex" align="middle">
-              <Col span={4}>
+          </div>
+          <div style={{ flex: 2 }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ flex: 1 }}>
                 <a onClick={this.onVolumeBtnClick}>
                   {this.state.muted ? (
                     <MuteIcon className="player-icon" />
@@ -389,8 +393,8 @@ class Player extends Component {
                     <VolumeIcon className="player-icon" />
                   )}
                 </a>
-              </Col>
-              <Col span={20}>
+              </div>
+              <div style={{ flex: 5 }}>
                 <Slider
                   min={0}
                   max={1}
@@ -398,18 +402,18 @@ class Player extends Component {
                   defaultValue={this.state.volume}
                   onChange={this.changeVolume}
                 />
-              </Col>
-            </Row>
-          </Col>
-          <Col span={1} style={{ textAlign: 'right' }}>
+              </div>
+            </div>
+          </div>
+          <div style={{ flex: 1, textAlign: 'right' }}>
             <Button
               ghost
               icon={<UnorderedListOutlined />}
               onClick={this.onListenlistBtnClick}
               title="聆听列表"
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
         {this.state.listenlistVisible && <Listenlist />}
       </div>
     )
