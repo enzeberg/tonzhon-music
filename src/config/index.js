@@ -1,6 +1,5 @@
 function getServerUrl() {
   const env = process.env.NODE_ENV || 'development'
-
   const urlMap = {
     development: 'http://localhost:8081/',
     production: '/',
@@ -11,6 +10,4 @@ function getServerUrl() {
 
 const serverUrl = getServerUrl()
 
-const themeColor = '#EA7030'
-
-export { serverUrl, themeColor }
+export { serverUrl }

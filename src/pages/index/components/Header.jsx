@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
-import { themeColor } from '../../../config'
 
 function Header() {
   return (
     <div
-      className='container'
+      className="container"
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -13,11 +12,11 @@ function Header() {
       }}
     >
       <div style={{ flex: '0 0 auto' }}>
-        <Link to='/'>
+        <Link to="/">
           <h1
             style={{
               display: 'inline',
-              color: themeColor,
+              color: 'orange',
               fontWeight: 360,
               margin: 0,
             }}
