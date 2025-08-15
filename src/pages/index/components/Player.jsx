@@ -19,7 +19,6 @@ import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi'
 import Artists from './Artists'
 import Listenlist from './Listenlist'
 import toMinAndSec from '../../../utils/toMinAndSec'
-import { musicPlayer } from '../../../config'
 import { buildSongLink } from '../../../utils/link'
 
 const playModeIcons = {
@@ -426,8 +425,8 @@ const styles = {
     bottom: 0,
     padding: '8px 0',
     width: '100%',
-    backgroundColor: musicPlayer.background,
-    color: musicPlayer.color,
+    backgroundColor: '#222',
+    color: 'white',
   },
 }
 

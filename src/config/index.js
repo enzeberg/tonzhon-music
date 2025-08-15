@@ -13,9 +13,4 @@ const serverUrl = getServerUrl()
 
 const themeColor = '#EA7030'
 
-const musicPlayer = {
-  background: '#222',
-  color: 'white',
-}
-
-export { serverUrl, themeColor, musicPlayer }
+export { serverUrl, themeColor }
