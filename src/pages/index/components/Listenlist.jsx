@@ -1,38 +1,31 @@
 import { DeleteOutlined } from '@ant-design/icons'
-import { Button, List, Row, Col } from 'antd'
+import { Button, List } from 'antd'
 import { connect } from 'react-redux'
 import ItemInListenlist from './SongItem/in_listenlist'
 
 function Listenlist() {
   return (
     <div style={styles.wrapper}>
-      <Row
-        type='flex'
-        align='middle'
-        justify='space-between'
-        style={styles.header}
-      >
-        <Col span={20}>聆听列表</Col>
-        <Col span={4} style={{ textAlign: 'right' }}>
-          <Button
-            icon={<DeleteOutlined />}
-            ghost
-            onClick={this.props.clearListenlist}
-          >
-            清空
-          </Button>
-        </Col>
-      </Row>
+      <div style={styles.header}>
+        <span>聆听列表</span>
+        <Button
+          icon={<DeleteOutlined />}
+          ghost
+          onClick={this.props.clearListenlist}
+        >
+          清空
+        </Button>
+      </div>
       <List
-        id='listenlist'
+        id="listenlist"
         style={styles.list}
-        itemLayout='horizontal'
+        itemLayout="horizontal"
         dataSource={this.props.dataSource}
         renderItem={(song) => {
           return <ItemInListenlist key={song.link} song={song} />
         }}
       />
-      <style jsx='true'>{`
+      <style jsx="true">{`
         #listenlist::-webkit-scrollbar {
           background-color: #222;
           width: 7px;
@@ -75,6 +68,9 @@ const styles = {
     background: 'rgb(70,70,70)',
   },
   header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10,
     background: '#222',
     borderTopLeftRadius: 5,
