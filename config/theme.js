@@ -1,5 +1,5 @@
 module.exports = {
-  'primary-color': '#EA7030',
+  'primary-color': 'orange',
   'layout-body-background': 'white',
   'layout-header-background': 'white',
   'layout-header-height': 'auto',
@@ -8,4 +8,4 @@ module.exports = {
   'layout-header-padding': 0,
   'layout-footer-padding': 0,
   'layout-footer-background': '#f7f7f7',
-};
+}

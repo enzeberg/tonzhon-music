@@ -1,29 +1,28 @@
-'use strict';
-
-const path = require('path');
-const fs = require('fs');
-const url = require('url');
+'use strict'
+const path = require('path')
+const fs = require('fs')
+const url = require('url')
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const appDirectory = fs.realpathSync(process.cwd())
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 
-const envPublicUrl = process.env.PUBLIC_URL;
+const envPublicUrl = process.env.PUBLIC_URL
 
 function ensureSlash(inputPath, needsSlash) {
-  const hasSlash = inputPath.endsWith('/');
+  const hasSlash = inputPath.endsWith('/')
   if (hasSlash && !needsSlash) {
-    return inputPath.substr(0, inputPath.length - 1);
+    return inputPath.substr(0, inputPath.length - 1)
   } else if (!hasSlash && needsSlash) {
-    return `${inputPath}/`;
+    return `${inputPath}/`
   } else {
-    return inputPath;
+    return inputPath
   }
 }
 
-const getPublicUrl = appPackageJson =>
-  envPublicUrl || require(appPackageJson).homepage;
+const getPublicUrl = (appPackageJson) =>
+  envPublicUrl || require(appPackageJson).homepage
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
@@ -32,10 +31,10 @@ const getPublicUrl = appPackageJson =>
 // We can't use a relative path in HTML because we don't want to load something
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 function getServedPath(appPackageJson) {
-  const publicUrl = getPublicUrl(appPackageJson);
+  const publicUrl = getPublicUrl(appPackageJson)
   const servedUrl =
-    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
-  return ensureSlash(servedUrl, true);
+    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/')
+  return ensureSlash(servedUrl, true)
 }
 
 const moduleFileExtensions = [
@@ -50,35 +49,35 @@ const moduleFileExtensions = [
   'json',
   'web.jsx',
   'jsx',
-];
+]
 
 // Resolve file paths in the same order as webpack
 const resolveModule = (resolveFn, filePath) => {
-  const extension = moduleFileExtensions.find(extension =>
+  const extension = moduleFileExtensions.find((extension) =>
     fs.existsSync(resolveFn(`${filePath}.${extension}`))
-  );
+  )
 
   if (extension) {
-    return resolveFn(`${filePath}.${extension}`);
+    return resolveFn(`${filePath}.${extension}`)
   }
 
-  return resolveFn(`${filePath}.js`);
-};
+  return resolveFn(`${filePath}.js`)
+}
 
 // pages: {
 //   pageOne: 'to/pageOne/index.js',
 //   pageTwo: 'to/pageTwo/index.js',
 // }
 function scanPages() {
-  const dirs = fs.readdirSync(resolveApp('src/pages/'));
-  const pages = {};
+  const dirs = fs.readdirSync(resolveApp('src/pages/'))
+  const pages = {}
   dirs.forEach((file) => {
-    const state = fs.statSync(resolveApp('src/pages/' + file));
+    const state = fs.statSync(resolveApp('src/pages/' + file))
     if (state.isDirectory()) {
-      pages[file] = resolveApp('src/pages/' + file + '/index.js');
+      pages[file] = resolveApp('src/pages/' + file + '/index.js')
     }
-  });
-  return pages;
+  })
+  return pages
 }
 
 // config after eject: we're in ./config/
@@ -90,8 +89,7 @@ module.exports = {
   appHtml: resolveApp('public/index.html'),
   mobileIndexHtml: resolveApp('public/mobile_index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/pages/index/index'),
-  mobileIndexJs:
-    resolveModule(resolveApp, 'src/pages/mobile_index/index'),
+  mobileIndexJs: resolveModule(resolveApp, 'src/pages/mobile_index/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
@@ -102,8 +100,6 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
   pages: scanPages(),
-};
+}
 
-
-
-module.exports.moduleFileExtensions = moduleFileExtensions;
+module.exports.moduleFileExtensions = moduleFileExtensions
