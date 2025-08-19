@@ -1,5 +1,4 @@
 html, body {
-  /* font-family: "Microsoft Yahei","微软雅黑", PingFangSC-Regular,Verdana,Arial,"宋体", Helvetica, sans-serif; */
   margin: 0;
   padding: 0;
 }
@@ -8,11 +7,8 @@ a {
   text-decoration: none;
   color: black;
 }
-a.no-copyright {
-  color: #ccc;
-}
 a:hover {
-  color: #EA7030;
+  color: orange;
 }
 
 .nowrap {
