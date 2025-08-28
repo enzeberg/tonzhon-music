@@ -1,9 +1,15 @@
 {
   "name": "tonzhon-music",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Tonzhon: Just listen to songs, no ads! Download songs, create playlists...",
   "homepage": "https://tonzhon.whamon.com",
-  "keywords": ["铜钟", "铜钟音乐", "tonzhon", "music", "music-player"],
+  "keywords": [
+    "铜钟",
+    "铜钟音乐",
+    "tonzhon",
+    "music",
+    "music-player"
+  ],
   "author": "Li Enze",
   "scripts": {
     "start": "node ./scripts/start",
@@ -11,7 +17,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
-    "@material-ui/core": "^4.8.1",
     "antd": "^4.5.4",
     "chalk": "^5.4.1",
     "react": "^16.13.1",
