@@ -2,31 +2,21 @@ import { connect } from 'react-redux'
 import { Layout } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import TheHeader from './components/Header'
+import Header from './components/Header'
 import SearchResult from './components/SearchResult'
 import TopSongs from './components/TopSongs'
 import Player from './components/Player'
 import './App.css'
-const { Header, Content } = Layout
+const { Content } = Layout
 
 function App({ searchStatus, searchResults }) {
   return (
     <BrowserRouter>
       <Layout>
-        <Header
-          style={{
-            position: 'fixed',
-            width: '100%',
-            zIndex: 1040,
-            padding: '8px 0',
-            boxShadow: '0 1px 3px rgba(26,26,26,.1)',
-          }}
-        >
-          <TheHeader />
-        </Header>
+        <Header />
         <Content>
           <div
-            className='container'
+            className="container"
             style={{
               marginTop: 59,
               marginBottom: 74,
@@ -35,7 +25,7 @@ function App({ searchStatus, searchResults }) {
           >
             <Switch>
               <Route
-                path='/search'
+                path="/search"
                 render={() => {
                   const filtered = Object.keys(searchResults).filter((key) => {
                     const result = searchResults[key]
@@ -52,7 +42,7 @@ function App({ searchStatus, searchResults }) {
                         />
                       ))}
                       {filtered.length === 0 && searchStatus === 'done' && (
-                        <div className='white-card'>
+                        <div className="white-card">
                           抱歉，未搜索到相关内容。
                         </div>
                       )}
