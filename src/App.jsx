@@ -14,45 +14,41 @@ function App({ searchStatus, searchResults }) {
     <BrowserRouter>
       <Layout>
         <Header />
-        <Content>
-          <div
-            className="container"
-            style={{
-              marginTop: 59,
-              marginBottom: 74,
-              minHeight: 800,
-            }}
-          >
-            <Switch>
-              <Route
-                path="/search"
-                render={() => {
-                  const filtered = Object.keys(searchResults).filter((key) => {
-                    const result = searchResults[key]
-                    return result.searchSuccess && result.data.totalCount > 0
-                  })
-                  return (
-                    <>
-                      <TopSongs />
-                      {filtered.map((key) => (
-                        <SearchResult
-                          result={searchResults[key]}
-                          provider={key}
-                          key={key}
-                        />
-                      ))}
-                      {filtered.length === 0 && searchStatus === 'done' && (
-                        <div className="white-card">
-                          抱歉，未搜索到相关内容。
-                        </div>
-                      )}
-                      {searchStatus === 'searching' && <LoadingOutlined />}
-                    </>
-                  )
-                }}
-              />
-            </Switch>
-          </div>
+        <Content
+          className="container"
+          style={{
+            marginTop: 59,
+            marginBottom: 74,
+            minHeight: 800,
+          }}
+        >
+          <Switch>
+            <Route
+              path="/search"
+              render={() => {
+                const filtered = Object.keys(searchResults).filter((key) => {
+                  const result = searchResults[key]
+                  return result.searchSuccess && result.data.totalCount > 0
+                })
+                return (
+                  <>
+                    <TopSongs />
+                    {filtered.map((key) => (
+                      <SearchResult
+                        result={searchResults[key]}
+                        provider={key}
+                        key={key}
+                      />
+                    ))}
+                    {filtered.length === 0 && searchStatus === 'done' && (
+                      <div className="white-card">抱歉，未搜索到相关内容。</div>
+                    )}
+                    {searchStatus === 'searching' && <LoadingOutlined />}
+                  </>
+                )
+              }}
+            />
+          </Switch>
         </Content>
         <Player />
       </Layout>
