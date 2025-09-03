@@ -4,12 +4,11 @@ import {
   CaretRightOutlined,
   StepForwardOutlined,
   StepBackwardOutlined,
-  LoadingOutlined,
   PauseOutlined,
   DownloadOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons'
-import { Slider, Button, Tooltip, notification } from 'antd'
+import { Slider, Button, Tooltip, notification, Spin } from 'antd'
 import {
   MdRepeat as LoopIcon,
   MdRepeatOne as SingleIcon,
@@ -293,7 +292,7 @@ class Player extends Component {
                 getMusicUrlStatus === 'notYet' ? (
                   <CaretRightOutlined />
                 ) : getMusicUrlStatus === 'started' ? (
-                  <LoadingOutlined />
+                  <Spin />
                 ) : getMusicUrlStatus === 'ok' ? (
                   playStatus === 'playing' ? (
                     <PauseOutlined />

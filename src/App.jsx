@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-import { Layout } from 'antd'
-import { LoadingOutlined } from '@ant-design/icons'
+import { Layout, Spin } from 'antd'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import SearchResult from './components/SearchResult'
@@ -43,7 +42,7 @@ function App({ searchStatus, searchResults }) {
                     {filtered.length === 0 && searchStatus === 'done' && (
                       <div className="white-card">抱歉，未搜索到相关内容。</div>
                     )}
-                    {searchStatus === 'searching' && <LoadingOutlined />}
+                    {searchStatus === 'searching' && <Spin />}
                   </>
                 )
               }}
