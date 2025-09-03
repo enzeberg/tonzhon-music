@@ -3,7 +3,6 @@ import { Layout, Spin } from 'antd'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import SearchResult from './components/SearchResult'
-import TopSongs from './components/TopSongs'
 import Player from './components/Player'
 import './App.css'
 const { Content } = Layout
@@ -31,7 +30,6 @@ function App({ searchStatus, searchResults }) {
                 })
                 return (
                   <>
-                    <TopSongs />
                     {filtered.map((key) => (
                       <SearchResult
                         result={searchResults[key]}
