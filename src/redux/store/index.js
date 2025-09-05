@@ -10,7 +10,6 @@ store.subscribe(() => {
   if (lastKeyword !== searchKeyword) {
     // 更新 lastKeyword 必须放在包含dispatch方法的函数前面，否则会造成无限递归
     lastKeyword = searchKeyword
-    updateSearchHistory(searchKeyword)
     onSearch()
     let resultsResponded = 0
     providers.forEach((provider) => {
@@ -51,10 +50,6 @@ const onResultResponded = (provider, data) => {
 
 const searchEnded = () => {
   store.dispatch({ type: 'UPDATE_SEARCH_STATUS', data: 'done' })
-}
-
-const updateSearchHistory = (keyword) => {
-  store.dispatch({ type: 'UPDATE_SEARCH_HISTORY', data: keyword })
 }
 
 export default store
