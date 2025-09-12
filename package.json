@@ -59,5 +59,22 @@
       ]
     ]
   },
-  "license": "MIT"
+  "license": "MIT",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "Chrome >= 90",
+      "Edge >= 90",
+      "Firefox >= 88",
+      "Safari >= 14"
+    ],
+    "development": [
+      "last 2 chrome version",
+      "last 2 edge version",
+      "last 2 firefox version",
+      "last 2 safari version"
+    ]
+  }
 }
