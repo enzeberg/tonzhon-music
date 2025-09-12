@@ -3,7 +3,6 @@ import { PlayCircleOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
 import AddToListenlist from './AddToListenlist'
-import { buildSongLink, buildAlbumLink } from '../../../../utils/link'
 import './index.css'
 
 function SongItem({
@@ -27,8 +26,7 @@ function SongItem({
     <List.Item style={{ padding: '5px 10px' }}>
       <div style={{ display: 'flex', alignItems: 'center', width: '100%', fontSize: 14 }}>
         <div style={{ flex: 5 }} className='nowrap'>
-          <a
-            href={buildSongLink(song.platform, song.originalId)}
+          <span
             title={`${song.name}${song.alias ? ` - ${song.alias}` : ''}`}
             target='_blank'
           >
@@ -36,19 +34,18 @@ function SongItem({
             <span className='song-alias'>
               {song.alias && ` - ${song.alias}`}
             </span>
-          </a>
+          </span>
         </div>
         <div style={{ flex: 3 }} className='nowrap'>
           <Artists artists={song.artists} />
         </div>
         <div style={{ flex: 3 }} className='nowrap'>
-          <a
-            href={buildAlbumLink(song.platform, song.album.id)}
+          <span
             target='_blank'
             title={song.album.name}
           >
             {song.album.name}
-          </a>
+          </span>
         </div>
         <div style={{ flex: 1, textAlign: 'center' }}>
           <a

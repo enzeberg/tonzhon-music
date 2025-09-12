@@ -1,6 +1,6 @@
 {
   "name": "tonzhon-music",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Tonzhon: Just listen to songs, no ads! Download songs, create playlists...",
   "homepage": "https://tonzhon.whamon.com",
   "keywords": [
@@ -10,10 +10,11 @@
     "music",
     "music-player"
   ],
-  "author": "Li Enze",
+  "author": "李恩泽 (Li Enze)",
   "scripts": {
-    "start": "node ./scripts/start",
-    "build": "node ./scripts/build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -26,38 +27,8 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "babel-loader": "^8.0.5",
-    "babel-plugin-named-asset-import": "^0.3.6",
-    "babel-preset-react-app": "^10.1.0",
-    "bfj": "^6.1.1",
-    "case-sensitive-paths-webpack-plugin": "^2.1.1",
-    "chalk": "^5.6.2",
-    "css-loader": "^6.7.1",
-    "file-loader": "^6.2.0",
-    "fs-extra": "^7.0.1",
-    "html-webpack-plugin": "^4.3.0",
-    "mini-css-extract-plugin": "^0.10.0",
-    "pnp-webpack-plugin": "^1.1.0",
-    "postcss-safe-parser": "^7.0.1",
-    "react-dev-utils": "^12.0.1",
-    "style-loader": "^4.0.0",
-    "url-loader": "^4.1.1",
-    "webpack": "^5.0.0",
-    "webpack-dev-server": "^5.2.2"
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      [
-        "import",
-        {
-          "libraryName": "antd",
-          "style": true
-        }
-      ]
-    ]
+    "@vitejs/plugin-react": "^5.0.2",
+    "vite": "^7.1.5"
   },
   "license": "MIT",
   "browserslist": {

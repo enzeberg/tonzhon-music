@@ -17,8 +17,7 @@ import {
 import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi'
 import Artists from './Artists'
 import Listenlist from './Listenlist'
-import toMinAndSec from '../../../utils/toMinAndSec'
-import { buildSongLink } from '../../../utils/link'
+import toMinAndSec from '@/utils/toMinAndSec'
 
 const playModeIcons = {
   loop: <LoopIcon className="player-icon" />,
@@ -35,6 +34,7 @@ const modeExplanations = {
 
 class Player extends Component {
   constructor() {
+    super()
     this.state = {
       getMusicUrlStatus: 'notYet',
       playStatus: 'pausing',
@@ -324,17 +324,13 @@ class Player extends Component {
               {currentSong && (
                 <>
                   <div style={{ flex: 3 }} className="nowrap">
-                    <a
-                      href={buildSongLink(
-                        currentSong.platform,
-                        currentSong.originalId
-                      )}
+                    <span
                       style={{ color: 'white', marginRight: 4, fontSize: 16 }}
                       target="_blank"
                       title={currentSong.name}
                     >
                       <strong>{currentSong.name}</strong>
-                    </a>
+                    </span>
                   </div>
                   <div style={{ flex: 2 }} className="nowrap">
                     {currentSong.artists && (

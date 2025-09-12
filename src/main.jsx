@@ -14,8 +14,4 @@ root.render(
   </Provider>
 )
 
-if (module.hot) {
-  module.hot.accept()
-}
-
 registerServiceWorker()
