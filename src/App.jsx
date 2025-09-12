@@ -4,10 +4,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import SearchResult from './components/SearchResult'
 import Player from './components/Player'
+import { useSearchStatus } from './contexts/SearchStatusContext'
 import './App.css'
 const { Content } = Layout
 
-function App({ searchStatus, searchResults }) {
+function App({ searchResults }) {
+  const { searchStatus } = useSearchStatus()
   return (
     <BrowserRouter>
       <Layout>
@@ -55,7 +57,6 @@ function App({ searchStatus, searchResults }) {
 
 function mapStateToProps(state) {
   return {
-    searchStatus: state.searchStatus,
     searchResults: state.searchResults,
   }
 }
