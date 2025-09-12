@@ -17,7 +17,6 @@ function SearchBar({ keyword, updateSearchKeyword, history }) {
 
   return (
     <Search
-      placeholder="歌曲 | 专辑 | 艺人"
       defaultValue={keyword || ''}
       // value={keyword || ''}
       onSearch={onSearch}
