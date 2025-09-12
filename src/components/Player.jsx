@@ -259,7 +259,16 @@ class Player extends Component {
     const progress = toMinAndSec(this.state.playProgress)
     const total = toMinAndSec(this.state.songDuration)
     return (
-      <div style={styles.player} id="music-player">
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          padding: '8px 0',
+          width: '100%',
+          color: 'white',
+          background: 'linear-gradient(#8080804d,#000)',
+        }}
+      >
         <audio
           src={this.state.songSource}
           ref={(audio) => {
@@ -412,17 +421,6 @@ class Player extends Component {
       </div>
     )
   }
-}
-
-const styles = {
-  player: {
-    position: 'fixed',
-    bottom: 0,
-    padding: '8px 0',
-    width: '100%',
-    backgroundColor: '#222',
-    color: 'white',
-  },
 }
 
 function mapStateToProps(state) {
