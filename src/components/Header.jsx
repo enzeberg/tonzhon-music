@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
 
-function Header() {
+export default function Header() {
   return (
     <header
       style={{
@@ -24,13 +24,10 @@ function Header() {
           <Link to="/">
             <h1
               style={{
-                display: 'inline',
-                color: 'orange',
-                fontWeight: 360,
                 margin: 0,
               }}
             >
-              Tonzhon
+              铜钟 Tonzhon
             </h1>
           </Link>
         </div>
@@ -41,5 +38,3 @@ function Header() {
     </header>
   )
 }
-
-export default Header
