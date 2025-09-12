@@ -19,7 +19,6 @@ function App({ searchResults }) {
           style={{
             marginTop: 59,
             marginBottom: 74,
-            minHeight: 800,
           }}
         >
           <Switch>
