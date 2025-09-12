@@ -1,14 +1,17 @@
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import App from './App'
 import store from './redux/store/'
+import { SearchStatusProvider } from './contexts/SearchStatusContext'
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'))
+root.render(
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <SearchStatusProvider>
+      <App />
+    </SearchStatusProvider>
+  </Provider>
 )
 
 if (module.hot) {
