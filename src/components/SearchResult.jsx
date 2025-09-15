@@ -4,8 +4,10 @@ import { useCallback, useMemo } from 'react'
 import SongList from './SongList'
 import Wrapper from './Wrapper'
 import OperatingBarOfSongList from './OperatingBarOfSongList'
+import { useSearchKeyword } from '../contexts/SearchKeywordContext'
 
-function SearchResult({ result, provider, keyword, onResultResponded }) {
+function SearchResult({ result, provider, onResultResponded }) {
+  const { searchKeyword: keyword } = useSearchKeyword()
   // 使用 useCallback 优化函数，避免不必要的重新渲染
   const onPageChange = useCallback(
     (page) => {
@@ -53,9 +55,7 @@ function SearchResult({ result, provider, keyword, onResultResponded }) {
 }
 
 function mapStateToProps(state) {
-  return {
-    keyword: state.searchKeyword,
-  }
+  return {}
 }
 function mapDispatchToProps(dispatch) {
   return {

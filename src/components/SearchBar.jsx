@@ -1,10 +1,11 @@
 import { Input } from 'antd'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { useSearchKeyword } from '../contexts/SearchKeywordContext'
 
 const { Search } = Input
 
-function SearchBar({ keyword, updateSearchKeyword, history }) {
+function SearchBar({ history }) {
+  const { searchKeyword: keyword, updateSearchKeyword } = useSearchKeyword()
   const onSearch = (searchKeyword) => {
     searchKeyword = searchKeyword.trim()
     if (searchKeyword !== '' && searchKeyword !== keyword) {
@@ -25,19 +26,4 @@ function SearchBar({ keyword, updateSearchKeyword, history }) {
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    keyword: state.searchKeyword,
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    updateSearchKeyword: (keyword) => {
-      dispatch({ type: 'UPDATE_SEARCH_KEYWORD', data: keyword })
-    },
-  }
-}
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SearchBar)
-)
+export default withRouter(SearchBar)
