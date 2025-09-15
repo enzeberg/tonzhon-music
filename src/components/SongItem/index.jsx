@@ -3,6 +3,7 @@ import { PlayCircleOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
 import AddToListenlist from './AddToListenlist'
+import { usePlayIndex } from '../../contexts/PlayIndexContext'
 import './index.css'
 
 function SongItem({
@@ -10,8 +11,8 @@ function SongItem({
   currentSong,
   listenlist,
   addToListenlist,
-  updatePlayIndex,
 }) {
+  const { updatePlayIndex } = usePlayIndex()
   const changeCurrentSong = () => {
     const index = listenlist.findIndex((song) => song.newId === song.newId)
     if (index === -1) {
@@ -84,9 +85,6 @@ function mapDispatchToProps(dispatch) {
   return {
     addToListenlist: (song) => {
       dispatch({ type: 'ADD_SONG_TO_LISTENLIST', data: song })
-    },
-    updatePlayIndex: (index) => {
-      dispatch({ type: 'UPDATE_PLAY_INDEX', data: index })
     },
   }
 }

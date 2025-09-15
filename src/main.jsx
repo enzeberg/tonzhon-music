@@ -5,6 +5,7 @@ import store from './redux/store/'
 import { SearchStatusProvider } from './contexts/SearchStatusContext'
 import { SearchKeywordProvider } from './contexts/SearchKeywordContext'
 import { SearchResultsProvider } from './contexts/SearchResultsContext'
+import { PlayIndexProvider } from './contexts/PlayIndexContext'
 import registerServiceWorker from './registerServiceWorker'
 
 const root = createRoot(document.getElementById('root'))
@@ -13,7 +14,9 @@ root.render(
     <SearchStatusProvider>
       <SearchKeywordProvider>
         <SearchResultsProvider>
-          <App />
+          <PlayIndexProvider>
+            <App />
+          </PlayIndexProvider>
         </SearchResultsProvider>
       </SearchKeywordProvider>
     </SearchStatusProvider>

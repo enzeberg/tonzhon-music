@@ -2,17 +2,17 @@ import { List } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
+import { usePlayIndex } from '../../contexts/PlayIndexContext'
 import './in_listenlist.css'
 
 function SongItem({
   song,
   currentSong,
   listenlist,
-  playIndex,
   addToListenlist,
-  updatePlayIndex,
   deleteSongInListenlist,
 }) {
+  const { playIndex, updatePlayIndex } = usePlayIndex()
   const changeCurrentSong = () => {
     const index = listenlist.findIndex((song) => song.newId === song.newId)
     if (index === -1) {
@@ -29,7 +29,7 @@ function SongItem({
     if (index + 1 === listenlist.length) {
       updatePlayIndex(0)
     }
-    deleteSongInListenlist(index, playIndex)
+    deleteSongInListenlist(index, playIndex, updatePlayIndex)
   }
   return (
     <List.Item
@@ -72,7 +72,6 @@ function mapStateToProps(state) {
   return {
     currentSong: state.listenlist[state.playIndex],
     listenlist: state.listenlist,
-    playIndex: state.playIndex,
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -80,13 +79,10 @@ function mapDispatchToProps(dispatch) {
     addToListenlist: (song) => {
       dispatch({ type: 'ADD_TO_LISTENLIST', data: song })
     },
-    updatePlayIndex: (index) => {
-      dispatch({ type: 'UPDATE_PLAY_INDEX', data: index })
-    },
-    deleteSongInListenlist: (indexToDelete, playIndex) => {
+    deleteSongInListenlist: (indexToDelete, playIndex, updatePlayIndexCallback) => {
       dispatch({ type: 'DELETE_SONG_IN_LISTENLIST', data: indexToDelete })
       if (indexToDelete < playIndex) {
-        dispatch({ type: 'UPDATE_PLAY_INDEX', data: playIndex - 1 })
+        updatePlayIndexCallback(playIndex - 1)
       }
     },
   }

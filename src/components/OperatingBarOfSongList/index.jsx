@@ -2,20 +2,28 @@ import { Button } from 'antd'
 import { CaretRightOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import AddToListenlist from './AddToListenlist'
+import { usePlayIndex } from '../../contexts/PlayIndexContext'
 
-function OperatingBarOfSongList() {
+function OperatingBarOfSongList({ songs, playSongList }) {
+  const { updatePlayIndex } = usePlayIndex()
+  
+  const handlePlaySongList = () => {
+    playSongList(songs)
+    updatePlayIndex(0)
+  }
+  
   return (
     <>
       <Button
         icon={<CaretRightOutlined />}
-        onClick={() => this.props.playSongList(this.props.songs)}
+        onClick={handlePlaySongList}
         style={{
           marginRight: '10px',
         }}
       >
         播放
       </Button>
-      <AddToListenlist data={this.props.songs} />
+      <AddToListenlist data={songs} />
     </>
   )
 }
@@ -24,7 +32,6 @@ function mapDispatchToProps(dispatch) {
   return {
     playSongList: (songs) => {
       dispatch({ type: 'NEW_LISTENLIST', data: songs })
-      dispatch({ type: 'UPDATE_PLAY_INDEX', data: 0 })
     },
   }
 }
