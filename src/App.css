@@ -3,14 +3,6 @@ html, body {
   padding: 0;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-}
-a:hover {
-  color: orange;
-}
-
 .nowrap {
   overflow: hidden;
   text-overflow: ellipsis;
