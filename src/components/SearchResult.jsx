@@ -1,13 +1,14 @@
 import { Pagination } from 'antd'
-import { connect } from 'react-redux'
 import { useCallback, useMemo } from 'react'
 import SongList from './SongList'
 import Wrapper from './Wrapper'
 import OperatingBarOfSongList from './OperatingBarOfSongList'
 import { useSearchKeyword } from '../contexts/SearchKeywordContext'
+import { useSearchResults } from '../contexts/SearchResultsContext'
 
-function SearchResult({ result, provider, onResultResponded }) {
+function SearchResult({ result, provider }) {
   const { searchKeyword: keyword } = useSearchKeyword()
+  const { updateSearchResults } = useSearchResults()
   // 使用 useCallback 优化函数，避免不必要的重新渲染
   const onPageChange = useCallback(
     (page) => {
@@ -19,7 +20,7 @@ function SearchResult({ result, provider, onResultResponded }) {
           return res.json()
         })
         .then((json) => {
-          onResultResponded(provider, json)
+          updateSearchResults(provider, json)
         })
         .catch((err) => {
           console.error('搜索请求失败:', err)
@@ -54,15 +55,4 @@ function SearchResult({ result, provider, onResultResponded }) {
   )
 }
 
-function mapStateToProps(state) {
-  return {}
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    onResultResponded: (provider, data) => {
-      dispatch({ type: 'UPDATE_SEARCH_RESULTS', provider, data })
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchResult)
+export default SearchResult

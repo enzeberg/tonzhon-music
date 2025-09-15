@@ -1,15 +1,20 @@
-import { connect } from 'react-redux'
 import { Layout, Spin } from 'antd'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import SearchResult from './components/SearchResult'
 import Player from './components/Player'
 import { useSearchStatus } from './contexts/SearchStatusContext'
+import { useSearchResults } from './contexts/SearchResultsContext'
+import { useSearchManager } from './hooks/useSearchManager'
 import './App.css'
 const { Content } = Layout
 
-function App({ searchResults }) {
+function App() {
   const { searchStatus } = useSearchStatus()
+  const { searchResults } = useSearchResults()
+  
+  // 初始化搜索管理器
+  useSearchManager()
   return (
     <BrowserRouter>
       <Layout>
@@ -54,10 +59,4 @@ function App({ searchResults }) {
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    searchResults: state.searchResults,
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default App

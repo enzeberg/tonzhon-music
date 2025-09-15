@@ -1,8 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { useSearchStatus } from '../contexts/SearchStatusContext'
+import { useSearchResults } from '../contexts/SearchResultsContext'
+import { useSearchKeyword } from '../contexts/SearchKeywordContext'
 
-export const useSearchManager = (searchKeyword, updateSearchResults) => {
+export const useSearchManager = () => {
+  const { searchKeyword } = useSearchKeyword()
   const { updateSearchStatus, clearResults } = useSearchStatus()
+  const { updateSearchResults, clearResults: clearSearchResults } = useSearchResults()
   const lastKeywordRef = useRef('')
   
   useEffect(() => {
@@ -16,7 +20,7 @@ export const useSearchManager = (searchKeyword, updateSearchResults) => {
     const providers = ['spotify', 'apple', 'youtube']
     
     // 开始搜索
-    clearResults()
+    clearSearchResults()
     updateSearchStatus('searching')
     
     let resultsResponded = 0
@@ -31,7 +35,7 @@ export const useSearchManager = (searchKeyword, updateSearchResults) => {
         )
         const json = await response.json()
         
-        // 更新搜索结果（这里仍然使用 Redux，后续会替换）
+        // 更新搜索结果
         updateSearchResults(provider, json)
         
         resultsResponded++
