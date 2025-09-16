@@ -1,4 +1,4 @@
-import { DeleteOutlined } from '@ant-design/icons'
+import { Trash2 } from 'lucide-react'
 import { Button, List } from 'antd'
 import { connect } from 'react-redux'
 import ItemInListenlist from './SongItem/in_listenlist'
@@ -9,7 +9,7 @@ function Listenlist() {
       <div style={styles.header}>
         <span>聆听列表</span>
         <Button
-          icon={<DeleteOutlined />}
+          icon={<Trash2 size={16} />}
           ghost
           onClick={this.props.clearListenlist}
         >

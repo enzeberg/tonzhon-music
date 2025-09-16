@@ -1,5 +1,5 @@
 import { List } from 'antd'
-import { DeleteOutlined } from '@ant-design/icons'
+import { Trash2 } from 'lucide-react'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
 import { usePlayIndex } from '../../contexts/PlayIndexContext'
@@ -40,9 +40,9 @@ function SongItem({
       style={{ border: 'none', padding: '6px 10px' }}
       extra={
         <a onClick={deleteFromPlaylist} className="delete-btn">
-          <DeleteOutlined
+          <Trash2
+            size={18}
             style={{
-              fontSize: 18,
               verticalAlign: 'middle',
             }}
           />

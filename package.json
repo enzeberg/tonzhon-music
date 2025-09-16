@@ -1,6 +1,6 @@
 {
   "name": "tonzhon-music",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Tonzhon: Just listen to songs, no ads! Download songs, create playlists...",
   "homepage": "https://tonzhon.whamon.com",
   "keywords": [
@@ -17,7 +17,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ant-design/icons": "^6.0.2",
     "antd": "^5.27.3",
     "lucide-react": "^0.544.0",
     "react": "^18.2.0",

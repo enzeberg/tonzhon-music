@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import { CaretRightOutlined } from '@ant-design/icons'
+import { Play } from 'lucide-react'
 import { connect } from 'react-redux'
 import AddToListenlist from './AddToListenlist'
 import { usePlayIndex } from '../../contexts/PlayIndexContext'
@@ -15,7 +15,7 @@ function OperatingBarOfSongList({ songs, playSongList }) {
   return (
     <>
       <Button
-        icon={<CaretRightOutlined />}
+        icon={<Play size={16} />}
         onClick={handlePlaySongList}
         style={{
           marginRight: '10px',

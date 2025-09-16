@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons'
+import { Plus } from 'lucide-react'
 import { notification } from 'antd'
 import { connect } from 'react-redux'
 
@@ -12,9 +12,9 @@ function AddToListenlist({ data, addToListenlist }) {
 
   return (
     <a onClick={handleClick} title='添加到聆听列表'>
-      <PlusOutlined
+      <Plus
+        size={20}
         style={{
-          fontSize: 20,
           display: 'block',
         }}
       />

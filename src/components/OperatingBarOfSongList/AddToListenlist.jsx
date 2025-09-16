@@ -1,5 +1,5 @@
 import { notification, Button } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { Plus } from 'lucide-react'
 import { connect } from 'react-redux'
 
 notification.config({
@@ -17,7 +17,7 @@ function AddToListenlist({ data, addToListenlist }) {
   }
 
   return (
-    <Button icon={<PlusOutlined />} onClick={handleClick}>
+    <Button icon={<Plus size={16} />} onClick={handleClick}>
       添加到聆听列表
     </Button>
   )

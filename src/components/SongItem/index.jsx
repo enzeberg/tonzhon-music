@@ -1,5 +1,5 @@
 import { List } from 'antd'
-import { PlayCircleOutlined } from '@ant-design/icons'
+import { PlayCircle } from 'lucide-react'
 import { connect } from 'react-redux'
 import Artists from '../Artists'
 import AddToListenlist from './AddToListenlist'
@@ -59,9 +59,9 @@ function SongItem({
                 : 'play-btn'
             }
           >
-            <PlayCircleOutlined
+            <PlayCircle
+              size={20}
               style={{
-                fontSize: 20,
                 display: 'block',
               }}
             />

@@ -1,13 +1,13 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  CaretRightOutlined,
-  StepForwardOutlined,
-  StepBackwardOutlined,
-  PauseOutlined,
-  DownloadOutlined,
-  UnorderedListOutlined,
-} from '@ant-design/icons'
+  Play as CaretRightOutlined,
+  SkipForward as StepForwardOutlined,
+  SkipBack as StepBackwardOutlined,
+  Pause as PauseOutlined,
+  Download as DownloadOutlined,
+  List as UnorderedListOutlined,
+} from 'lucide-react'
 import { Slider, Button, Tooltip, notification, Spin } from 'antd'
 import {
   Repeat as LoopIcon,
@@ -289,7 +289,7 @@ class Player extends Component {
             <Button
               ghost
               shape="circle"
-              icon={<StepBackwardOutlined />}
+              icon={<StepBackwardOutlined size={16} />}
               onClick={() => this.playNext('backward')}
             />
             <Button
@@ -300,17 +300,17 @@ class Player extends Component {
               style={{ margin: '0 10px' }}
               icon={
                 getMusicUrlStatus === 'notYet' ? (
-                  <CaretRightOutlined />
+                  <CaretRightOutlined size={20} />
                 ) : getMusicUrlStatus === 'started' ? (
                   <Spin />
                 ) : getMusicUrlStatus === 'ok' ? (
                   playStatus === 'playing' ? (
-                    <PauseOutlined />
+                    <PauseOutlined size={20} />
                   ) : (
-                    <CaretRightOutlined />
+                    <CaretRightOutlined size={20} />
                   )
                 ) : (
-                  <CaretRightOutlined />
+                  <CaretRightOutlined size={20} />
                 )
               }
               disabled={!currentSong}
@@ -318,7 +318,7 @@ class Player extends Component {
             <Button
               ghost
               shape="circle"
-              icon={<StepForwardOutlined />}
+              icon={<StepForwardOutlined size={16} />}
               onClick={() => this.playNext('forward')}
             />
           </div>
@@ -371,7 +371,7 @@ class Player extends Component {
           </div>
           <div style={{ flex: 1, textAlign: 'center' }}>
             <Button
-              icon={<DownloadOutlined />}
+              icon={<DownloadOutlined size={16} />}
               ghost
               shape="circle"
               href={this.state.songSource}
@@ -412,7 +412,7 @@ class Player extends Component {
           <div style={{ flex: 1, textAlign: 'right' }}>
             <Button
               ghost
-              icon={<UnorderedListOutlined />}
+              icon={<UnorderedListOutlined size={16} />}
               onClick={this.onListenlistBtnClick}
               title="聆听列表"
             />
