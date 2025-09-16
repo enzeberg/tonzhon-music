@@ -363,7 +363,7 @@ class Player extends Component {
                 this.state.songDuration ? parseInt(this.state.songDuration) : 0
               }
               value={this.state.playProgress}
-              tipFormatter={(value) => toMinAndSec(value)}
+              tooltip={{ formatter: (value) => toMinAndSec(value) }}
               onChange={this.changePlayProgress}
               disabled={!this.state.songSource}
               style={{ margin: '8px 0' }}
