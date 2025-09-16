@@ -1,16 +1,17 @@
 import { Input } from 'antd'
-import { withRouter } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSearchKeyword } from '../contexts/SearchKeywordContext'
 
 const { Search } = Input
 
-function SearchBar({ history }) {
+function SearchBar() {
+  const navigate = useNavigate()
   const { searchKeyword: keyword, updateSearchKeyword } = useSearchKeyword()
   const onSearch = (searchKeyword) => {
     searchKeyword = searchKeyword.trim()
     if (searchKeyword !== '' && searchKeyword !== keyword) {
       updateSearchKeyword(searchKeyword)
-      history.push(
+      navigate(
         `/search?keyword=${window.encodeURIComponent(searchKeyword)}`
       )
     }
@@ -26,4 +27,4 @@ function SearchBar({ history }) {
   )
 }
 
-export default withRouter(SearchBar)
+export default SearchBar
