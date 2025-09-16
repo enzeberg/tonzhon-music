@@ -10,11 +10,12 @@ import {
 } from '@ant-design/icons'
 import { Slider, Button, Tooltip, notification, Spin } from 'antd'
 import {
-  MdRepeat as LoopIcon,
-  MdRepeatOne as SingleIcon,
-  MdShuffle as ShuffleIcon,
-} from 'react-icons/md'
-import { FiVolume2 as VolumeIcon, FiVolumeX as MuteIcon } from 'react-icons/fi'
+  Repeat as LoopIcon,
+  Repeat1 as SingleIcon,
+  Shuffle as ShuffleIcon,
+  Volume2 as VolumeIcon,
+  VolumeX as MuteIcon,
+} from 'lucide-react'
 import Artists from './Artists'
 import Listenlist from './Listenlist'
 import toMinAndSec from '@/utils/toMinAndSec'
