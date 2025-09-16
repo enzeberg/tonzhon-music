@@ -6,21 +6,21 @@ const { Search } = Input
 
 function SearchBar() {
   const navigate = useNavigate()
-  const { searchKeyword: keyword, updateSearchKeyword } = useSearchKeyword()
-  const onSearch = (searchKeyword) => {
-    searchKeyword = searchKeyword.trim()
-    if (searchKeyword !== '' && searchKeyword !== keyword) {
-      updateSearchKeyword(searchKeyword)
+  const { searchKeyword, updateSearchKeyword } = useSearchKeyword()
+  const onSearch = (inputKeyword) => {
+    inputKeyword = inputKeyword.trim()
+    if (inputKeyword !== '' && inputKeyword !== searchKeyword) {
+      updateSearchKeyword(inputKeyword)
       navigate(
-        `/search?keyword=${window.encodeURIComponent(searchKeyword)}`
+        `/search/${window.encodeURIComponent(inputKeyword)}`
       )
     }
   }
 
   return (
     <Search
-      defaultValue={keyword || ''}
-      // value={keyword || ''}
+      defaultValue={searchKeyword || ''}
+      // value={searchKeyword || ''}
       onSearch={onSearch}
       enterButton
     />
