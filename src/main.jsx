@@ -5,7 +5,6 @@ import { SearchKeywordProvider } from './contexts/SearchKeywordContext'
 import { SearchResultsProvider } from './contexts/SearchResultsContext'
 import { PlayIndexProvider } from './contexts/PlayIndexContext'
 import { ListenlistProvider } from './contexts/ListenlistContext'
-import registerServiceWorker from './registerServiceWorker'
 
 const root = createRoot(document.getElementById('root'))
 root.render(
@@ -21,5 +20,3 @@ root.render(
     </SearchKeywordProvider>
   </SearchStatusProvider>
 )
-
-registerServiceWorker()
