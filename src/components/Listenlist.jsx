@@ -3,39 +3,33 @@ import { Button, List } from 'antd'
 import ItemInListenlist from './SongItem/in_listenlist'
 import { useListenlist } from '../contexts/ListenlistContext'
 
-const styles = {
-  wrapper: {
-    position: 'absolute',
-    bottom: 64,
-    color: 'white',
-    right: `${(document.body.clientWidth - 1000) / 2}px`,
-    width: 600,
-    height: 320,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    background: 'rgb(70,70,70)',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    background: '#222',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-  },
-  list: {
-    color: 'white',
-    overflow: 'auto',
-    height: 268,
-  },
-}
-
 export default function Listenlist() {
   const { listenlist, clearListenlist } = useListenlist()
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.header}>
+    <div
+      style={{
+        position: 'absolute',
+        bottom: 64,
+        color: 'white',
+        right: `${(document.body.clientWidth - 1000) / 2}px`,
+        width: 600,
+        height: 320,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+        background: 'rgb(70,70,70)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: 10,
+          background: '#222',
+          borderTopLeftRadius: 5,
+          borderTopRightRadius: 5,
+        }}
+      >
         <span>聆听列表</span>
         <Button icon={<Trash2 size={16} />} ghost onClick={clearListenlist}>
           清空
@@ -43,7 +37,11 @@ export default function Listenlist() {
       </div>
       <List
         id="listenlist"
-        style={styles.list}
+        style={{
+          color: 'white',
+          overflow: 'auto',
+          height: 268,
+        }}
         itemLayout="horizontal"
         dataSource={listenlist}
         renderItem={(song) => {
