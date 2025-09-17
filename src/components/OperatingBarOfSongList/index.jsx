@@ -1,17 +1,18 @@
 import { Button } from 'antd'
 import { Play } from 'lucide-react'
-import { connect } from 'react-redux'
 import AddToListenlist from './AddToListenlist'
 import { usePlayIndex } from '../../contexts/PlayIndexContext'
+import { useListenlist } from '../../contexts/ListenlistContext'
 
-function OperatingBarOfSongList({ songs, playSongList }) {
+export default function OperatingBarOfSongList({ songs }) {
   const { updatePlayIndex } = usePlayIndex()
-  
+  const { setNewListenlist } = useListenlist()
+
   const handlePlaySongList = () => {
-    playSongList(songs)
+    setNewListenlist(songs)
     updatePlayIndex(0)
   }
-  
+
   return (
     <>
       <Button
@@ -27,13 +28,3 @@ function OperatingBarOfSongList({ songs, playSongList }) {
     </>
   )
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    playSongList: (songs) => {
-      dispatch({ type: 'NEW_LISTENLIST', data: songs })
-    },
-  }
-}
-
-export default connect(null, mapDispatchToProps)(OperatingBarOfSongList)

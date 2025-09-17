@@ -1,6 +1,6 @@
 import { notification, Button } from 'antd'
 import { Plus } from 'lucide-react'
-import { connect } from 'react-redux'
+import { useListenlist } from '../../contexts/ListenlistContext'
 
 notification.config({
   placement: 'bottomRight',
@@ -8,9 +8,11 @@ notification.config({
   duration: 2,
 })
 
-function AddToListenlist({ data, addToListenlist }) {
+export default function AddToListenlist({ data }) {
+  const { addSongsToListenlist } = useListenlist()
+
   function handleClick() {
-    addToListenlist(data)
+    addSongsToListenlist(data)
     notification.open({
       message: '已添加到聆听列表',
     })
@@ -22,13 +24,3 @@ function AddToListenlist({ data, addToListenlist }) {
     </Button>
   )
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    addToListenlist: (data) => {
-      dispatch({ type: 'ADD_SONGS_TO_LISTENLIST', data })
-    },
-  }
-}
-
-export default connect(null, mapDispatchToProps)(AddToListenlist)

@@ -1,18 +1,43 @@
 import { Trash2 } from 'lucide-react'
 import { Button, List } from 'antd'
-import { connect } from 'react-redux'
 import ItemInListenlist from './SongItem/in_listenlist'
+import { useListenlist } from '../contexts/ListenlistContext'
 
-function Listenlist() {
+const styles = {
+  wrapper: {
+    position: 'absolute',
+    bottom: 64,
+    color: 'white',
+    right: `${(document.body.clientWidth - 1000) / 2}px`,
+    width: 600,
+    height: 320,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    background: 'rgb(70,70,70)',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    background: '#222',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+  },
+  list: {
+    color: 'white',
+    overflow: 'auto',
+    height: 268,
+  },
+}
+
+export default function Listenlist() {
+  const { listenlist, clearListenlist } = useListenlist()
   return (
     <div style={styles.wrapper}>
       <div style={styles.header}>
         <span>聆听列表</span>
-        <Button
-          icon={<Trash2 size={16} />}
-          ghost
-          onClick={this.props.clearListenlist}
-        >
+        <Button icon={<Trash2 size={16} />} ghost onClick={clearListenlist}>
           清空
         </Button>
       </div>
@@ -20,7 +45,7 @@ function Listenlist() {
         id="listenlist"
         style={styles.list}
         itemLayout="horizontal"
-        dataSource={this.props.dataSource}
+        dataSource={listenlist}
         renderItem={(song) => {
           return <ItemInListenlist key={song.link} song={song} />
         }}
@@ -54,46 +79,3 @@ function Listenlist() {
     </div>
   )
 }
-
-const styles = {
-  wrapper: {
-    position: 'absolute',
-    bottom: 64,
-    color: 'white',
-    right: `${(document.body.clientWidth - 1000) / 2}px`,
-    width: 600,
-    height: 320,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    background: 'rgb(70,70,70)',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    background: '#222',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-  },
-  list: {
-    color: 'white',
-    overflow: 'auto',
-    height: 268,
-  },
-}
-
-function mapStateToProps(state) {
-  return {
-    dataSource: state.listenlist,
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    clearListenlist: () => {
-      dispatch({ type: 'CLEAR_LISTENLIST' })
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Listenlist)

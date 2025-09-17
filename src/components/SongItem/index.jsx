@@ -1,22 +1,19 @@
 import { List } from 'antd'
 import { PlayCircle } from 'lucide-react'
-import { connect } from 'react-redux'
 import Artists from '../Artists'
 import AddToListenlist from './AddToListenlist'
 import { usePlayIndex } from '../../contexts/PlayIndexContext'
+import { useListenlist } from '../../contexts/ListenlistContext'
 import './index.css'
 
-function SongItem({
-  song,
-  currentSong,
-  listenlist,
-  addToListenlist,
-}) {
-  const { updatePlayIndex } = usePlayIndex()
+export default function SongItem({ song }) {
+  const { playIndex, updatePlayIndex } = usePlayIndex()
+  const { listenlist, addSongToListenlist } = useListenlist()
+  const currentSong = listenlist[playIndex]
   const changeCurrentSong = () => {
-    const index = listenlist.findIndex((song) => song.newId === song.newId)
+    const index = listenlist.findIndex((item) => item.newId === song.newId)
     if (index === -1) {
-      addToListenlist(song)
+      addSongToListenlist(song)
       updatePlayIndex(listenlist.length)
     } else {
       updatePlayIndex(index)
@@ -25,26 +22,30 @@ function SongItem({
 
   return (
     <List.Item style={{ padding: '5px 10px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', width: '100%', fontSize: 14 }}>
-        <div style={{ flex: 5 }} className='nowrap'>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          width: '100%',
+          fontSize: 14,
+        }}
+      >
+        <div style={{ flex: 5 }} className="nowrap">
           <span
             title={`${song.name}${song.alias ? ` - ${song.alias}` : ''}`}
-            target='_blank'
+            target="_blank"
           >
             <span>{song.name}</span>
-            <span className='song-alias'>
+            <span className="song-alias">
               {song.alias && ` - ${song.alias}`}
             </span>
           </span>
         </div>
-        <div style={{ flex: 3 }} className='nowrap'>
+        <div style={{ flex: 3 }} className="nowrap">
           <Artists artists={song.artists} />
         </div>
-        <div style={{ flex: 3 }} className='nowrap'>
-          <span
-            target='_blank'
-            title={song.album.name}
-          >
+        <div style={{ flex: 3 }} className="nowrap">
+          <span target="_blank" title={song.album.name}>
             {song.album.name}
           </span>
         </div>
@@ -74,19 +75,3 @@ function SongItem({
     </List.Item>
   )
 }
-
-function mapStateToProps(state) {
-  return {
-    currentSong: state.listenlist[state.playIndex],
-    listenlist: state.listenlist,
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    addToListenlist: (song) => {
-      dispatch({ type: 'ADD_SONG_TO_LISTENLIST', data: song })
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SongItem)

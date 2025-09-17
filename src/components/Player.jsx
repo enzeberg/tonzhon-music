@@ -1,29 +1,29 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import {
-  Play as CaretRightOutlined,
-  SkipForward as StepForwardOutlined,
-  SkipBack as StepBackwardOutlined,
-  Pause as PauseOutlined,
-  Download as DownloadOutlined,
-  List as UnorderedListOutlined,
+  Play,
+  SkipForward,
+  SkipBack,
+  Pause,
+  Download,
+  List,
+  Repeat,
+  Repeat1,
+  Shuffle,
+  Volume2,
+  VolumeX,
+  Loader2
 } from 'lucide-react'
-import { Slider, Button, Tooltip, notification, Spin } from 'antd'
-import {
-  Repeat as LoopIcon,
-  Repeat1 as SingleIcon,
-  Shuffle as ShuffleIcon,
-  Volume2 as VolumeIcon,
-  VolumeX as MuteIcon,
-} from 'lucide-react'
+import { Slider, Button, Tooltip, notification } from 'antd'
 import Artists from './Artists'
 import Listenlist from './Listenlist'
-import toMinAndSec from '@/utils/toMinAndSec'
+import toMinAndSec from '../utils/toMinAndSec'
+import { usePlayIndex } from '../contexts/PlayIndexContext'
+import { useListenlist } from '../contexts/ListenlistContext'
 
 const playModeIcons = {
-  loop: <LoopIcon className="player-icon" />,
-  single: <SingleIcon className="player-icon" />,
-  shuffle: <ShuffleIcon className="player-icon" />,
+  loop: <Repeat className="player-icon" size={16} />,
+  single: <Repeat1 className="player-icon" size={16} />,
+  shuffle: <Shuffle className="player-icon" size={16} />,
 }
 
 const playModes = ['loop', 'single', 'shuffle']
@@ -33,411 +33,218 @@ const modeExplanations = {
   shuffle: '随机',
 }
 
-class Player extends Component {
-  constructor() {
-    super()
-    this.state = {
-      getMusicUrlStatus: 'notYet',
-      playStatus: 'pausing',
-      playMode: localStorage.getItem('playMode') || 'loop',
-      volume: localStorage.getItem('volume')
-        ? Number(localStorage.getItem('volume'))
-        : 0.6,
-      songSource: null,
-      muted: false,
-      playProgress: 0,
-      listenlistVisible: false,
+function Player() {
+  const { playIndex, updatePlayIndex } = usePlayIndex()
+  const { listenlist } = useListenlist()
+  const audioRef = useRef(null)
+  const intervalRef = useRef(null)
+  
+  // 计算当前歌曲
+  const currentSong = listenlist[playIndex]
+  
+  // 状态管理
+  const [getMusicUrlStatus, setGetMusicUrlStatus] = useState('notYet')
+  const [playStatus, setPlayStatus] = useState('pausing')
+  const [playMode, setPlayMode] = useState(() => localStorage.getItem('playMode') || 'loop')
+  const [volume, setVolume] = useState(() => {
+    const savedVolume = localStorage.getItem('volume')
+    return savedVolume ? Number(savedVolume) : 0.6
+  })
+  const [songSource, setSongSource] = useState(null)
+  const [muted, setMuted] = useState(false)
+  const [playProgress, setPlayProgress] = useState(0)
+  const [listenlistVisible, setListenlistVisible] = useState(false)
+  const [songLoaded, setSongLoaded] = useState(false)
+  const [songDuration, setSongDuration] = useState(0)
+
+  // 音频事件处理
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    audio.volume = volume
+
+    const handleLoadedData = () => {
+      setSongLoaded(true)
+      setSongDuration(audio.duration)
     }
-    this.playOrPause = this.playOrPause.bind(this)
-    this.changePlayProgress = this.changePlayProgress.bind(this)
-    this.onVolumeBtnClick = this.onVolumeBtnClick.bind(this)
-    this.changeVolume = this.changeVolume.bind(this)
-    this.playNext = this.playNext.bind(this)
-    this.switchPlayMode = this.switchPlayMode.bind(this)
-    this.onListenlistBtnClick = this.onListenlistBtnClick.bind(this)
-  }
 
-  componentDidMount() {
-    this.audio.volume = this.state.volume
-    this.audio.addEventListener('loadeddata', () => {
-      this.setState({
-        songLoaded: true,
-        songDuration: this.audio.duration,
-        // playProgress: 0
-      })
-    })
-    this.audio.addEventListener('play', () => {
-      document.title = `${this.props.currentSong.name} -
-                        ${this.props.currentSong.artists
-                          .map((item) => item.name)
-                          .reduce(
-                            (accumulator, currentValue) =>
-                              accumulator + ' / ' + currentValue
-                          )}`
-      if (this.interval) {
-        clearInterval(this.interval)
+    const handlePlay = () => {
+      if (currentSong) {
+        document.title = `${currentSong.name} - ${currentSong.artists
+          ?.map((item) => item.name)
+          .join(' / ')}`
       }
-      this.interval = setInterval(() => {
-        this.setState({
-          playProgress: this.audio.currentTime,
-          // songDuration: this.audio.duration,
-        })
+      
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+      
+      intervalRef.current = setInterval(() => {
+        setPlayProgress(audio.currentTime)
       }, 1000)
-    })
-    this.audio.addEventListener('pause', () => {
-      if (this.interval) {
-        clearInterval(this.interval)
-      }
-    })
-    this.audio.addEventListener('ended', () => {
-      clearInterval(this.interval)
-      this.setState(
-        {
-          playProgress: this.audio.currentTime,
-        },
-        () => {
-          this.playNext('forward')
-        }
-      )
-    })
-  }
+    }
 
-  componentDidUpdate(prevProps) {
-    const prevSong = prevProps.currentSong
-    const currentSong = this.props.currentSong
+    const handlePause = () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
+
+    const handleEnded = () => {
+      clearInterval(intervalRef.current)
+      setPlayProgress(audio.currentTime)
+      playNext('forward')
+    }
+
+    audio.addEventListener('loadeddata', handleLoadedData)
+    audio.addEventListener('play', handlePlay)
+    audio.addEventListener('pause', handlePause)
+    audio.addEventListener('ended', handleEnded)
+
+    return () => {
+      audio.removeEventListener('loadeddata', handleLoadedData)
+      audio.removeEventListener('play', handlePlay)
+      audio.removeEventListener('pause', handlePause)
+      audio.removeEventListener('ended', handleEnded)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
+  }, [currentSong])
+
+  // 当前歌曲变化时的处理
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
 
     if (currentSong) {
-      if ((prevSong && currentSong.newId !== prevSong.newId) || !prevSong) {
-        this.audio.pause()
-        this.setState({
-          songSource: null,
-          songLoaded: false,
-          playProgress: 0,
-        })
-        this.getSongSourceAndPlay(currentSong)
-      }
+      audio.pause()
+      setSongSource(null)
+      setSongLoaded(false)
+      setPlayProgress(0)
+      getSongSourceAndPlay(currentSong)
     } else {
-      if (prevSong) {
-        this.setState({
-          songSource: null,
-          songLoaded: false,
-          playProgress: 0,
-        })
-      }
+      setSongSource(null)
+      setSongLoaded(false)
+      setPlayProgress(0)
     }
-  }
+  }, [currentSong?.newId])
 
-  playOrPause() {
-    const { playStatus } = this.state
+  const playOrPause = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
     if (playStatus === 'pausing') {
-      if (this.state.songSource) {
-        this.play()
-      } else {
-        const { currentSong } = this.props
-        this.getSongSourceAndPlay(currentSong)
+      if (songSource) {
+        play()
+      } else if (currentSong) {
+        getSongSourceAndPlay(currentSong)
       }
     } else if (playStatus === 'playing') {
-      this.pause()
+      pause()
     }
-  }
-  getSongSourceAndPlay(song) {
-    this.getSongSource(song.platform, song.originalId, () => {
-      this.play()
-    })
-  }
-  play() {
-    this.audio.play()
-    this.setState({
-      playStatus: 'playing',
-    })
-  }
-  pause() {
-    this.audio.pause()
-    this.setState({
-      playStatus: 'pausing',
-    })
-  }
+  }, [playStatus, songSource, currentSong])
 
-  getSongSource(platform, originalId, callback) {
-    this.setState({
-      getMusicUrlStatus: 'started',
+  const getSongSourceAndPlay = useCallback((song) => {
+    getSongSource(song.platform, song.originalId, () => {
+      play()
     })
+  }, [])
+
+  const play = useCallback(() => {
+    const audio = audioRef.current
+    if (audio) {
+      audio.play()
+      setPlayStatus('playing')
+    }
+  }, [])
+
+  const pause = useCallback(() => {
+    const audio = audioRef.current
+    if (audio) {
+      audio.pause()
+      setPlayStatus('pausing')
+    }
+  }, [])
+
+  const getSongSource = useCallback((platform, originalId, callback) => {
+    setGetMusicUrlStatus('started')
+    
     fetch(`/api/song_source/${platform}/${originalId}`)
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 'ok') {
-          this.setState(
-            {
-              getMusicUrlStatus: 'ok',
-              songSource: json.data.songSource,
-              songLoaded: false,
-            },
-            callback
-          )
+          setSongSource(json.data.songSource)
+          setSongLoaded(false)
+          setGetMusicUrlStatus('ok')
+          if (callback) callback()
         } else {
-          this.setState(
-            {
-              getMusicUrlStatus: 'failed',
-            },
-            () => {
-              this.afterLoadingFailure()
-            }
-          )
+          setGetMusicUrlStatus('failed')
+          afterLoadingFailure()
         }
       })
       .catch((err) => {
-        this.setState(
-          {
-            getMusicUrlStatus: 'failed',
-          },
-          () => {
-            this.afterLoadingFailure()
-          }
-        )
+        setGetMusicUrlStatus('failed')
+        afterLoadingFailure()
       })
-  }
+  }, [])
 
-  afterLoadingFailure() {
+  const afterLoadingFailure = useCallback(() => {
     notification.open({
       message: '加载失败，已跳过',
     })
-    this.playNext('forward')
-  }
+    playNext('forward')
+  }, [])
 
-  changePlayProgress(value) {
-    this.audio.currentTime = value
-    this.setState({ playProgress: value })
-  }
-
-  onVolumeBtnClick() {
-    if (this.state.muted) {
-      this.audio.muted = false
-      this.setState({ muted: false })
-    } else {
-      this.audio.muted = true
-      this.setState({ muted: true })
+  const changePlayProgress = useCallback((value) => {
+    const audio = audioRef.current
+    if (audio) {
+      audio.currentTime = value
+      setPlayProgress(value)
     }
-  }
+  }, [])
 
-  changeVolume(value) {
-    this.audio.volume = value
-    this.setState({ volume: value })
-    localStorage.setItem('volume', value)
-  }
-
-  playNext(direction) {
-    if (this.state.playStatus === 'playing') {
-      this.pause()
+  const onVolumeBtnClick = useCallback(() => {
+    const audio = audioRef.current
+    if (audio) {
+      if (muted) {
+        audio.muted = false
+        setMuted(false)
+      } else {
+        audio.muted = true
+        setMuted(true)
+      }
     }
-    const { currentSong, listenlist } = this.props
-    const { playMode } = this.state
+  }, [muted])
+
+  const changeVolume = useCallback((value) => {
+    const audio = audioRef.current
+    if (audio) {
+      audio.volume = value
+      setVolume(value)
+      localStorage.setItem('volume', value.toString())
+    }
+  }, [])
+
+  const playNext = useCallback((direction) => {
+    if (playStatus === 'playing') {
+      pause()
+    }
+    
     if (playMode === 'single' || listenlist.length === 1) {
-      this.audio.currentTime = 0
-      this.play()
+      const audio = audioRef.current
+      if (audio) {
+        audio.currentTime = 0
+        play()
+      }
     } else {
-      this.props.changePlayIndex(currentSong, listenlist, playMode, direction)
-    }
-  }
-
-  switchPlayMode() {
-    const i = playModes.indexOf(this.state.playMode)
-    const mode = playModes[i + 1] || playModes[0]
-    localStorage.setItem('playMode', mode)
-    this.setState({
-      playMode: mode,
-    })
-  }
-
-  onListenlistBtnClick() {
-    this.setState({
-      listenlistVisible: !this.state.listenlistVisible,
-    })
-  }
-
-  render() {
-    const { currentSong } = this.props
-    const { getMusicUrlStatus, playStatus } = this.state
-    const progress = toMinAndSec(this.state.playProgress)
-    const total = toMinAndSec(this.state.songDuration)
-    return (
-      <div
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          padding: '8px 0',
-          width: '100%',
-          color: 'white',
-          background: 'linear-gradient(#8080804d,#000)',
-        }}
-      >
-        <audio
-          src={this.state.songSource}
-          ref={(audio) => {
-            this.audio = audio
-          }}
-        />
-
-        <div
-          className="container"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-          }}
-        >
-          <div style={{ flex: 2 }}>
-            <Button
-              ghost
-              shape="circle"
-              icon={<StepBackwardOutlined size={16} />}
-              onClick={() => this.playNext('backward')}
-            />
-            <Button
-              ghost
-              shape="circle"
-              size="large"
-              onClick={this.playOrPause}
-              style={{ margin: '0 10px' }}
-              icon={
-                getMusicUrlStatus === 'notYet' ? (
-                  <CaretRightOutlined size={20} />
-                ) : getMusicUrlStatus === 'started' ? (
-                  <Spin />
-                ) : getMusicUrlStatus === 'ok' ? (
-                  playStatus === 'playing' ? (
-                    <PauseOutlined size={20} />
-                  ) : (
-                    <CaretRightOutlined size={20} />
-                  )
-                ) : (
-                  <CaretRightOutlined size={20} />
-                )
-              }
-              disabled={!currentSong}
-            />
-            <Button
-              ghost
-              shape="circle"
-              icon={<StepForwardOutlined size={16} />}
-              onClick={() => this.playNext('forward')}
-            />
-          </div>
-          <div style={{ flex: 7, paddingRight: 40 }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                height: 20,
-              }}
-            >
-              {currentSong && (
-                <>
-                  <div style={{ flex: 3 }} className="nowrap">
-                    <span
-                      style={{ color: 'white', marginRight: 4, fontSize: 16 }}
-                      target="_blank"
-                      title={currentSong.name}
-                    >
-                      <strong>{currentSong.name}</strong>
-                    </span>
-                  </div>
-                  <div style={{ flex: 2 }} className="nowrap">
-                    {currentSong.artists && (
-                      <Artists artists={currentSong.artists} />
-                    )}
-                  </div>
-                  <div style={{ flex: 1, textAlign: 'right' }}>
-                    {getMusicUrlStatus === 'failed'
-                      ? '加载失败'
-                      : this.state.songLoaded
-                      ? `${progress} / ${total}`
-                      : '00:00 / 00:00'}
-                  </div>
-                </>
-              )}
-            </div>
-            <Slider
-              min={0}
-              max={
-                this.state.songDuration ? parseInt(this.state.songDuration) : 0
-              }
-              value={this.state.playProgress}
-              tooltip={{ formatter: (value) => toMinAndSec(value) }}
-              onChange={this.changePlayProgress}
-              disabled={!this.state.songSource}
-              style={{ margin: '8px 0' }}
-            />
-          </div>
-          <div style={{ flex: 1, textAlign: 'center' }}>
-            <Button
-              icon={<DownloadOutlined size={16} />}
-              ghost
-              shape="circle"
-              href={this.state.songSource}
-              target="_blank"
-              download
-              disabled={this.state.songSource === null}
-            />
-          </div>
-          <div style={{ flex: 1, textAlign: 'center', paddingLeft: 3 }}>
-            <Tooltip title={modeExplanations[this.state.playMode]}>
-              <a onClick={this.switchPlayMode}>
-                {playModeIcons[this.state.playMode]}
-              </a>
-            </Tooltip>
-          </div>
-          <div style={{ flex: 2 }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ flex: 1 }}>
-                <a onClick={this.onVolumeBtnClick}>
-                  {this.state.muted ? (
-                    <MuteIcon className="player-icon" />
-                  ) : (
-                    <VolumeIcon className="player-icon" />
-                  )}
-                </a>
-              </div>
-              <div style={{ flex: 5 }}>
-                <Slider
-                  min={0}
-                  max={1}
-                  step={0.01}
-                  defaultValue={this.state.volume}
-                  onChange={this.changeVolume}
-                />
-              </div>
-            </div>
-          </div>
-          <div style={{ flex: 1, textAlign: 'right' }}>
-            <Button
-              ghost
-              icon={<UnorderedListOutlined size={16} />}
-              onClick={this.onListenlistBtnClick}
-              title="聆听列表"
-            />
-          </div>
-        </div>
-        {this.state.listenlistVisible && <Listenlist />}
-      </div>
-    )
-  }
-}
-
-function mapStateToProps(state) {
-  const currentSong = state.listenlist[state.playIndex]
-  return {
-    currentSong: currentSong,
-    listenlist: state.listenlist,
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    changePlayIndex: (currentSong, listenlist, playMode, direction) => {
+      // 计算下一首歌曲的索引
       let nextPlayIndex
       const currentIndex = listenlist.findIndex(
         (song) => song.newId === currentSong.newId
       )
+      
       if (playMode === 'loop') {
         if (direction === 'forward') {
           nextPlayIndex = listenlist[currentIndex + 1] ? currentIndex + 1 : 0
@@ -451,11 +258,192 @@ function mapDispatchToProps(dispatch) {
           nextPlayIndex = Math.floor(Math.random() * listenlist.length)
         } while (nextPlayIndex === currentIndex)
       }
+      
       if (nextPlayIndex !== undefined) {
-        dispatch({ type: 'UPDATE_PLAY_INDEX', data: nextPlayIndex })
+        updatePlayIndex(nextPlayIndex)
       }
-    },
-  }
+    }
+  }, [playStatus, playMode, listenlist, currentSong, updatePlayIndex, pause, play])
+
+  const switchPlayMode = useCallback(() => {
+    const currentIndex = playModes.indexOf(playMode)
+    const nextMode = playModes[currentIndex + 1] || playModes[0]
+    localStorage.setItem('playMode', nextMode)
+    setPlayMode(nextMode)
+  }, [playMode])
+
+  const onListenlistBtnClick = useCallback(() => {
+    setListenlistVisible(!listenlistVisible)
+  }, [listenlistVisible])
+
+  const progress = toMinAndSec(playProgress)
+  const total = toMinAndSec(songDuration)
+
+  return (
+    <div style={styles.player} id="music-player">
+      <audio
+        src={songSource}
+        ref={audioRef}
+      />
+
+      <div
+        className="container"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+        }}
+      >
+        <div style={{ flex: 2 }}>
+          <Button
+            ghost
+            shape="circle"
+            icon={<SkipBack size={16} />}
+            onClick={() => playNext('backward')}
+          />
+          <Button
+            ghost
+            shape="circle"
+            size="large"
+            onClick={playOrPause}
+            style={{ margin: '0 10px' }}
+            icon={
+              getMusicUrlStatus === 'notYet' ? (
+                <Play size={20} />
+              ) : getMusicUrlStatus === 'started' ? (
+                <Loader2 size={20} className="animate-spin" />
+              ) : getMusicUrlStatus === 'ok' ? (
+                playStatus === 'playing' ? (
+                  <Pause size={20} />
+                ) : (
+                  <Play size={20} />
+                )
+              ) : (
+                <Play size={20} />
+              )
+            }
+            disabled={!currentSong}
+          />
+          <Button
+            ghost
+            shape="circle"
+            icon={<SkipForward size={16} />}
+            onClick={() => playNext('forward')}
+          />
+        </div>
+        
+        <div style={{ flex: 7, paddingRight: 40 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              height: 20,
+            }}
+          >
+            {currentSong && (
+              <>
+                <div style={{ flex: 3 }} className="nowrap">
+                  <span
+                    style={{ color: 'white', marginRight: 4, fontSize: 16 }}
+                    title={currentSong.name}
+                  >
+                    <strong>{currentSong.name}</strong>
+                  </span>
+                </div>
+                <div style={{ flex: 2 }} className="nowrap">
+                  {currentSong.artists && (
+                    <Artists artists={currentSong.artists} />
+                  )}
+                </div>
+                <div style={{ flex: 1, textAlign: 'right' }}>
+                  {getMusicUrlStatus === 'failed'
+                    ? '加载失败'
+                    : songLoaded
+                    ? `${progress} / ${total}`
+                    : '00:00 / 00:00'}
+                </div>
+              </>
+            )}
+          </div>
+          <Slider
+            min={0}
+            max={songDuration ? parseInt(songDuration) : 0}
+            value={playProgress}
+            tipFormatter={(value) => toMinAndSec(value)}
+            onChange={changePlayProgress}
+            disabled={!songSource}
+            style={{ margin: '8px 0' }}
+          />
+        </div>
+        
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <Button
+            icon={<Download size={16} />}
+            ghost
+            shape="circle"
+            href={songSource}
+            target="_blank"
+            download
+            disabled={songSource === null}
+          />
+        </div>
+        
+        <div style={{ flex: 1, textAlign: 'center', paddingLeft: 3 }}>
+          <Tooltip title={modeExplanations[playMode]}>
+            <a onClick={switchPlayMode}>
+              {playModeIcons[playMode]}
+            </a>
+          </Tooltip>
+        </div>
+        
+        <div style={{ flex: 2 }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <a onClick={onVolumeBtnClick}>
+                {muted ? (
+                  <VolumeX className="player-icon" size={16} />
+                ) : (
+                  <Volume2 className="player-icon" size={16} />
+                )}
+              </a>
+            </div>
+            <div style={{ flex: 5 }}>
+              <Slider
+                min={0}
+                max={1}
+                step={0.01}
+                defaultValue={volume}
+                onChange={changeVolume}
+              />
+            </div>
+          </div>
+        </div>
+        
+        <div style={{ flex: 1, textAlign: 'right' }}>
+          <Button
+            ghost
+            icon={<List size={16} />}
+            onClick={onListenlistBtnClick}
+            title="聆听列表"
+          />
+        </div>
+      </div>
+      
+      {listenlistVisible && <Listenlist />}
+    </div>
+  )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player)
+const styles = {
+  player: {
+    position: 'fixed',
+    bottom: 0,
+    padding: '8px 0',
+    width: '100%',
+    backgroundColor: '#222',
+    color: 'white',
+  },
+}
+
+export default Player

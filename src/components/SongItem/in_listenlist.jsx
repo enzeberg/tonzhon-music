@@ -1,22 +1,19 @@
 import { List } from 'antd'
 import { Trash2 } from 'lucide-react'
-import { connect } from 'react-redux'
 import Artists from '../Artists'
 import { usePlayIndex } from '../../contexts/PlayIndexContext'
+import { useListenlist } from '../../contexts/ListenlistContext'
 import './in_listenlist.css'
 
-function SongItem({
-  song,
-  currentSong,
-  listenlist,
-  addToListenlist,
-  deleteSongInListenlist,
-}) {
+export default function SongItem({ song }) {
   const { playIndex, updatePlayIndex } = usePlayIndex()
+  const { listenlist, addSongToListenlist, deleteSongInListenlist } =
+    useListenlist()
+  const currentSong = listenlist[playIndex]
   const changeCurrentSong = () => {
-    const index = listenlist.findIndex((song) => song.newId === song.newId)
+    const index = listenlist.findIndex((item) => item.newId === song.newId)
     if (index === -1) {
-      addToListenlist(song)
+      addSongToListenlist(song)
       updatePlayIndex(listenlist.length)
     } else {
       updatePlayIndex(index)
@@ -25,11 +22,14 @@ function SongItem({
 
   const deleteFromPlaylist = (e) => {
     e.stopPropagation()
-    const index = listenlist.findIndex((song) => song.newId === song.newId)
+    const index = listenlist.findIndex((item) => item.newId === song.newId)
     if (index + 1 === listenlist.length) {
       updatePlayIndex(0)
     }
-    deleteSongInListenlist(index, playIndex, updatePlayIndex)
+    deleteSongInListenlist(index)
+    if (index < playIndex) {
+      updatePlayIndex(playIndex - 1)
+    }
   }
   return (
     <List.Item
@@ -67,25 +67,3 @@ function SongItem({
     </List.Item>
   )
 }
-
-function mapStateToProps(state) {
-  return {
-    currentSong: state.listenlist[state.playIndex],
-    listenlist: state.listenlist,
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    addToListenlist: (song) => {
-      dispatch({ type: 'ADD_TO_LISTENLIST', data: song })
-    },
-    deleteSongInListenlist: (indexToDelete, playIndex, updatePlayIndexCallback) => {
-      dispatch({ type: 'DELETE_SONG_IN_LISTENLIST', data: indexToDelete })
-      if (indexToDelete < playIndex) {
-        updatePlayIndexCallback(playIndex - 1)
-      }
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SongItem)
