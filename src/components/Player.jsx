@@ -11,7 +11,7 @@ import {
   Shuffle,
   Volume2,
   VolumeX,
-  Loader2
+  Loader2,
 } from 'lucide-react'
 import { Slider, Button, Tooltip, notification } from 'antd'
 import Artists from './Artists'
@@ -33,19 +33,17 @@ const modeExplanations = {
   shuffle: '随机',
 }
 
-function Player() {
+export default function Player() {
   const { playIndex, updatePlayIndex } = usePlayIndex()
   const { listenlist } = useListenlist()
   const audioRef = useRef(null)
   const intervalRef = useRef(null)
-  
-  // 计算当前歌曲
   const currentSong = listenlist[playIndex]
-  
-  // 状态管理
   const [getMusicUrlStatus, setGetMusicUrlStatus] = useState('notYet')
   const [playStatus, setPlayStatus] = useState('pausing')
-  const [playMode, setPlayMode] = useState(() => localStorage.getItem('playMode') || 'loop')
+  const [playMode, setPlayMode] = useState(
+    () => localStorage.getItem('playMode') || 'loop'
+  )
   const [volume, setVolume] = useState(() => {
     const savedVolume = localStorage.getItem('volume')
     return savedVolume ? Number(savedVolume) : 0.6
@@ -57,7 +55,6 @@ function Player() {
   const [songLoaded, setSongLoaded] = useState(false)
   const [songDuration, setSongDuration] = useState(0)
 
-  // 音频事件处理
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
@@ -75,11 +72,11 @@ function Player() {
           ?.map((item) => item.name)
           .join(' / ')}`
       }
-      
+
       if (intervalRef.current) {
         clearInterval(intervalRef.current)
       }
-      
+
       intervalRef.current = setInterval(() => {
         setPlayProgress(audio.currentTime)
       }, 1000)
@@ -113,7 +110,6 @@ function Player() {
     }
   }, [currentSong])
 
-  // 当前歌曲变化时的处理
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
@@ -170,7 +166,7 @@ function Player() {
 
   const getSongSource = useCallback((platform, originalId, callback) => {
     setGetMusicUrlStatus('started')
-    
+
     fetch(`/api/song_source/${platform}/${originalId}`)
       .then((res) => res.json())
       .then((json) => {
@@ -227,43 +223,54 @@ function Player() {
     }
   }, [])
 
-  const playNext = useCallback((direction) => {
-    if (playStatus === 'playing') {
-      pause()
-    }
-    
-    if (playMode === 'single' || listenlist.length === 1) {
-      const audio = audioRef.current
-      if (audio) {
-        audio.currentTime = 0
-        play()
+  const playNext = useCallback(
+    (direction) => {
+      if (playStatus === 'playing') {
+        pause()
       }
-    } else {
-      // 计算下一首歌曲的索引
-      let nextPlayIndex
-      const currentIndex = listenlist.findIndex(
-        (song) => song.newId === currentSong.newId
-      )
-      
-      if (playMode === 'loop') {
-        if (direction === 'forward') {
-          nextPlayIndex = listenlist[currentIndex + 1] ? currentIndex + 1 : 0
-        } else if (direction === 'backward') {
-          nextPlayIndex = listenlist[currentIndex - 1]
-            ? currentIndex - 1
-            : listenlist.length - 1
+
+      if (playMode === 'single' || listenlist.length === 1) {
+        const audio = audioRef.current
+        if (audio) {
+          audio.currentTime = 0
+          play()
         }
-      } else if (playMode === 'shuffle') {
-        do {
-          nextPlayIndex = Math.floor(Math.random() * listenlist.length)
-        } while (nextPlayIndex === currentIndex)
+      } else {
+        // 计算下一首歌曲的索引
+        let nextPlayIndex
+        const currentIndex = listenlist.findIndex(
+          (song) => song.newId === currentSong.newId
+        )
+
+        if (playMode === 'loop') {
+          if (direction === 'forward') {
+            nextPlayIndex = listenlist[currentIndex + 1] ? currentIndex + 1 : 0
+          } else if (direction === 'backward') {
+            nextPlayIndex = listenlist[currentIndex - 1]
+              ? currentIndex - 1
+              : listenlist.length - 1
+          }
+        } else if (playMode === 'shuffle') {
+          do {
+            nextPlayIndex = Math.floor(Math.random() * listenlist.length)
+          } while (nextPlayIndex === currentIndex)
+        }
+
+        if (nextPlayIndex !== undefined) {
+          updatePlayIndex(nextPlayIndex)
+        }
       }
-      
-      if (nextPlayIndex !== undefined) {
-        updatePlayIndex(nextPlayIndex)
-      }
-    }
-  }, [playStatus, playMode, listenlist, currentSong, updatePlayIndex, pause, play])
+    },
+    [
+      playStatus,
+      playMode,
+      listenlist,
+      currentSong,
+      updatePlayIndex,
+      pause,
+      play,
+    ]
+  )
 
   const switchPlayMode = useCallback(() => {
     const currentIndex = playModes.indexOf(playMode)
@@ -280,11 +287,18 @@ function Player() {
   const total = toMinAndSec(songDuration)
 
   return (
-    <div style={styles.player} id="music-player">
-      <audio
-        src={songSource}
-        ref={audioRef}
-      />
+    <div
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        padding: '8px 0',
+        width: '100%',
+        backgroundColor: '#222',
+        color: 'white',
+      }}
+      id="music-player"
+    >
+      <audio src={songSource} ref={audioRef} />
 
       <div
         className="container"
@@ -331,7 +345,7 @@ function Player() {
             onClick={() => playNext('forward')}
           />
         </div>
-        
+
         <div style={{ flex: 7, paddingRight: 40 }}>
           <div
             style={{
@@ -370,13 +384,13 @@ function Player() {
             min={0}
             max={songDuration ? parseInt(songDuration) : 0}
             value={playProgress}
-            tipFormatter={(value) => toMinAndSec(value)}
+            tooltip={{ formatter: (value) => toMinAndSec(value) }}
             onChange={changePlayProgress}
             disabled={!songSource}
             style={{ margin: '8px 0' }}
           />
         </div>
-        
+
         <div style={{ flex: 1, textAlign: 'center' }}>
           <Button
             icon={<Download size={16} />}
@@ -388,15 +402,13 @@ function Player() {
             disabled={songSource === null}
           />
         </div>
-        
+
         <div style={{ flex: 1, textAlign: 'center', paddingLeft: 3 }}>
           <Tooltip title={modeExplanations[playMode]}>
-            <a onClick={switchPlayMode}>
-              {playModeIcons[playMode]}
-            </a>
+            <a onClick={switchPlayMode}>{playModeIcons[playMode]}</a>
           </Tooltip>
         </div>
-        
+
         <div style={{ flex: 2 }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ flex: 1 }}>
@@ -419,7 +431,7 @@ function Player() {
             </div>
           </div>
         </div>
-        
+
         <div style={{ flex: 1, textAlign: 'right' }}>
           <Button
             ghost
@@ -429,21 +441,8 @@ function Player() {
           />
         </div>
       </div>
-      
+
       {listenlistVisible && <Listenlist />}
     </div>
   )
 }
-
-const styles = {
-  player: {
-    position: 'fixed',
-    bottom: 0,
-    padding: '8px 0',
-    width: '100%',
-    backgroundColor: '#222',
-    color: 'white',
-  },
-}
-
-export default Player
