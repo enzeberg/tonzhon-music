@@ -1,8 +1,7 @@
 import { List } from 'antd'
 import { Trash2 } from 'lucide-react'
 import Artists from '../Artists'
-import { usePlayIndex } from '../../contexts/PlayIndexContext'
-import { useListenlist } from '../../contexts/ListenlistContext'
+import { usePlayIndex, useListenlist } from '../../contexts/MusicContext'
 import './in_listenlist.css'
 
 export default function SongItem({ song }) {

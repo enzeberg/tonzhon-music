@@ -1,6 +1,6 @@
 import { Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useSearchKeyword } from '../contexts/SearchKeywordContext'
+import { useSearchKeyword } from '../contexts/SearchContext'
 
 const { Search } = Input
 

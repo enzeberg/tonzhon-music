@@ -2,9 +2,7 @@ import { useEffect } from 'react'
 import { Spin } from 'antd'
 import { useParams } from 'react-router-dom'
 import SearchResult from '../components/SearchResult'
-import { useSearchStatus } from '../contexts/SearchStatusContext'
-import { useSearchResults } from '../contexts/SearchResultsContext'
-import { useSearchKeyword } from '../contexts/SearchKeywordContext'
+import { useSearchStatus, useSearchResults, useSearchKeyword } from '../contexts/SearchContext'
 
 export default function Search() {
   const { keyword } = useParams()

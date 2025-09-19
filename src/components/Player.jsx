@@ -17,8 +17,7 @@ import { Slider, Button, Tooltip, notification } from 'antd'
 import Artists from './Artists'
 import Listenlist from './Listenlist'
 import toMinAndSec from '../utils/toMinAndSec'
-import { usePlayIndex } from '../contexts/PlayIndexContext'
-import { useListenlist } from '../contexts/ListenlistContext'
+import { usePlayIndex, useListenlist } from '../contexts/MusicContext'
 
 const playModeIcons = {
   loop: <Repeat className="player-icon" size={16} />,

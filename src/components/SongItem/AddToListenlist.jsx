@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react'
 import { notification } from 'antd'
-import { useListenlist } from '../../contexts/ListenlistContext'
+import { useListenlist } from '../../contexts/MusicContext'
 
 export default function AddToListenlist({ data }) {
   const { addSongToListenlist } = useListenlist()

@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useSearchStatus } from '../contexts/SearchStatusContext'
-import { useSearchResults } from '../contexts/SearchResultsContext'
-import { useSearchKeyword } from '../contexts/SearchKeywordContext'
+import { useSearchStatus, useSearchResults, useSearchKeyword } from '../contexts/SearchContext'
 
 export const useSearchManager = () => {
   const { searchKeyword } = useSearchKeyword()

@@ -2,8 +2,7 @@ import { List } from 'antd'
 import { PlayCircle } from 'lucide-react'
 import Artists from '../Artists'
 import AddToListenlist from './AddToListenlist'
-import { usePlayIndex } from '../../contexts/PlayIndexContext'
-import { useListenlist } from '../../contexts/ListenlistContext'
+import { usePlayIndex, useListenlist } from '../../contexts/MusicContext'
 import './index.css'
 
 export default function SongItem({ song }) {

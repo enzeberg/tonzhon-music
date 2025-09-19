@@ -3,8 +3,7 @@ import { useCallback, useMemo } from 'react'
 import SongList from './SongList'
 import Wrapper from './Wrapper'
 import OperatingBarOfSongList from './OperatingBarOfSongList'
-import { useSearchKeyword } from '../contexts/SearchKeywordContext'
-import { useSearchResults } from '../contexts/SearchResultsContext'
+import { useSearchKeyword, useSearchResults } from '../contexts/SearchContext'
 
 function SearchResult({ result, provider }) {
   const { searchKeyword: keyword } = useSearchKeyword()
