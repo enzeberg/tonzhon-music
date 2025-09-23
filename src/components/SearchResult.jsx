@@ -25,7 +25,7 @@ function SearchResult({ result, provider }) {
           console.error('搜索请求失败:', err)
         })
     },
-    [provider, keyword, onResultResponded]
+    [provider, keyword, updateSearchResults]
   )
 
   const songs = useMemo(() => result?.data?.songs || [], [result])
