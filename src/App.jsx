@@ -3,12 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Player from './components/Player'
 import Search from './pages/Search'
-import { useSearchManager } from './hooks/useSearchManager'
 import './App.css'
 const { Content } = Layout
 
 function App() {
-  useSearchManager()
   return (
     <BrowserRouter>
       <Layout>

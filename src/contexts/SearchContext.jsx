@@ -85,7 +85,7 @@ export const SearchProvider = ({ children }) => {
           updateSearchStatus('done')
         }
       } catch (err) {
-        console.log('搜索错误: ', err)
+        console.error('搜索错误: ', err)
         resultsResponded++
         if (resultsResponded === providers.length) {
           updateSearchStatus('done')
