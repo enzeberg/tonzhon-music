@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { getListenList, setListenList, getPlayIndex, setPlayIndex } from '../utils/storage'
 
 const MusicContext = createContext()
 
@@ -37,27 +38,21 @@ export const useListenlist = () => {
 
 export const MusicProvider = ({ children }) => {
   // 播放列表状态
-  const [listenlist, setListenlist] = useState(() => {
-    const savedList = localStorage.getItem('listenlist')
-    return savedList ? JSON.parse(savedList) : []
-  })
+  const [listenlist, setListenlist] = useState(() => getListenList())
 
   // 播放索引状态
-  const [playIndex, setPlayIndex] = useState(() => {
-    const savedIndex = localStorage.getItem('playIndex')
-    return savedIndex ? Number(savedIndex) : 0
-  })
+  const [playIndex, setPlayIndexState] = useState(() => getPlayIndex())
 
   // 计算当前歌曲
   const currentSong = listenlist[playIndex]
 
   // 持久化函数
   const saveListenlistToStorage = (list) => {
-    localStorage.setItem('listenlist', JSON.stringify(list))
+    setListenList(list)
   }
 
   const savePlayIndexToStorage = (index) => {
-    localStorage.setItem('playIndex', index.toString())
+    setPlayIndex(index)
   }
 
   // 播放列表操作
@@ -104,12 +99,12 @@ export const MusicProvider = ({ children }) => {
 
   // 播放索引操作
   const updatePlayIndex = (index) => {
-    setPlayIndex(index)
+    setPlayIndexState(index)
     savePlayIndexToStorage(index)
   }
 
   const clearPlayIndex = () => {
-    setPlayIndex(0)
+    setPlayIndexState(0)
     savePlayIndexToStorage(0)
   }
 

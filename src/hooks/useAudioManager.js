@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { notification } from 'antd'
 import { usePlayIndex, useListenlist } from '../contexts/MusicContext'
+import { getPlayMode, setPlayMode, getVolume, setVolume } from '../utils/storage'
 
 export const useAudioManager = () => {
   const { playIndex, updatePlayIndex } = usePlayIndex()
@@ -19,11 +20,8 @@ export const useAudioManager = () => {
   const [songDuration, setSongDuration] = useState(0)
   
   // 播放模式和音量
-  const [playMode, setPlayMode] = useState(() => localStorage.getItem('playMode') || 'loop')
-  const [volume, setVolume] = useState(() => {
-    const savedVolume = localStorage.getItem('volume')
-    return savedVolume ? Number(savedVolume) : 0.6
-  })
+  const [playMode, setPlayModeState] = useState(() => getPlayMode())
+  const [volume, setVolumeState] = useState(() => getVolume())
   const [muted, setMuted] = useState(false)
 
   // 音频事件处理
@@ -224,8 +222,8 @@ export const useAudioManager = () => {
     const audio = audioRef.current
     if (audio) {
       audio.volume = value
+      setVolumeState(value)
       setVolume(value)
-      localStorage.setItem('volume', value.toString())
     }
   }, [])
 
@@ -233,8 +231,8 @@ export const useAudioManager = () => {
     const playModes = ['loop', 'single', 'shuffle']
     const currentIndex = playModes.indexOf(playMode)
     const nextMode = playModes[currentIndex + 1] || playModes[0]
-    localStorage.setItem('playMode', nextMode)
     setPlayMode(nextMode)
+    setPlayModeState(nextMode)
   }, [playMode])
 
   return {
