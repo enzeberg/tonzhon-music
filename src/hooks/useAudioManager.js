@@ -147,6 +147,7 @@ export const useAudioManager = () => {
         }
       })
       .catch(err => {
+        console.error('获取歌曲源失败:', err)
         setGetMusicUrlStatus('failed')
         afterLoadingFailure()
       })
