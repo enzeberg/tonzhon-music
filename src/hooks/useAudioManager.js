@@ -46,7 +46,12 @@ export const useAudioManager = () => {
       }
 
       intervalRef.current = setInterval(() => {
-        setPlayProgress(audio.currentTime)
+        const currentTime = Math.floor(audio.currentTime)
+        // 只有当秒数发生变化时才更新状态，减少不必要的重渲染
+        setPlayProgress(prevProgress => {
+          const prevTime = Math.floor(prevProgress)
+          return prevTime !== currentTime ? currentTime : prevProgress
+        })
       }, 1000)
     }
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import { List } from 'antd'
 import { PlayCircle } from 'lucide-react'
 import Artists from '../Artists'
@@ -5,7 +6,7 @@ import AddToListenlist from './AddToListenlist'
 import { usePlayIndex, useListenlist } from '../../contexts/MusicContext'
 import './index.css'
 
-export default function SongItem({ song }) {
+function SongItem({ song }) {
   const { playIndex, updatePlayIndex } = usePlayIndex()
   const { listenlist, addSongToListenlist } = useListenlist()
   const currentSong = listenlist[playIndex]
@@ -74,3 +75,5 @@ export default function SongItem({ song }) {
     </List.Item>
   )
 }
+
+export default React.memo(SongItem)

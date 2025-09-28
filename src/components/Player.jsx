@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import {
   Play,
   SkipForward,
@@ -31,6 +31,58 @@ const modeExplanations = {
   shuffle: '随机',
 }
 
+// 提取样式对象，避免每次渲染都创建新对象
+const playerStyles = {
+  container: {
+    position: 'fixed',
+    bottom: 0,
+    padding: '8px 0',
+    width: '100%',
+    backgroundColor: '#222',
+    color: 'white',
+  },
+  flexContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  playButton: {
+    margin: '0 10px',
+  },
+  songInfoContainer: {
+    flex: 7,
+    paddingRight: 40,
+  },
+  songInfo: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 20,
+  },
+  songTitle: {
+    flex: 3,
+  },
+  songArtists: {
+    flex: 2,
+  },
+  songTime: {
+    flex: 1,
+    textAlign: 'right',
+  },
+  progressSlider: {
+    margin: '8px 0',
+  },
+  volumeContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  titleSpan: {
+    color: 'white',
+    marginRight: 4,
+    fontSize: 16,
+  },
+}
+
 export default function Player() {
   const [listenlistVisible, setListenlistVisible] = useState(false)
   
@@ -54,98 +106,77 @@ export default function Player() {
     switchPlayMode,
   } = useAudioManager()
 
-  const onListenlistBtnClick = () => {
+  const onListenlistBtnClick = useCallback(() => {
     setListenlistVisible(!listenlistVisible)
-  }
+  }, [listenlistVisible])
 
-  const progress = toMinAndSec(playProgress)
-  const total = toMinAndSec(songDuration)
+  // 使用useMemo优化时间格式化计算
+  const progress = useMemo(() => toMinAndSec(playProgress), [playProgress])
+  const total = useMemo(() => toMinAndSec(songDuration), [songDuration])
+
+  // 使用useMemo优化播放按钮图标
+  const playButtonIcon = useMemo(() => {
+    if (getMusicUrlStatus === 'notYet') {
+      return <Play size={20} />
+    }
+    if (getMusicUrlStatus === 'started') {
+      return <Loader2 size={20} className="animate-spin" />
+    }
+    if (getMusicUrlStatus === 'ok') {
+      return playStatus === 'playing' ? <Pause size={20} /> : <Play size={20} />
+    }
+    return <Play size={20} />
+  }, [getMusicUrlStatus, playStatus])
+
+  // 使用useCallback优化事件处理函数
+  const handlePlayNext = useCallback((direction) => {
+    playNext(direction)
+  }, [playNext])
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        padding: '8px 0',
-        width: '100%',
-        backgroundColor: '#222',
-        color: 'white',
-      }}
-      id="music-player"
-    >
+    <div style={playerStyles.container} id="music-player">
       <audio src={songSource} ref={audioRef} />
 
-      <div
-        className="container"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-        }}
-      >
+      <div className="container" style={playerStyles.flexContainer}>
         <div style={{ flex: 2 }}>
           <Button
             ghost
             shape="circle"
             icon={<SkipBack size={16} />}
-            onClick={() => playNext('backward')}
+            onClick={() => handlePlayNext('backward')}
           />
           <Button
             ghost
             shape="circle"
             size="large"
             onClick={playOrPause}
-            style={{ margin: '0 10px' }}
-            icon={
-              getMusicUrlStatus === 'notYet' ? (
-                <Play size={20} />
-              ) : getMusicUrlStatus === 'started' ? (
-                <Loader2 size={20} className="animate-spin" />
-              ) : getMusicUrlStatus === 'ok' ? (
-                playStatus === 'playing' ? (
-                  <Pause size={20} />
-                ) : (
-                  <Play size={20} />
-                )
-              ) : (
-                <Play size={20} />
-              )
-            }
+            style={playerStyles.playButton}
+            icon={playButtonIcon}
             disabled={!currentSong}
           />
           <Button
             ghost
             shape="circle"
             icon={<SkipForward size={16} />}
-            onClick={() => playNext('forward')}
+            onClick={() => handlePlayNext('forward')}
           />
         </div>
 
-        <div style={{ flex: 7, paddingRight: 40 }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              height: 20,
-            }}
-          >
+        <div style={playerStyles.songInfoContainer}>
+          <div style={playerStyles.songInfo}>
             {currentSong && (
               <>
-                <div style={{ flex: 3 }} className="nowrap">
-                  <span
-                    style={{ color: 'white', marginRight: 4, fontSize: 16 }}
-                    title={currentSong.name}
-                  >
+                <div style={playerStyles.songTitle} className="nowrap">
+                  <span style={playerStyles.titleSpan} title={currentSong.name}>
                     <strong>{currentSong.name}</strong>
                   </span>
                 </div>
-                <div style={{ flex: 2 }} className="nowrap">
+                <div style={playerStyles.songArtists} className="nowrap">
                   {currentSong.artists && (
                     <Artists artists={currentSong.artists} />
                   )}
                 </div>
-                <div style={{ flex: 1, textAlign: 'right' }}>
+                <div style={playerStyles.songTime}>
                   {getMusicUrlStatus === 'failed'
                     ? '加载失败'
                     : songLoaded
@@ -162,7 +193,7 @@ export default function Player() {
             tooltip={{ formatter: (value) => toMinAndSec(value) }}
             onChange={changePlayProgress}
             disabled={!songSource}
-            style={{ margin: '8px 0' }}
+            style={playerStyles.progressSlider}
           />
         </div>
 
@@ -185,7 +216,7 @@ export default function Player() {
         </div>
 
         <div style={{ flex: 2 }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={playerStyles.volumeContainer}>
             <div style={{ flex: 1 }}>
               <a onClick={onVolumeBtnClick}>
                 {muted ? (

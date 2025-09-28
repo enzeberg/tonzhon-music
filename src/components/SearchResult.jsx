@@ -1,5 +1,5 @@
+import React, { useCallback, useMemo } from 'react'
 import { Pagination } from 'antd'
-import { useCallback, useMemo } from 'react'
 import SongList from './SongList'
 import Wrapper from './Wrapper'
 import OperatingBarOfSongList from './OperatingBarOfSongList'
@@ -54,4 +54,4 @@ function SearchResult({ result, provider }) {
   )
 }
 
-export default SearchResult
+export default React.memo(SearchResult)
