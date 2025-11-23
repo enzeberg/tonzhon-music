@@ -17,15 +17,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^5.27.3",
+    "antd": "^6.0.0",
     "lucide-react": "^0.544.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.4",
-    "vite": "^7.1.7"
+    "@vitejs/plugin-react": "^5.1.1",
+    "vite": "^7.2.4"
   },
   "license": "MIT",
   "browserslist": {
