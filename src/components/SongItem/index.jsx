@@ -1,5 +1,4 @@
 import React from 'react'
-import { List } from 'antd'
 import { PlayCircle } from 'lucide-react'
 import Artists from '../Artists'
 import AddToListenlist from './AddToListenlist'
@@ -21,7 +20,7 @@ function SongItem({ song }) {
   }
 
   return (
-    <List.Item style={{ padding: '5px 10px' }}>
+    <li style={{ padding: '5px 10px' }}>
       <div
         style={{
           display: 'flex',
@@ -72,7 +71,7 @@ function SongItem({ song }) {
           <AddToListenlist data={song} />
         </div>
       </div>
-    </List.Item>
+    </li>
   )
 }
 

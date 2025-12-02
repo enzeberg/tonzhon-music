@@ -1,4 +1,3 @@
-import { List } from 'antd'
 import { Trash2 } from 'lucide-react'
 import Artists from '../Artists'
 import { usePlayIndex, useListenlist } from '../../contexts/MusicContext'
@@ -31,22 +30,12 @@ export default function SongItem({ song }) {
     }
   }
   return (
-    <List.Item
+    <li
       onClick={changeCurrentSong}
       className={
         currentSong && currentSong.newId === song.newId ? 'playing' : ''
       }
-      style={{ border: 'none', padding: '6px 10px' }}
-      extra={
-        <a onClick={deleteFromPlaylist} className="delete-btn">
-          <Trash2
-            size={18}
-            style={{
-              verticalAlign: 'middle',
-            }}
-          />
-        </a>
-      }
+      style={{ border: 'none', padding: '6px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
     >
       <div
         style={{
@@ -63,6 +52,14 @@ export default function SongItem({ song }) {
           <Artists artists={song.artists} />
         </div>
       </div>
-    </List.Item>
+      <a onClick={deleteFromPlaylist} className="delete-btn">
+        <Trash2
+          size={18}
+          style={{
+            verticalAlign: 'middle',
+          }}
+        />
+      </a>
+    </li>
   )
 }

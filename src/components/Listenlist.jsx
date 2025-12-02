@@ -1,5 +1,5 @@
 import { Trash2 } from 'lucide-react'
-import { Button, List } from 'antd'
+import { Button } from 'antd'
 import ItemInListenlist from './SongItem/in_listenlist'
 import { useListenlist } from '../contexts/MusicContext'
 
@@ -35,19 +35,21 @@ export default function Listenlist() {
           清空
         </Button>
       </div>
-      <List
+      <ol
         id="listenlist"
         style={{
           color: 'white',
           overflow: 'auto',
           height: 268,
+          margin: 0,
+          padding: 0,
+          listStyle: 'none',
         }}
-        itemLayout="horizontal"
-        dataSource={listenlist}
-        renderItem={(song) => {
-          return <ItemInListenlist key={song.link} song={song} />
-        }}
-      />
+      >
+        {listenlist.map((song) => (
+          <ItemInListenlist key={song.link} song={song} />
+        ))}
+      </ol>
       <style jsx="true">{`
         #listenlist::-webkit-scrollbar {
           background-color: #222;
