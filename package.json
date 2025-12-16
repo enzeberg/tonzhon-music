@@ -10,7 +10,7 @@
     "music",
     "music-player"
   ],
-  "author": "李恩泽 (Li Enze)",
+  "author": "enzeberg",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -19,9 +19,9 @@
   "dependencies": {
     "antd": "^6.0.0",
     "lucide-react": "^0.544.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^7.10.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.1.1",
